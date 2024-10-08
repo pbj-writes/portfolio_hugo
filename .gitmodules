@@ -1,0 +1,6 @@
+[submodule "willfaught/paige"]
+	path = willfaught/paige
+	url = https://github.com/willfaught/paige.git
+[submodule "paige"]
+	path = paige
+	url = https://github.com/willfaught/paige.git

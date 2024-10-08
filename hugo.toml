@@ -1,0 +1,210 @@
+baseURL = 'https://pbjwrites.info'
+copyright = '© PBJ'
+languageCode = 'en-us'
+timezone = 'America/Los_Angeles'
+theme = 'paige'
+titlecasestyle = "Go"
+enablerobotstxt = true
+
+[params.paige]
+color = "#6831f5"
+external_link_new_tab = true
+noindex = true
+
+[params.paige.menu]
+style = "tabs" # Must be "links", "pills", "tabs", or "underline"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup.highlight]
+noClasses = false
+
+[languages.en]
+weight = 10
+
+[[languages.en.menu.main]]
+identifier = "home"
+name = "Home"
+url = "/"
+weight = 9
+
+[[languages.en.menu.main]]
+identifier = "mystory"
+name = "My Story"
+url = "/mystory/"
+weight = 24
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "pbjtheathlete"
+name = "PBJ the Athlete"
+parent ="mystory"
+url = "/mystory/pbj_the_athlete"
+weight = 26
+
+[[languages.en.menu.main]]
+identifier = "pbjtheprofessional"
+name = "PBJ the Professional"
+parent ="mystory"
+url = "/mystory/pbj_the_professional"
+weight = 25
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+##[[languages.en.menu.main]]
+##identifier = "resume"
+##name = "Resume"
+##url = "/resume/"
+##weight = 10
+
+[[languages.en.menu.main]]
+identifier = "portfolio"
+name = "Portfolio"
+url = "/portfolio/"
+weight = 14
+
+[[languages.en.menu.main]]
+identifier = "bicycle_api_app"
+name = "Bicycle Inventory API & Doc"
+parent = "portfolio"
+url = "/portfolio/bicycle_inventory_api_app/"
+weight = 16
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "templates"
+name = "Templates"
+parent = "portfolio"
+url = "/portfolio/word_templates/"
+weight = 22
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "how-to"
+name = "How-to"
+parent = "portfolio"
+url = "/portfolio/how-to/"
+weight = 18
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "install_bicycle_tires"
+name = "Tasks"
+parent = "portfolio"
+url = "/portfolio/tasks/"
+weight = 17
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "video_instructions"
+name = "Videos"
+parent = "portfolio"
+url = "/portfolio/video_instructions/"
+weight = 19
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "editing_samples"
+name = "Editing Samples"
+parent = "portfolio"
+url = "/portfolio/editing_samples/"
+weight = 21
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "diagram_samples"
+name = "Diagram Samples"
+parent = "portfolio"
+url = "/portfolio/diagram_samples/"
+weight = 20
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "style_guide_sample"
+name = "Style Guide Sample"
+parent = "portfolio"
+url = "/portfolio/style_guide_sample/"
+weight = 23
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "dita_portfolio"
+name = "Old DITA Example"
+parent = "portfolio"
+url = "https://dita.pbjwrites.info"
+weight = 24
+
+[[languages.en.menu.main]]
+identifier = "blog#"
+name = "Blog"
+url = "/blog/#"
+weight = 27
+
+[[languages.en.menu.main]]
+identifier = "blog"
+name = "Browse All"
+parent = "blog#"
+url = "/blog/"
+weight = 27
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "tags"
+name = "Tags"
+parent = "blog#"
+url = "/tags/"
+weight = 27
+
+[[languages.en.menu.main]]
+identifier = "series"
+name = "Series"
+parent = "blog#"
+url = "/series/"
+weight = 27
+
+[taxonomies]
+series = "series"
+tag = "tags"
+category = "categories"
+
+[permalinks]
+blog = "blog/:year-:month-:day/:title/"
+
+[outputs]
+home = ["html", "json", "rss"]
+section = ["html", "rss"]
+taxonomy = ["html", "rss"]
+term = ["html", "rss"]
+
+[[module.imports]]
+path = "github.com/willfaught/paige"
+
+[params.paige.git]
+commit_url = "https://github.com/pbj-writes/hugo_portfolio/commit/%s"
+
+[params.paige.file_link]
+content = "Edit this page"
+disable = true
+url = "https://github.com/pbj-writes/hugo_portfolio/edit/main/content/%s"
