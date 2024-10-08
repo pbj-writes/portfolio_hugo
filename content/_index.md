@@ -50,4 +50,4 @@ title: "PBJ Writes ✍🏻"
 </style>
 <a href="https://strava.com/athletes/8610265" class="strava-badge- strava-badge-follow" target="_blank"><img src="//badges.strava.com/echelon-sprite-48.png" alt="Strava" /></a>
 </div>  
-<p><font size="3"><center>Built with code using <a href="https://gohugo.io/">Hugo</a> and theme (<a href="https://themes.gohugo.io/themes/paige/">Paige</a>).</center></font></p>
+<p><font size="3"><center>Built with code using <a href="https://gohugo.io/">Hugo</a> and the (<a href="https://themes.gohugo.io/themes/paige/">Paige</a>) theme.</center></font></p>
