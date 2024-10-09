@@ -1,4 +1,4 @@
-# PBJWrites Hugo Portfolio
+# PBJ Writes Hugo Portfolio
 
 I'm working on expanding my knowledge of static site generators and doc-as-code methodologies, so this will always be a work in progress as I learn more, develop more content, and adopt best practices. C'est tout. 
 
@@ -10,6 +10,6 @@ Most of my repos contribute to my site. For example, the `dita_portfolio` and `b
 Site Layout
 | Repo          | Site Relationship |
 | ------------- | -------------     |
-| hugo_portfolio  | Main website infrastructure for [pbjwrites.info](https://pbjwrites.info) |
+| portfolio_hugo  | Main website infrastructure for [pbjwrites.info](https://pbjwrites.info) |
 | dita_portofio   | Sub-domain for [dita.pbjwrites.info](https://dita.pbjwrites.info)        |
 | bicycle_api     | Sub-domain for [docs.pbjwrites.info](https://docs.pbjwrites.info)        |
