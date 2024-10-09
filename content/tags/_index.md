@@ -1,5 +1,6 @@
 ---
 title: "Tags"
+layout: "paige/cloud"
 paige:
   style: |
     #paige-authors,
