@@ -20,6 +20,9 @@ paige:
     .paige-summary {
         display: none;
     }
+       #paige-page-footer {
+        display: none;
+    }
 ---
 # how-to
 

@@ -4,6 +4,7 @@ description: "Install content for a New DT SWISS R 470 700 C Wheelset."
 paige: 
   style: |
     #paige-toc,
+    #paige-page-footer,
     .paige-authors,
     .paige-date,
     .paige-date-header,
@@ -11,6 +12,9 @@ paige:
     .paige-series,
     .paige-summary {
         display: block;
+    }
+       #paige-page-footer {
+        display: none;
     }
 ---
 <html>

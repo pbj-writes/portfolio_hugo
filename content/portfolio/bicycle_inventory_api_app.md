@@ -11,6 +11,10 @@ paige:
     .paige-summary {
         display: block;
     }
+    #paige-page-footer {
+        display: none;
+    }
+
 ---
 ## Introduction
 

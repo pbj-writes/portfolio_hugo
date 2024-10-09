@@ -20,6 +20,9 @@ paige:
     .paige-summary {
         display: none;
     }
+       #paige-page-footer {
+        display: none;
+    }
 ---
 <script src= '/js/pdf-js/build/pdf.js'></script>
 # Word Templates
