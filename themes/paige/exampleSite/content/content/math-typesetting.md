@@ -1,13 +1,12 @@
----
-authors: ["will-faught"]
-categories: ["content", "paige"]
-description: "A brief guide to setup KaTeX."
-paige:
-  math: true
-tags: ["katex", "math", "typesetting"]
-title: "Math Typesetting"
-weight: 40
----
++++
+authors = ["author-demo"]
+categories = ["content", "paige"]
+description = "A brief guide to setup KaTeX."
+tags = ["katex", "math", "typesetting"]
+title = "Math Typesetting"
+[paige]
+math = true
++++
 
 <!--
 The MIT License (MIT)
@@ -43,12 +42,13 @@ In this example we will be using [KaTeX](https://katex.org/)
 - Include the partial in your templates like so:
 
 ```
-{{ if .Params.paige.math }}
+{{ if or .Params.math .Site.Params.math }}
 {{ partial "math.html" . }}
 {{ end }}
 ```
 
-To enable KaTex on a per page basis include the parameter `paige.math: true` in content files
+- To enable KaTeX globally set the parameter `math` to `true` in a project's configuration
+- To enable KaTeX on a per page basis include the parameter `math: true` in content files
 
 **Note:** Use the online reference of [Supported TeX Functions](https://katex.org/docs/supported.html)
 

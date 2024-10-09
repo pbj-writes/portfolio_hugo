@@ -32,16 +32,17 @@
     <link href="{{ (resources.Get `site.webmanifest` | resources.ExecuteAsTemplate `site.webmanifest` .).RelPermalink | safeURL }}" rel="manifest">
 {{ end }}
 
-{{ partial "paige/link.html" (dict "href" "css/paige/bootstrap/paige.scss" "page" $page "sass" true "template" true) }}
-{{ partial "paige/link.html" (dict "href" "css/paige/bootstrap-icons/bootstrap-icons.css" "page" $page) }}
+{{ $color := $page.Param "paige.color" | default "#0d6efd" }}
+{{ $colorscheme := $page.Param "paige.color_scheme" | default "auto" }}
+{{ $context := dict "color" $color "color_scheme" $colorscheme }}
+
+{{ partial "paige/tag-link.html" (dict "href" "css/paige/bootstrap/paige.scss" "page" $page "sass" true "template" true "context" $context) }}
+{{ partial "paige/tag-link.html" (dict "href" "css/paige/bootstrap-icons/bootstrap-icons.css" "page" $page) }}
 
 {{ if $page.Param "paige.math" }}
-    {{ partial "paige/link.html" (dict "href" "css/paige/katex/katex.min.css") }}
+    {{ partial "paige/tag-link.html" (dict "href" "css/paige/katex/katex.min.css") }}
 {{ end }}
 
-{{ if .AlternativeOutputFormats }}
-    {{ $title := partial "paige/title.html" $page }}
-    {{ range .AlternativeOutputFormats }}
-        {{ printf `<link href="%s" rel="%s" type="%s">` (.Permalink | safeURL) .Rel .MediaType | safeHTML }}
-    {{ end }}
+{{ range $page.AlternativeOutputFormats }}
+    {{ printf `<link href="%s" rel="%s" type="%s">` (.Permalink | safeURL) .Rel .MediaType | safeHTML }}
 {{ end }}

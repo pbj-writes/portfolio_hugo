@@ -1,14 +1,13 @@
----
-authors: ["will-faught"]
-categories: ["layouts", "paige"]
-description: "Demonstration of the Paige cloud layout."
-layout: "paige/cloud"
-tags: ["cloud"]
-title: "Cloud Layout"
-weight: 20
----
++++
+authors = ["author-demo"]
+categories = ["layouts", "paige"]
+description = "Demonstration of the cloud layout."
+layout = "paige/cloud"
+tags = ["cloud"]
+title = "Cloud"
++++
 
-Paige provides a `paige/cloud` layout for taxonomy pages with lots of terms.
+The `paige/cloud` layout displays list page links as a link cloud.
 
 <!--more-->
 

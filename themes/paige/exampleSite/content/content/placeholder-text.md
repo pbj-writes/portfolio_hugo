@@ -1,11 +1,10 @@
----
-authors: ["will-faught"]
-categories: ["content", "paige"]
-description: "Lorem Ipsum Dolor Si Amet."
-tags: ["markdown", "text"]
-title: "Placeholder Text"
-weight: 30
----
++++
+authors = ["author-demo"]
+categories = ["content", "paige"]
+description = "Lorem Ipsum Dolor Si Amet."
+tags = ["markdown", "text"]
+title = "Placeholder Text"
++++
 
 <!--
 The MIT License (MIT)

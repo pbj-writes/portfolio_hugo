@@ -1,12 +1,12 @@
----
-authors: ["will-faught"]
-categories: ["paige", "shortcodes"]
-description: "Demonstration of the Paige gallery shortcode."
-tags: ["figures", "gallery", "images"]
-title: "Gallery Shortcode"
----
++++
+authors = ["author-demo"]
+categories = ["paige", "shortcodes"]
+description = "Demonstration of the gallery shortcode."
+tags = ["figures", "gallery", "images"]
+title = "Gallery"
++++
 
-Paige provides a `paige/gallery` shortcode for displaying a list of images.
+The `paige/gallery` shortcode displays a list of content.
 
 <!--more-->
 

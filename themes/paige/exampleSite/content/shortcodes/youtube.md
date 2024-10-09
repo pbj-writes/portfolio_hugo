@@ -1,12 +1,12 @@
----
-authors: ["will-faught"]
-categories: ["paige", "shortcodes"]
-description: "Demonstration of the Paige YouTube shortcode."
-tags: ["videos", "youtube"]
-title: "YouTube Shortcode"
----
++++
+authors = ["author-demo"]
+categories = ["paige", "shortcodes"]
+description = "Demonstration of the YouTube shortcode."
+tags = ["videos", "youtube"]
+title = "YouTube"
++++
 
-Paige provides a `paige/youtube` shortcode for playing YouTube videos.
+The `paige/youtube` shortcode plays a YouTube video.
 
 <!--more-->
 

@@ -4,26 +4,20 @@ Powerful, pliable pixel perfection. An advanced Hugo theme. [Try it out.](https:
 
 <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/willfaught/paige/raw/master/images/screenshot-dark.jpg">
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/willfaught/paige/raw/master/images/screenshot.jpg">
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/willfaught/paige/raw/master/images/screenshot.jpg">
     <img alt="Screenshot" src="https://github.com/willfaught/paige/raw/master/images/screenshot.jpg">
 </picture>
 
-Paige is designed to put your content front and center,
-avoiding the typical clutter.
-The look is seamless and smooth, scalable and readable, portable and efficient.
-The layout is minimal and responsive,
-using verticality and white space to focus and delineate parts of the page.
-The implementation is flexible and extensible.
-It's a versatile canvas that serves most web needs.
+Paige is designed to put your content front and center, avoiding the typical clutter. The look is seamless and smooth, scalable and readable, portable and efficient. The layout is minimal and responsive, using verticality and white space to delineate and highlight each part of the page. The implementation is flexible and extensible. It’s a versatile canvas that serves most web needs.
 
 ## Features
 
 - Accessibility
 - Analytics
+- Atom feed
 - Authors
-- Automatic switching between light and dark color schemes
 - Blog
-- Bootstrap
+- Bootstrap styles and icons
 - Categories
 - Code shortcode
 - Comments
@@ -46,17 +40,18 @@ It's a versatile canvas that serves most web needs.
 - Menu
 - Minimal design
 - Quote shortcode
-- RSS with full page content
 - Responsive
 - Right-to-left languages
-- SEO
+- RSS feed
 - Safari and Firefox Reader View support
 - Search
 - Sections
+- SEO
 - Series
 - Single column
 - Social links
 - Table of contents
+- Tab shortcode
 - Tags
 - Twitter sharing
 - Validated with [PageSpeed](https://pagespeed.web.dev/report?url=https%3A%2F%2Fwillfaught.com%2Fpaige%2F&form_factor=desktop) and [Validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwillfaught.com%2Fpaige%2F)
@@ -82,7 +77,7 @@ please share it by [posting a link](https://github.com/willfaught/paige/discussi
 
 ## Setup
 
-1. [Install Hugo](https://gohugo.io/installation/) (the extended version, and at least 0.111.3).
+1. [Install Hugo](https://gohugo.io/installation/) (the extended version, and at least 0.123.0).
 
     For Homebrew on Mac:
 
@@ -125,28 +120,28 @@ please share it by [posting a link](https://github.com/willfaught/paige/discussi
 3. Create a site:
 
     ```sh
-    $ hugo new site yourproject
+    $ hugo new site yoursite
     ```
 
 4. Create a post:
 
     ```sh
-    $ cd yourproject
+    $ cd yoursite
     $ hugo new yourpost.md
     ```
 
 5. Install the Paige module:
 
     ```sh
-    $ cd yourproject
-    $ hugo mod init github.com/youraccount/yourproject
+    $ cd yoursite
+    $ hugo mod init github.com/youraccount/yoursite
     $ hugo mod get github.com/willfaught/paige@latest
     ```
 
 6. Import the Paige module:
 
     ```sh
-    $ cd yourproject
+    $ cd yoursite
     $ cat >>hugo.toml <<EOF
     [[module.imports]]
     path = "github.com/willfaught/paige"
@@ -156,18 +151,20 @@ please share it by [posting a link](https://github.com/willfaught/paige/discussi
 7. Build and run the site:
 
     ```sh
-    $ cd yourproject
+    $ cd yoursite
     $ hugo server -D
     ```
 
 8. Update the Paige module:
 
     ```sh
-    $ cd yourproject
+    $ cd yoursite
     $ hugo mod get github.com/willfaught/paige@latest
     ```
 
 See Hugo's [installation](https://gohugo.io/installation/), [getting started](https://gohugo.io/getting-started/), and [module](https://gohugo.io/hugo-modules/) guides for more information.
+
+See the [minimal look](#minimal-look), [narrow look](#narrow-look), [narrow-and-wide look](#narrow-and-wide-look), and [menu navigation only](#menu-navigation-only) sections for common customizations.
 
 ## Configure
 
@@ -178,8 +175,23 @@ There is a single parameter object with sensible defaults that can be overridden
 ```toml
 [paige]
 color = "#0d6efd" # Bootstrap primary color and theme color for Safari and Windows
+color_scheme = "auto" # Must be "auto", "dark", or "light"
+credit = '<a class="link-secondary text-decoration-none" href="https://github.com/willfaught/paige">Paige Theme</a>'
+date_format = ":date_long" # Hugo date format
+description = "" # Site description. Appears above the menu, below the site title, if set.
+edit = "" # File edit URL. Example: "https://github.com/account/project/edit/master/content/%s".
+external_link_new_tab = false # Open external links in new tabs
+history = "" # File history URL. Example: "https://github.com/account/project/commits/master/content/%s".
+keyword_style = "text" # Must be "text" or "pills"
+license = "" # Example: "CC BY 4.0 License", "CC BY-NC 4.0 License", "MIT License"
 math = false # Enable math typesetting
+menu_style = "links" # Must be "links", "pills", "tabs", or "underline"
+title = "" # Site title. Appears above the menu, above the site description, if set.
 style = "" # CSS included at the end of the stylesheet, before style-last.css
+
+[paige.alert]
+message = "Alert!" # Markdown displayed before the page body
+type = "primary" # Bootstrap alert class
 
 [paige.analytics]
 disable = false # Disable all analytics
@@ -232,18 +244,23 @@ account_id = ""
 
 [paige.comments]
 disable = false # Disable all comments
+disable_kinds = [] # Page kinds to disable comments for. Examples: ["list"], ["page", "term"].
 
 [paige.comments.cactus] # See https://cactus.chat
-account_id = ""
+site_name = ""
 
 [paige.comments.commento] # See https://commento.io
 script_url = ""
+
+[paige.comments.cusdis] # See https://cusdis.com
+app_id = ""
+host_url = ""
 
 [paige.comments.graphcomment] # See https://graphcomment.com
 account_id = ""
 
 [paige.comments.hyvor] # See https://hyvor.com
-account_id = ""
+website = ""
 
 [paige.comments.intensedebate] # See https://intensedebate.com
 account_id = ""
@@ -251,134 +268,129 @@ account_id = ""
 [paige.comments.isso] # See https://isso-comments.de
 script_url = ""
 
-[paige.comments.muut] # See https://muut.com
-account_id = ""
-
 [paige.comments.remark42] # See https://remark42.com
 host_url = ""
 site_id = ""
 
 [paige.comments.replybox] # See https://getreplybox.com
-account_id = ""
+site = ""
 
 [paige.comments.utterances] # See https://utteranc.es
-github_repo = ""
+repo = ""
+theme = ""
 
-[paige.date]
-format = ":date_long" # Hugo date format
+[paige.feed]
+disable = false # Exclude the page from feeds
+link_to_page = false # Link to the page instead of the front matter link, if present
+page_link = "⏎" # If a front matter link is present, and link_to_page is false, then link to the page with this text
 
-[paige.git]
-commit_url = "" # Example is "https://github.com/willfaught/paige/commit/%s"
+[paige.feed.atom]
+authors = []
+# Example:
+# [[paige.feed.atom.authors]]
+# email = "example@example.com"
+# name = "John Doe"
+# url = "https://github.com/account/project"
+icon = "" # Example: "/icon.webp"
+logo = "" # Example: "/logo.webp"
 
-[paige.menu]
-style = "pills" # Must be "links", "pills", "tabs", or "underline"
+[paige.feed.rss]
+managing_editor = "" # Example: "example@example.com (John Doe)"
+web_master = "" # Example: "example@example.com (John Doe)"
 
-[paige.rss]
-hide_page = false
-managing_editor = ""
-web_master = ""
+[params.paige.list_page]
+disable_authors = false
+disable_collections = false
+disable_date = false
+disable_description = false
+disable_keywords = false
+disable_pages = false
+disable_reading_time = false
+disable_sections = false
+disable_series = false
+disable_summary = false
+disable_title = false
+
+[params.paige.page]
+disable_alert = false
+disable_authors = false
+disable_date = false
+disable_description = false
+disable_edit = false
+disable_history = false
+disable_keywords = false
+disable_next = false
+disable_prev = false
+disable_reading_time = false
+disable_series = false
+disable_title = false
+disable_toc = false
+
+[params.paige.site]
+disable_breadcrumbs = false
+disable_copyright = false
+disable_credit = false
+disable_description = false
+disable_license = false
+disable_menu = false
+disable_title = false
 
 [paige.search]
-hide_page = false
+disable = false # Exclude the page from search
+```
+
+The parameter object is accessed in site parameters as `[params.paige]`, and in page parameters as `[paige]`.
+
+The assigned values shown are the default values.
+
+Parameters specific to pages:
+
+```toml
+link = "" # The reference for an anchor around the title. Example: "https://youtu.be/dQw4w9WgXcQ".
 ```
 
 The assigned values shown are the default values.
 
-Optional site parameters:
+Parameters specific to menus:
 
 ```toml
-[authors.will-faught]
-name = "Will Faught"
-default = false # Credit this author in pages that have no authors parameter
-```
-
-Optional page parameters:
-
-```toml
-authors = ["will-faught"] # Credit the corresponding author in the site parameters
-link = "https://youtu.be/dQw4w9WgXcQ" # The reference for an anchor around the title
-
-[[authors]]
-author = "will-faught" # Credit the corresponding author in the site parameters
-
-[[authors]]
-name = "Will Faught" # Credit this author
-
 [paige]
-alert = "Alert!" # Markdown displayed before the page body (defaults to primary alert type)
-pin = true # Display this page before the rest
-
-[paige.alert]
-message = "Alert!" # Markdown displayed before the page body
-type = "primary" # Bootstrap alert type
+disabled = false
+divider_above = false
+divider_below = false
+header_above = ""
+header_below = ""
 ```
+
+The assigned values shown are the default values.
 
 ### Menu
 
-An optional menu can be configured.
+The menu can be configured using the `main` menu.
 The active menu item has a URL that is a prefix of the path of the current page.
 A menu item with the URL `/` only matches a `/` path.
 
-Example configuration in `yoursite/hugo.toml`:
-
-```toml
-[languages.en]
-weight = 10
-
-[[languages.en.menu.main]]
-identifier = "home"
-name = "Home"
-url = "/"
-weight = 10
-
-[[languages.en.menu.main]]
-identifier = "blog"
-name = "Blog"
-url = "/blog/"
-weight = 20
-
-[[languages.en.menu.main]]
-identifier = "life"
-name = "Life"
-parent = "blog"
-url = "/blog/life/"
-weight = 10
-
-[[languages.en.menu.main]]
-identifier = "work"
-name = "Work"
-parent = "blog"
-url = "/blog/work/"
-weight = 20
-
-[languages.en.menu.main.params.paige]
-divider_below = true
-
-[[languages.en.menu.main]]
-identifier = "interests"
-name = "Interests"
-parent = "blog"
-url = "/blog/interests/"
-weight = 30
-
-[languages.en.menu.main.params.paige]
-disabled = true
-
-[[languages.en.menu.main]]
-identifier = "tags"
-name = "Tags"
-url = "/tags/"
-weight = 30
-
-[[languages.en.menu.main]]
-identifier = "search"
-name = "Search"
-url = "/search/"
-weight = 40
-```
-
 If you intend for the menu to be sufficient for all navigation,
 see [how to hide other navigation features](#menu-navigation-only).
+
+### Taxonomies
+
+Support for authors, categories, series, and tags taxonomies is built in.
+
+Set `default` to `true` in the front matter of an author term page for that author to be credited in regular pages that have no authors parameter.
+A default author must be referenced at least once explicitly in a regular page.
+
+To disable the rendering of author pages, add this to `yoursite/hugo.toml`:
+
+```toml
+[[cascade]]
+[cascade._target]
+path = "{/authors,/authors/**}"
+[cascade.build]
+render = "never"
+```
+
+The `email` and `url` parameters in the front matter of an author term page are used in feeds if present.
 
 ## Layouts
 
@@ -400,7 +412,7 @@ Example configuration in `yoursite/hugo.toml`:
 
 ```toml
 [outputs]
-home = ["html", "json", "rss"]
+home = ["atom", "html", "paige-search", "rss"]
 ```
 
 Example configuration in `yoursite/content/search.md`:
@@ -419,12 +431,11 @@ The `paige/code` shortcode provides highlighted code.
 ```
 {{< paige/code
     lang=""
-    options="" >}}
+    options=""
+    unescape=false >}}
 
 {{< /paige/code >}}
 ```
-
-Inner content: Required. String. The code.
 
 Parameters:
 
@@ -433,7 +444,11 @@ Parameters:
     <dd>Optional. Position 0. String. Chroma <a href="https://gohugo.io/content-management/syntax-highlighting/#list-of-chroma-highlighting-languages">language code</a>. Default is <code>plaintext</code>.</dd>
     <dt><code>options</code></dt>
     <dd>Optional. String. Hugo <a href="https://gohugo.io/content-management/syntax-highlighting/#highlight-shortcode">highlight options</a>.</dd>
+    <dt><code>unescape</code></dt>
+    <dd>Optional. Boolean. Whether to reverse the HTML escaping in the body. Useful for when the request shortcode is used in the body.</dd>
 </dl>
+
+Body: Required. String. The code.
 
 ### Email
 
@@ -441,20 +456,19 @@ The `paige/email` shortcode hides e-mail addresses from robots.
 
 ```
 {{< paige/email
-    address=""
-    text="" >}}
-```
+    address="" >}}
 
-Inner content: None.
+{{< /paige/email >}}
+```
 
 Parameters:
 
 <dl>
     <dt><code>address</code></dt>
-    <dd>Required. String. The e-mail address.</dd>
-    <dt><code>text</code></dt>
-    <dd>Required. String. The anchor text.</dd>
+    <dd>Required. Position 0. String. The e-mail address.</dd>
 </dl>
+
+Body: Required. String. Markdown. The content.
 
 ### Figure
 
@@ -474,8 +488,6 @@ The `paige/figure` shortcode provides a figure.
 
 {{< /paige/figure >}}
 ```
-
-Inner content: Required. String. Markdown. The content.
 
 Parameters:
 
@@ -499,6 +511,8 @@ Parameters:
     <dt><code>width</code></dt>
     <dd>Optional. String. CSS value. Total width.</dd>
 </dl>
+
+Body: Required. String. Markdown. The content.
 
 ### Gallery
 
@@ -525,8 +539,6 @@ The `paige/gallery` shortcode provides an arrangement of images.
 
 {{< /paige/gallery >}}
 ```
-
-Inner content: Optional. String. HTML. The images.
 
 Parameters:
 
@@ -565,6 +577,8 @@ Parameters:
     <dd>Optional. String. CSS value. Image width.</dd>
 </dl>
 
+Body: Optional. String. HTML. The images.
+
 ### Icon
 
 The `paige/icon` shortcode provides a web font icon.
@@ -572,22 +586,22 @@ The `paige/icon` shortcode provides a web font icon.
 ```
 {{< paige/icon
     class=""
-    name=""
+    title=""
     url="" >}}
 ```
-
-Inner content: None.
 
 Parameters:
 
 <dl>
     <dt><code>class</code></dt>
-    <dd>Required. Position 0. String. <code>&lt;i&gt;</code> class. Example is <code>bi bi-github</code>.</dd>
-    <dt><code>name</code></dt>
-    <dd>Optional. String. The screen reader description. Example is <code>GitHub</code>.</dd>
+    <dd>Required. Position 0. String. <code>&lt;i&gt;</code> class. Example: <code>bi bi-github</code>.</dd>
+    <dt><code>title</code></dt>
+    <dd>Optional. String. The screen reader description and anchor title. Example: <code>GitHub</code>.</dd>
     <dt><code>url</code></dt>
-    <dd>Optional. String. URL. Example is <code>https://github.com/willfaught/paige</code>. E-mails in URLs with a <code>mailto:</code> scheme are protected from web crawlers.</dd>
+    <dd>Optional. String. URL. Example: <code>https://github.com/account/project</code>. E-mails in URLs with a <code>mailto:</code> scheme are protected from web crawlers.</dd>
 </dl>
+
+Body: None.
 
 ### Image
 
@@ -614,8 +628,6 @@ The `paige/image` shortcode provides an image.
     title=""
     width="" >}}
 ```
-
-Inner content: None.
 
 Parameters:
 
@@ -658,6 +670,8 @@ Parameters:
     <dd>Optional. String. CSS value. Image width.</dd>
 </dl>
 
+Body: None.
+
 ### Quote
 
 The `paige/quote` shortcode provides a quotation.
@@ -669,12 +683,102 @@ The `paige/quote` shortcode provides a quotation.
 {{< /paige/quote >}}
 ```
 
-Inner content: Required. String. Markdown. The quotation.
+Parameters:
+
+<dl>
+    <dt><code>cite</code></dt>
+    <dd>Optional. String. Plain text. Citation.</dd>
+</dl>
+
+Body: Required. String. Markdown. The quotation.
+
+### Request
+
+The `paige/request` shortcode provides the content for a URL.
+
+```
+{{< paige/request
+    method=""
+    url="" >}}
+```
 
 Parameters:
 
-<dt><code>cite</code></dt>
-<dd>Optional. String. Plain text. Citation.</dd>
+<dl>
+    <dt><code>method</code></dt>
+    <dd>Optional. String. HTTP method. Default is <code>get</code>.</dd>
+    <dt><code>url</code></dt>
+    <dd>Required. String. URL.</dd>
+</dl>
+
+Body: None.
+
+### Tabs
+
+The `paige/tabs` shortcode provides tab buttons and tab panes.
+It must contain one `paige/tabs/buttons` shortcode, and then one `paige/tabs/panes` shortcode.
+
+```
+{{< paige/tabs >}}
+
+{{< /paige/tabs >}}
+```
+
+Parameters: None.
+
+Body: Required. String. HTML. The tab buttons and tab panes.
+
+The `paige/tabs/buttons` shortcode provides tab buttons.
+It must contain one or more `paige/tabs/button` shortcodes.
+Each `paige/tabs/button` shortcode corresponds to the `paige/tabs/pane` shortcode in the same position.
+
+```
+{{< paige/tabs/buttons >}}
+
+{{< /paige/tabs/buttons >}}
+```
+
+Parameters: None.
+
+Body: Required. String. HTML. The tab buttons.
+
+The `paige/tabs/button` shortcode provides a tab button.
+
+```
+{{< paige/tabs/button >}}
+
+{{< /paige/tabs/button >}}
+```
+
+Parameters: None.
+
+Body: Required. String. Markdown. The tab button content.
+
+The `paige/tabs/panes` shortcode provides tab panes.
+It must contain one or more `paige/tabs/pane` shortcodes.
+Each `paige/tabs/pane` shortcode corresponds to the `paige/tabs/button` shortcode in the same position.
+
+```
+{{< paige/tabs/panes >}}
+
+{{< /paige/tabs/panes >}}
+```
+
+Parameters: None.
+
+Body: Required. String. HTML. The tab panes.
+
+The `paige/tabs/pane` shortcode provides a tab pane.
+
+```
+{{< paige/tabs/pane >}}
+
+{{< /paige/tabs/pane >}}
+```
+
+Parameters: None.
+
+Body: Required. String. Markdown. The tab pane content.
 
 ### Vimeo
 
@@ -709,8 +813,6 @@ The `paige/vimeo` shortcode provides a Vimeo video.
     video=""
     width="" >}}
 ```
-
-Inner content: None.
 
 Parameters:
 
@@ -769,6 +871,8 @@ Parameters:
     <dd>Optional. String. CSS value. Video width.</dd>
 </dl>
 
+Body: None.
+
 See [Vimeo documentation](https://vimeo.zendesk.com/hc/en-us/articles/360001494447-Player-parameters-overview) for more detail.
 
 ### YouTube
@@ -792,8 +896,6 @@ The `paige/youtube` shortcode provides a YouTube video.
     video=""
     width="" >}}
 ```
-
-Inner content: None.
 
 Parameters:
 
@@ -828,38 +930,87 @@ Parameters:
     <dd>Optional. String. CSS value. Video width.</dd>
 </dl>
 
+Body: None.
+
 ## Customize
 
 ### Include
 
-| If this file exists                                 | It is included at               |
-| --------------------------------------------------- | ------------------------------- |
-| `yoursite/layouts/partials/paige/body-first.html`   | The beginning of the body tag   |
-| `yoursite/layouts/partials/paige/body-last.html`    | The end of the body tag         |
-| `yoursite/layouts/partials/paige/footer-first.html` | The beginning of the footer tag |
-| `yoursite/layouts/partials/paige/footer-last.html`  | The end of the footer tag       |
-| `yoursite/layouts/partials/paige/head-first.html`   | The beginning of the head tag   |
-| `yoursite/layouts/partials/paige/head-last.html`    | The end of the head tag         |
-| `yoursite/layouts/partials/paige/header-first.html` | The beginning of the header tag |
-| `yoursite/layouts/partials/paige/header-last.html`  | The end of the header tag       |
-| `yoursite/layouts/partials/paige/main-first.html`   | The beginning of the main tag   |
-| `yoursite/layouts/partials/paige/main-last.html`    | The end of the main tag         |
-| `yoursite/layouts/partials/paige/style-first.css`   | The beginning of the style tag  |
-| `yoursite/layouts/partials/paige/style-last.css`    | The end of the style tag        |
+| If this file exists                                      | It is included at                    |
+| ---------------------------------------------------------| -------------------------------------|
+| `yoursite/layouts/partials/paige/body-first.html`        | The beginning of the body tag        |
+| `yoursite/layouts/partials/paige/body-last.html`         | The end of the body tag              |
+| `yoursite/layouts/partials/paige/head-first.html`        | The beginning of the head tag        |
+| `yoursite/layouts/partials/paige/head-last.html`         | The end of the head tag              |
+| `yoursite/layouts/partials/paige/page-footer-first.html` | The beginning of the page footer tag |
+| `yoursite/layouts/partials/paige/page-footer-last.html`  | The end of the page footer tag       |
+| `yoursite/layouts/partials/paige/page-header-first.html` | The beginning of the page header tag |
+| `yoursite/layouts/partials/paige/page-header-last.html`  | The end of the page header tag       |
+| `yoursite/layouts/partials/paige/site-first.html`        | The beginning of the main tag        |
+| `yoursite/layouts/partials/paige/site-last.html`         | The end of the main tag              |
+| `yoursite/layouts/partials/paige/site-footer-first.html` | The beginning of the site footer tag |
+| `yoursite/layouts/partials/paige/site-footer-last.html`  | The end of the site footer tag       |
+| `yoursite/layouts/partials/paige/site-header-first.html` | The beginning of the site header tag |
+| `yoursite/layouts/partials/paige/site-header-last.html`  | The end of the site header tag       |
+| `yoursite/layouts/partials/paige/style-first.css`        | The beginning of the style tag       |
+| `yoursite/layouts/partials/paige/style-last.css`         | The end of the style tag             |
 
 ### Override
 
-Most code is in partials that are included by the layouts.
-Elements can be added, changed, or removed easily by overriding the corresponding layout or partial.
+Most code is in partial templates that the layout templates use.
+Code can be added, changed, or removed easily by overriding the corresponding layout or partial template.
 
-For example, the layouts `list.html`, `single.html`, `taxonomy.html`, and `term.html`
-include the partial `paige/article.html`.
-`paige/article.html` includes the partials `paige/metadata.html`, `paige/toc.html`, and `paige/content.html`.
-To change the page title for those layouts, change `paige/metadata.html`.
-To change the page title for `single.html`,
-replace the use of `paige/article.html` in `single.html` with the use of
-`paige/metadata.html`, `paige/toc.html`, and `paige/content.html`,
-then replace that use of `paige/metadata.html` with your own design.
+For example, `layouts/_default/list.html` and `layouts/_default/single.html` include `layouts/partial/paige/page.html`.
+`layouts/partial/paige/page.html` includes `layouts/partial/paige/page-header.html`.
+To change the page title for those layout templates, change `layouts/partial/paige/page-header.html`.
+
+To change the page title for `layouts/_default/single.html` only,
+replace the inclusion of `layouts/partial/paige/page.html` in `layouts/_default/single.html` with its content,
+then in that, replace the inclusion of `layouts/partial/paige/page-header.html` with its content,
+then in that, change the page title.
+
+To change the favicon, override these files:
+
+- `static/android-chrome-192x192.png`
+- `static/android-chrome-512x512.png`
+- `static/apple-touch-icon-114x114-precomposed.png`
+- `static/apple-touch-icon-114x114.png`
+- `static/apple-touch-icon-120x120-precomposed.png`
+- `static/apple-touch-icon-120x120.png`
+- `static/apple-touch-icon-144x144-precomposed.png`
+- `static/apple-touch-icon-144x144.png`
+- `static/apple-touch-icon-152x152-precomposed.png`
+- `static/apple-touch-icon-152x152.png`
+- `static/apple-touch-icon-180x180-precomposed.png`
+- `static/apple-touch-icon-180x180.png`
+- `static/apple-touch-icon-57x57-precomposed.png`
+- `static/apple-touch-icon-57x57.png`
+- `static/apple-touch-icon-60x60-precomposed.png`
+- `static/apple-touch-icon-60x60.png`
+- `static/apple-touch-icon-72x72-precomposed.png`
+- `static/apple-touch-icon-72x72.png`
+- `static/apple-touch-icon-76x76-precomposed.png`
+- `static/apple-touch-icon-76x76.png`
+- `static/apple-touch-icon-precomposed.png`
+- `static/apple-touch-icon.png`
+- `static/favicon-16x16.png`
+- `static/favicon-32x32.png`
+- `static/favicon.ico`
+- `static/favicon.png`
+- `static/favicon.svg`
+- `static/mstile-144x144.png`
+- `static/mstile-150x150.png`
+- `static/mstile-310x150.png`
+- `static/mstile-310x310.png`
+- `static/mstile-70x70.png`
+- `static/safari-pinned-tab.svg`
+
+You can generate these favicon files [here](https://realfavicongenerator.net).
+
+To change the syntax highlighting styles, override these files [with your own](https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css):
+
+- `layouts/partials/paige/dark.css`
+- `layouts/partials/paige/light.css`
 
 ### Extend
 
@@ -868,77 +1019,102 @@ Use CSS selectors to extend the default styling.
 Page identifiers:
 
 <dl>
-    <dt><code>#paige-article</code></dt>
-    <dd>The article.</dd>
+    <dt><code>#paige-alert</code></dt>
+    <dd>The page alert.</dd>
     <dt><code>#paige-authors</code></dt>
-    <dd>The authors.</dd>
+    <dd>The page authors.</dd>
     <dt><code>#paige-breadcrumbs</code></dt>
-    <dd>The breadcrumbs.</dd>
+    <dd>The site breadcrumbs.</dd>
     <dt><code>#paige-collections</code></dt>
-    <dd>The collections.</dd>
+    <dd>The site collection pages.</dd>
     <dt><code>#paige-collections-header</code></dt>
-    <dd>The collections header.</dd>
+    <dd>The site collection pages header.</dd>
     <dt><code>#paige-comments</code></dt>
-    <dd>The comments.</dd>
+    <dd>The page comments.</dd>
     <dt><code>#paige-content</code></dt>
-    <dd>The content.</dd>
+    <dd>The page content.</dd>
     <dt><code>#paige-copyright</code></dt>
-    <dd>The copyright.</dd>
+    <dd>The site copyright.</dd>
     <dt><code>#paige-credit</code></dt>
-    <dd>The credit.</dd>
+    <dd>The site credit.</dd>
     <dt><code>#paige-date</code></dt>
-    <dd>The date.</dd>
-    <dt><code>#paige-description</code></dt>
-    <dd>The description.</dd>
-    <dt><code>#paige-footer</code></dt>
-    <dd>The footer.</dd>
-    <dt><code>#paige-header</code></dt>
-    <dd>The header.</dd>
+    <dd>The page date.</dd>
+    <dt><code>#paige-edit</code></dt>
+    <dd>The page edit link.</dd>
+    <dt><code>#paige-file</code></dt>
+    <dd>The page edit and history links.</dd>
+    <dt><code>#paige-history</code></dt>
+    <dd>The page history link.</dd>
     <dt><code>#paige-keywords</code></dt>
-    <dd>The keywords.</dd>
-    <dt><code>#paige-main</code></dt>
-    <dd>The main.</dd>
+    <dd>The page keywords.</dd>
+    <dt><code>#paige-license</code></dt>
+    <dd>The site license.</dd>
     <dt><code>#paige-menu</code></dt>
-    <dd>The menu.</dd>
+    <dd>The site menu.</dd>
     <dt><code>#paige-metadata</code></dt>
-    <dd>The metadata.</dd>
+    <dd>The page metadata.</dd>
+    <dt><code>#paige-next</code></dt>
+    <dd>The next page link.</dd>
+    <dt><code>#paige-page-description</code></dt>
+    <dd>The page description.</dd>
+    <dt><code>#paige-page-footer</code></dt>
+    <dd>The page footer that contains the page edit, history, next, and previous links.</dd>
+    <dt><code>#paige-page-header</code></dt>
+    <dd>The page header that contains the page title, description, metadata, and table of contents.</dd>
+    <dt><code>#paige-page-title</code></dt>
+    <dd>The page title.</dd>
     <dt><code>#paige-pages</code></dt>
-    <dd>The pages.</dd>
+    <dd>The page sub-pages.</dd>
     <dt><code>#paige-pages-header</code></dt>
-    <dd>The pages header.</dd>
+    <dd>The page sub-pages header.</dd>
     <dt><code>#paige-pagination</code></dt>
-    <dd>The sub-page pagination links.</dd>
+    <dd>The pagination of sub-pages.</dd>
+    <dt><code>#paige-prev</code></dt>
+    <dd>The previous page link.</dd>
     <dt><code>#paige-reading-time</code></dt>
-    <dd>The reading time.</dd>
-    <dt><code>#paige-root</code></dt>
-    <dd>The outermost element in the body.</dd>
+    <dd>The page reading time.</dd>
     <dt><code>#paige-sections</code></dt>
-    <dd>The sections.</dd>
+    <dd>The page section sub-pages.</dd>
     <dt><code>#paige-sections-header</code></dt>
-    <dd>The sections header.</dd>
+    <dd>The page section sub-pages header.</dd>
     <dt><code>#paige-series</code></dt>
-    <dd>The series.</dd>
-    <dt><code>#paige-title</code></dt>
-    <dd>The title.</dd>
+    <dd>The page series.</dd>
+    <dt><code>#paige-siblings</code></dt>
+    <dd>The page next and previous links.</dd>
+    <dt><code>#paige-site-description</code></dt>
+    <dd>The site description.</dd>
+    <dt><code>#paige-site-footer</code></dt>
+    <dd>The site footer that contains the site copyright, license, and credit.</dd>
+    <dt><code>#paige-site-header</code></dt>
+    <dd>The site header that contains the site title, description, menu, and breadcrumbs.</dd>
+    <dt><code>#paige-site-title</code></dt>
+    <dd>The site title.</dd>
     <dt><code>#paige-toc</code></dt>
     <dd>The table of contents.</dd>
 </dl>
 
-Page and sub-page classes:
+Page classes:
+
+<dl>
+    <dt><code>.paige-keyword</code></dt>
+    <dd>A keyword.</dd>
+    <dt><code>.paige-keyword-category</code></dt>
+    <dd>A category keyword.</dd>
+    <dt><code>.paige-keyword-tag</code></dt>
+    <dd>A tag keyword.</dd>
+    <dt><code>.paige-keywords</code></dt>
+    <dd>The keywords.</dd>
+</dl>
+
+Sub-page classes:
 
 <dl>
     <dt><code>.paige-authors</code></dt>
     <dd>The authors.</dd>
     <dt><code>.paige-date</code></dt>
     <dd>The date.</dd>
-    <dt><code>.paige-date-header</code></dt>
-    <dd>The date headers.</dd>
     <dt><code>.paige-description</code></dt>
     <dd>The description.</dd>
-    <dt><code>.paige-keyword</code></dt>
-    <dd>A keyword.</dd>
-    <dt><code>.paige-keywords</code></dt>
-    <dd>The keywords.</dd>
     <dt><code>.paige-metadata</code></dt>
     <dd>The metadata.</dd>
     <dt><code>.paige-page</code></dt>
@@ -953,22 +1129,22 @@ Page and sub-page classes:
     <dd>The title.</dd>
 </dl>
 
-Kind classes:
+Page kind classes:
 
 <dl>
-    <dt><code>.paige-home</code></dt>
+    <dt><code>.paige-kind-home</code></dt>
     <dd>The container element of pages with kind "home".</dd>
-    <dt><code>.paige-list</code></dt>
+    <dt><code>.paige-kind-section</code></dt>
     <dd>The container element of pages with kind "section".</dd>
-    <dt><code>.paige-single</code></dt>
+    <dt><code>.paige-kind-page</code></dt>
     <dd>The container element of pages with kind "page".</dd>
-    <dt><code>.paige-taxonomy</code></dt>
+    <dt><code>.paige-kind-taxonomy</code></dt>
     <dd>The container element of pages with kind "taxonomy".</dd>
-    <dt><code>.paige-term</code></dt>
+    <dt><code>.paige-kind-term</code></dt>
     <dd>The container element of pages with kind "term".</dd>
 </dl>
 
-Status classes:
+Page status classes:
 
 <dl>
     <dt><code>.paige-draft</code></dt>
@@ -990,6 +1166,8 @@ Shortcode classes:
 <dl>
     <dt><code>.paige-code</code></dt>
     <dd>The container element of <code>paige/code</code> shortcodes.</dd>
+    <dt><code>.paige-email</code></dt>
+    <dd>The container element of <code>paige/email</code> shortcodes.</dd>
     <dt><code>.paige-figure</code></dt>
     <dd>The container element of <code>paige/figure</code> shortcodes.</dd>
     <dt><code>.paige-gallery</code></dt>
@@ -1006,30 +1184,63 @@ Shortcode classes:
     <dd>The container element of <code>paige/youtube</code> shortcodes.</dd>
 </dl>
 
-If you hide `#paige-credit`, please credit this project in a post to help others find it.
-
 ### Minimal look
 
 By default, everything is shown.
 If you want a more minimal look,
-try the following in `yoursite/layouts/partials/paige/style-first.css`:
+try the following in `yoursite/hugo.toml`:
 
-```css
-#paige-authors,
-#paige-collections,
-#paige-credit,
-#paige-keywords,
-#paige-reading-time,
-#paige-series,
-#paige-toc,
-.paige-authors,
-.paige-date,
-.paige-keywords,
-.paige-reading-time,
-.paige-series,
-.paige-summary {
-    display: none;
-}
+```toml
+[params.paige.list_page]
+disable_authors = true
+disable_date = true
+disable_keywords = true
+disable_reading_time = true
+disable_series = true
+disable_summary = true
+
+[params.paige.page]
+disable_authors = true
+disable_date = true
+disable_keywords = true
+disable_next = true
+disable_prev = true
+disable_reading_time = true
+disable_series = true
+disable_toc = true
+```
+
+### Narrow look
+
+By default, the content expands to fill the whole window.
+This can result in very long lines, depending on the window width.
+To use [the recommended line length of 66 characters](https://en.wikipedia.org/wiki/Line_length#Printed_text) (40rem),
+try the following in `yoursite/hugo.toml`:
+
+```toml
+[params.paige]
+style = """
+#paige-content > * { margin-left: auto; margin-right: auto; max-width: 40rem; }
+"""
+```
+
+### Narrow-and-wide look
+
+By default, the content expands to fill the whole window.
+This can result in very long lines, depending on the window width.
+To use [the recommended line length of 66 characters](https://en.wikipedia.org/wiki/Line_length#Printed_text) (40rem)
+for all content except media,
+try the following in `yoursite/hugo.toml`:
+
+```toml
+[params.paige]
+style = """
+#paige-content > * { margin-left: auto; margin-right: auto; max-width: 40rem; }
+#paige-content > img,
+#paige-content > .paige-image,
+#paige-content > .paige-vimeo,
+#paige-content > .paige-youtube { max-width: 100%; }
+"""
 ```
 
 ### Menu navigation only
@@ -1039,61 +1250,22 @@ you should hide the breadcrumbs on every page,
 and hide the collection, section, and page lists on the home page if you use the default home page layout.
 
 To hide the breadcrumbs on every page,
-try the following in `yoursite/layouts/partials/paige/style-first.css`:
+try the following in `yoursite/hugo.toml`:
 
-```css
-#paige-breadcrumbs {
-    display: none;
-}
+```toml
+[params.paige.site]
+disable_breadcrumbs = true
 ```
 
 To hide the collection, section, and page lists on the home page,
 try the following in `yoursite/content/_index.md`:
 
 ```toml
-[paige]
-style = """
-#paige-collections,
-#paige-sections,
-#paige-pages {
-    display: none;
-}
-"""
+[params.paige.list_page]
+disable_collections = true
+disable_pages = true
+disable_sections = true
 ```
-
-## Implementation
-
-The HTML author is the page authors.
-
-The HTML description is the page description.
-
-The HTML keywords is a union of the page keywords, tags, and categories.
-
-The HTML title is the page title, followed by a middle dot, followed by the site title.
-If one is missing, the other is used without the middle dot.
-For the home page, the title is the page title, or the site title otherwise.
-
-The HTML body has a header, a body, and a footer.
-The header has the menu.
-The body has the page article.
-The footer has the copyright notice and the theme link.
-The article has the page metadata, table of contents, and content.
-The metadata has the page title, description, terms, authors, date, and reading time.
-
-The copyright notice, title, and description can be Markdown. Markup is stripped for HTML and RSS titles.
-
-The page title is displayed in an `h1` tag, so page content headers must start with `h2`.
-
-The page date is the publish date.
-
-The following NPM packages are used:
-
-- [bootstrap](https://www.npmjs.com/package/bootstrap/v/5.3.0)
-- [bootstrap-icons](https://www.npmjs.com/package/bootstrap-icons/v/1.10.5)
-- [katex](https://www.npmjs.com/package/katex/v/0.16.7)
-
-Hugo names, HTML names, CSS names, and JavaScript names that begin with "paige" capitalized in any way,
-optionally prefixed with one or more underscores, are reserved.
 
 ## Credits
 
@@ -1103,5 +1275,5 @@ optionally prefixed with one or more underscores, are reserved.
 ## Project
 
 Created by [Will Faught](https://willfaught.com).
-Released under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+Released under the [MIT License](https://spdx.org/licenses/MIT.html).
 Hosted at https://github.com/willfaught/paige.

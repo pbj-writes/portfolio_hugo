@@ -1,11 +1,10 @@
----
-authors: ["will-faught"]
-categories: ["content", "paige"]
-description: "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
-tags: ["markdown", "css", "html"]
-title: "Markdown Syntax Guide"
-weight: 10
----
++++
+authors = ["author-demo"]
+categories = ["content", "paige"]
+description = "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
+tags = ["css", "html", "markdown"]
+title = "Markdown Syntax Guide"
++++
 
 <!--
 The MIT License (MIT)

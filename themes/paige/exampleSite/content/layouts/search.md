@@ -1,14 +1,13 @@
----
-authors: ["will-faught"]
-categories: ["layouts", "paige"]
-description: "Demonstration of the Paige search layout."
-layout: "paige/search"
-tags: ["search"]
-title: "Search Layout"
-weight: 20
----
++++
+authors = ["author-demo"]
+categories = ["layouts", "paige"]
+description = "Demonstration of the search layout."
+layout = "paige/search"
+tags = ["search"]
+title = "Search"
++++
 
-Paige provides a `paige/search` layout for site search.
+The `paige/search` layout provides site search.
 
 <!--more-->
 
@@ -16,7 +15,7 @@ Example `config.yaml`:
 
 ```yaml
 outputs:
-  home: ["html", "json", "rss"]
+  home: ["atom", "html", "paige-search", "rss"]
 ```
 
 Example `content/layouts/search.md`:
@@ -24,7 +23,7 @@ Example `content/layouts/search.md`:
 ```yaml
 ---
 layout: "paige/search"
-title: "Search Layout"
+title: "Search"
 ---
 ```
 

@@ -1,12 +1,12 @@
----
-authors: ["will-faught"]
-categories: ["paige", "shortcodes"]
-description: "Demonstration of the Paige Vimeo shortcode."
-tags: ["videos", "vimeo"]
-title: "Vimeo Shortcode"
----
++++
+authors = ["author-demo"]
+categories = ["paige", "shortcodes"]
+description = "Demonstration of the Vimeo shortcode."
+tags = ["videos", "vimeo"]
+title = "Vimeo"
++++
 
-Paige provides a `paige/vimeo` shortcode for playing Vimeo videos.
+The `paige/vimeo` shortcode plays a Vimeo video.
 
 <!--more-->
 

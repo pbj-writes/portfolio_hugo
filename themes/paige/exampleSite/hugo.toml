@@ -1,79 +1,25 @@
 baseurl = "https://example.com"
-copyright = "© Will Faught"
 enablerobotstxt = true
-languagecode = "en-us"
 paginate = 50
 timezone = "America/Los_Angeles"
 titlecasestyle = "Go"
 
 [languages.en]
+languagecode = "en-us"
+languagedirection = "ltr"
+languagename = "English"
 weight = 10
 
-[[languages.en.menu.main]]
-identifier = "home"
-name = "Home"
-url = "/"
-weight = 10
-
-[[languages.en.menu.main]]
-identifier = "content"
-name = "Content"
-url = "/content/"
-weight = 20
-
-[[languages.en.menu.main]]
-identifier = "layouts"
-name = "Layouts"
-url = "/layouts/"
-weight = 30
-
-[[languages.en.menu.main]]
-identifier = "shortcodes"
-name = "Shortcodes"
-url = "/shortcodes/"
-weight = 40
-
-[[languages.en.menu.main]]
-identifier = "customization"
-name = "Customization"
-url = "/customization/"
-weight = 50
-
-[[languages.en.menu.main]]
-identifier = "authors"
-name = "Authors"
-url = "/authors/"
-weight = 60
-
-[[languages.en.menu.main]]
-identifier = "series"
-name = "Series"
-url = "/series/"
-weight = 70
-
-[[languages.en.menu.main]]
-identifier = "categories"
-name = "Categories"
-url = "/categories/"
-weight = 80
-
-[[languages.en.menu.main]]
-identifier = "tags"
-name = "Tags"
-url = "/tags/"
-weight = 90
-
-[[languages.en.menu.main]]
-identifier = "search"
-name = "Search"
-url = "/search/"
-weight = 100
+[languages.en.params.paige]
+copyright = "© Will Faught"
+description = "Powerful, pliable pixel perfection"
+title = "Paige"
 
 [markup.goldmark.renderer]
 unsafe = true
 
 [markup.highlight]
-noClasses = false
+noclasses = false
 
 [markup.tableofcontents]
 endlevel = 6
@@ -84,13 +30,41 @@ startlevel = 2
 path = "github.com/willfaught/paige"
 
 [outputs]
-home = ["html", "json", "rss"]
+home = ["html", "paige-search"]
+section = ["html"]
+taxonomy = ["html"]
+term = ["html"]
 
-[params.authors.will-faught]
-name = "Will Faught"
+[params.paige.list_page]
+disable_authors = true
+disable_date = true
+disable_keywords = true
+disable_reading_time = true
+disable_series = true
+disable_summary = true
 
-[params.paige.git]
-commit_url = "https://github.com/willfaught/paige/commit/%s"
+[params.paige.page]
+disable_authors = true
+disable_date = true
+disable_keywords = true
+disable_next = true
+disable_prev = true
+disable_reading_time = true
+disable_series = true
+disable_toc = true
+
+[params.paige.site]
+disable_breadcrumbs = true
+disable_credit = true
+
+[[params.paige.feed.atom.authors]]
+email = "example@example.com"
+name = "John Doe"
+url = "https://example.com"
+
+[params.paige.feed.rss]
+managing_editor = "example@example.com (John Doe)"
+web_master = "example@example.com (John Doe)"
 
 [taxonomies]
 author = "authors"

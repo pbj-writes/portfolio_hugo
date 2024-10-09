@@ -1,12 +1,12 @@
----
-authors: ["will-faught"]
-categories: ["paige", "shortcodes"]
-description: "Demonstration of the Paige icon shortcode."
-tags: ["icon", "web font"]
-title: "Icon Shortcode"
----
++++
+authors = ["author-demo"]
+categories = ["paige", "shortcodes"]
+description = "Demonstration of the icon shortcode."
+tags = ["icon", "web font"]
+title = "Icon"
++++
 
-Paige provides a `paige/icon` shortcode for displaying a web font icon.
+The `paige/icon` shortcode displays a web font icon.
 
 <!--more-->
 
@@ -22,17 +22,17 @@ Result:
 
 <p class="display-1">Icon: {{< paige/icon class="bi bi-github" >}}</p>
 
-## Name parameter
+## Title parameter
 
 Code:
 
 ```go-html-template
-<p class="display-1">Icon: {{</* paige/icon class="bi bi-github" name="GitHub" */>}}</p>
+<p class="display-1">Icon: {{</* paige/icon class="bi bi-github" title="GitHub" */>}}</p>
 ```
 
 Result:
 
-<p class="display-1">Icon: {{< paige/icon class="bi bi-github" name="GitHub" >}}</p>
+<p class="display-1">Icon: {{< paige/icon class="bi bi-github" title="GitHub" >}}</p>
 
 ## Url parameter
 

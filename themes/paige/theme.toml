@@ -2,36 +2,64 @@ demosite = "https://willfaught.com/paige"
 description = "Powerful, pliable pixel perfection. An advanced Hugo theme."
 features = [
   "accessibility",
+  "analytics",
+  "atom feed",
+  "authors",
   "blog",
-  "bootstrap",
+  "bootstrap styles and icons",
+  "categories",
+  "code shortcode",
+  "comments",
   "customizable",
+  "dark color scheme",
+  "email shortcode",
   "facebook sharing",
-  "google analytics",
+  "figure shortcode",
+  "gallery shortcode",
   "header links",
+  "icon shortcode",
+  "image pixel densities",
+  "image shortcode",
+  "image size breakpoints",
+  "image thumbnails",
   "landing page",
+  "languages",
   "light color scheme",
   "math typesetting",
-  "menus",
+  "menu",
   "minimal design",
+  "quote shortcode",
   "responsive",
-  "safari and firefox reader view",
+  "right-to-left languages",
+  "rss feed",
+  "safari and firefox reader view support",
   "search",
   "sections",
   "seo",
+  "series",
   "single column",
   "social links",
-  "twitter sharing"
+  "tab shortcode",
+  "table of contents",
+  "tags",
+  "twitter sharing",
+  "validated",
+  "vimeo shortcode",
+  "youtube shortcode",
 ]
 homepage = "https://github.com/willfaught/paige"
-license = "Apache-2.0"
-licenselink = "https://www.apache.org/licenses/LICENSE-2.0"
+license = "MIT"
+licenselink = "https://github.com/willfaught/paige/blob/master/LICENSE"
 name = "Paige"
 tags = [
+  "archive",
   "blog",
   "bootstrap",
+  "company",
   "contact",
-  "dark",
   "dark mode",
+  "dark",
+  "docs",
   "gallery",
   "hero",
   "landing",
@@ -39,8 +67,9 @@ tags = [
   "minimal",
   "multilingual",
   "personal",
+  "podcast",
   "portfolio",
-  "responsive"
+  "responsive",
 ]
 
 [author]

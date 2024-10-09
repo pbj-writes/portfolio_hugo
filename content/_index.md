@@ -13,7 +13,6 @@ paige:
     #paige-date,
     #paige-keywords,
     #paige-reading-time,
-    #paige-series,
     #paige-toc,
     #paige-sections,
     #paige-collections,
@@ -22,7 +21,6 @@ paige:
     .paige-date-header,
     .paige-keywords,
     .paige-reading-time,
-    .paige-series,
     .paige-summary {
         display: none;
     }

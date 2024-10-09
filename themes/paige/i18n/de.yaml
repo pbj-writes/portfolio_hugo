@@ -1,5 +1,5 @@
 paige_breadcrumbs:
-  other: Semmelbrösel
+  other: Brotkrumen
 
 paige_collections:
   other: Sammlungen
@@ -8,23 +8,47 @@ paige_figure:
   other: Abbildung
 
 paige_aria_section_link:
-  other: Verweise auf diesen Abschnitt
+  other: Verweis auf diesen Abschnitt
+
+paige_edit_history:
+  other: Bearbeitungshistorie
+
+paige_edit_this_page:
+  other: Diese Seite bearbeiten
+
+paige_first:
+  other: Erste
+
+paige_last:
+  other: Letzte
+
+paige_menu:
+  other: Menü
 
 paige_minutes:
   one: Minute
   other: Minuten
 
+paige_next:
+  other: Nächste
+
 paige_noscript:
-  other: JavaScript wird benötigt.
+  other: JavaScript erforderlich
+
+paige_page_list_navigation:
+  other: Seitenlisten-Navigation
 
 paige_pages:
   other: Seiten
 
-paige_pinned_page:
-  other: Angeheftete seite
+paige_previous:
+  other: Vorherige
+
+paige_recent_content:
+  other: Neueste Inhalte
 
 paige_search_button:
-  other: Suche
+  other: Suchen
 
 paige_search_error:
   other: Fehler
@@ -33,13 +57,13 @@ paige_search_input:
   other: Suchbegriff
 
 paige_search_nothing:
-  other: Die Suche lieferte keine Treffer
+  other: Keine Ergebnisse gefunden
 
 paige_search_searching:
   other: Suche ...
 
 paige_search_something:
-  other: Die Suche lieferte einige Treffer
+  other: Einige Treffer gefunden
 
 paige_sections:
   other: Abschnitte

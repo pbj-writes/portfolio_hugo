@@ -1,11 +1,10 @@
----
-authors: ["will-faught"]
-categories: ["content", "paige"]
-description: "A brief description of Hugo Shortcodes."
-tags: ["shortcodes", "privacy"]
-title: "Rich Content"
-weight: 20
----
++++
+authors = ["author-demo"]
+categories = ["content", "paige"]
+description = "A brief description of Hugo Shortcodes."
+tags = ["privacy", "shortcodes"]
+title = "Rich Content"
++++
 
 <!--
 The MIT License (MIT)
@@ -39,15 +38,11 @@ Hugo ships with several [Built-in Shortcodes](https://gohugo.io/content-manageme
 
 {{< youtube ZJthWmvUzzc >}}
 
-<br>
-
 ---
 
 ## Twitter Simple Shortcode
 
 {{< twitter_simple user="DesignReviewed" id="1085870671291310081" >}}
-
-<br>
 
 ---
 

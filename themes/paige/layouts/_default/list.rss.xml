@@ -1,23 +1,22 @@
 {{ $page := . }}
 
-{{ $copyright := site.Copyright }}
-{{ $description := or $page.Description "Recent content" }}
-{{ $feed := ($page.OutputFormats.Get "rss").Permalink }}
+{{ $copyright := site.Copyright | markdownify | plainify | htmlUnescape }}
+{{ $description := or $page.Description (i18n "paige_recent_content") }}
 {{ $format := "Mon, 02 Jan 2006 15:04:05 MST" }}
-{{ $guids := dict }}
-{{ $html := $page.AlternativeOutputFormats.Get "html" }}
 {{ $language := site.LanguageCode | default site.Language.Lang }}
-{{ $lastbuilddate := (partial "paige/changed.html" $page).Format $format }}
+{{ $lastbuilddate := false }}
 {{ $limit := site.Config.Services.RSS.Limit }}
 {{ $link := ($page.AlternativeOutputFormats.Get "html").Permalink }}
 {{ $managingeditor := $page.Param "paige.feed.rss.managing_editor" }}
-{{ $pagetitle := $page.Title | markdownify | plainify | htmlUnescape }}
-{{ $sitetitle := site.Title | markdownify | plainify | htmlUnescape }}
 {{ $subpages := slice }}
 {{ $webmaster := $page.Param "paige.feed.rss.web_master" }}
 
-{{ range (cond $page.IsHome site $page).RegularPages }}
-    {{ if not (.Param "paige.feed.hide_page") }}
+{{ range $page.RegularPagesRecursive.ByPublishDate.Reverse }}
+    {{ if or (and (not $lastbuilddate) (not .Lastmod.IsZero)) (and $lastbuilddate (lt $lastbuilddate .Lastmod)) }}
+        {{ $lastbuilddate = .Lastmod }}
+    {{ end }}
+
+    {{ if not (.Param "paige.feed.disable") }}
         {{ $subpages = $subpages | append . }}
     {{ end }}
 {{ end }}
@@ -35,13 +34,33 @@
 {{ $title := delimit $titles " · " }}
 
 {{ if not $title }}
-    {{ warnf "layouts/_default/rss.xml: page %s does not have a title" $page.RelPermalink }}
+    {{ warnf "layouts/_default/list.rss.xml: Page %s does not have a title. The rss output requires a title. Either set the page's title parameter, or disable the rss output." $page.RelPermalink }}
 {{ end }}
 
 {{ printf "<?xml version=\"1.0\" encoding=\"utf-8\"?>" | safeHTML }}
 <rss version="2.0" {{ with $language }} xml:lang="{{ . }}" {{ end }} xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <atom:link href="{{ $feed }}" rel="self" type="application/rss+xml"/>
+        {{ range $page.OutputFormats }}
+            {{ $rel := .Rel }}
+
+            {{ if eq .Permalink $page.Permalink }}
+                {{ $rel = "self" }}
+            {{ else if eq $rel "canonical" }}
+                {{ $rel = "alternate" }}
+            {{ end }}
+
+            {{ if or (eq $rel "alternate") (eq $rel "enclosure") (eq $rel "related") (eq $rel "self") (eq $rel "via") }}
+                {{ printf `<link href="%s" rel="%s" type="%s"/>` .Permalink $rel .MediaType | safeHTML }}
+            {{ end }}
+        {{ end }}
+
+        {{ range $t := $page.Translations }}
+            {{ range .OutputFormats }}
+                {{ if or (eq .Rel "alternate") (eq .Rel "enclosure") (eq .Rel "related") (eq .Rel "via") }}
+                    {{ printf `<link href="%s" hreflang="%s" rel="%s" type="%s"/>` .Permalink $t.Lang .Rel .MediaType | safeHTML }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
 
         {{ with $copyright }}
             <copyright>{{ . }}</copyright>
@@ -74,9 +93,8 @@
                 {{ $author := "" }}
                 {{ $authors := partial "paige/authors.html" . }}
                 {{ $description := .Content }}
-                {{ $guid := "" }}
+                {{ $guid := printf "tag:%s,%s:%s" (urls.Parse site.BaseURL).Host (.PublishDate.Format "2006-01-02") (cond (.Params.id | not) .RelPermalink .Params.id) }}
                 {{ $paramlink := and .Params.link (not (.Param "paige.feed.link_to_page")) | not | not }}
-                {{ $permalink := false }}
                 {{ $pubdate := .PublishDate.Format $format }}
                 {{ $title := .Title | markdownify | plainify | htmlUnescape }}
 
@@ -85,10 +103,10 @@
                 {{ with $authors }}
                     {{ $primary := index . 0 }}
 
-                    {{ if and $primary.name $primary.email }}
-                        {{ $author = printf "%s (%s)" $primary.email $primary.name }}
-                    {{ else if $primary.email }}
-                        {{ $author = $primary.email }}
+                    {{ if and $primary.Params.email $primary.Title }}
+                        {{ $author = printf "%s (%s)" $primary.Params.email $primary.Title }}
+                    {{ else if $primary.Params.email }}
+                        {{ $author = $primary.Params.email }}
                     {{ end }}
                 {{ end }}
 
@@ -107,23 +125,8 @@
                 {{ $description = $description | replaceRE `<a href="#fnref:(\d+)" class="footnote-backref" role="doc-backlink">` (printf `<a href="%s#fnref:$1" class="footnote-backref" role="doc-backlink">` .Permalink) }}
 
                 {{ if and (not $description) (not $title) }}
-                    {{ warnf "layouts/_default/rss.xml: page %s does not have a title or description" .RelPermalink }}
+                    {{ warnf "layouts/_default/rss.xml: Page %s does not have a title or description. The rss output requires a title or description. Either set the page's title or description parameters, or disable the rss output." .RelPermalink }}
                 {{ end }}
-
-                {{ if .Params.id }}
-                    {{ $guid = .Params.id }}
-                {{ else if not .Date.IsZero }}
-                    {{ $guid = printf "tag:%s,%s:%s" (urls.Parse site.BaseURL).Host (.Date.Format "2006-01-02") (.Date.Format "2006-01-02T15:04:05Z07:00") }}
-                {{ else }}
-                    {{ $guid = .Permalink }}
-                    {{ $permalink = false }}
-                {{ end }}
-
-                {{ with index $guids $guid }}
-                    {{ warnf "layouts/_default/rss.xml: pages %s and %s have the same GUID" . $subpage.RelPermalink }}
-                {{ end }}
-
-                {{ $guids = merge (dict $guid .RelPermalink) $guids }}
 
                 {{ with $author }}
                     <author>{{ . }}</author>
@@ -133,7 +136,7 @@
                     <description>{{ printf "<![CDATA[%s]]>" . | safeHTML }}</description>
                 {{ end }}
 
-                <guid {{ if not $permalink }} isPermaLink="false" {{ end }}>{{ $guid }}</guid>
+                <guid isPermaLink="false">{{ $guid }}</guid>
 
                 {{ with $link }}
                     <link>{{ . }}</link>

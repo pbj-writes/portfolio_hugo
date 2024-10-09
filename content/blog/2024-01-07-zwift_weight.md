@@ -18,7 +18,7 @@ paige:
     .paige-reading-time,
     .paige-series,
     .paige-summary {
-        display: block;
+        display: all;
     }
 series: ["cycling"]
 tags: ["zwift", "cycling", "strava"]
