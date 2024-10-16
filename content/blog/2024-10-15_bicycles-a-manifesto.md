@@ -20,6 +20,7 @@ paige:
     .paige-summary {
         display: all;
     }
+    
 series: ["cycling"]
 tags: ["cycling"]
 title: "Bicycles"
@@ -28,7 +29,7 @@ Bicycles are miracle machines. They are simple. They are efficient. They are sma
 
 As a kid, I started on a bicycle with training wheels, then had a tricycle, then skinned my knees falling off a regular bicycle. I explored neighborhoods. I saw friends. I made it home before dinner. 
 
-As a teenager, I had a budget bicycle that I mostly used for exercise. I climbed hills. I adventured to nearby cities. I completed triathlons. 
+As a teenager, I had a budget bicycle that I used mostly for exercise. I climbed hills. I adventured to nearby cities. I completed triathlons. 
 
 As a young adult, I purchased a bicycle for the first time. I commuted to work. I finished group rides. I ran errands. 
 
