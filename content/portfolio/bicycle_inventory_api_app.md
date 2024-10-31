@@ -1,5 +1,6 @@
 ---
 title: Bicycle Inventory API App
+hasMermaid: true
 paige:
   style: |
     #paige-toc,
