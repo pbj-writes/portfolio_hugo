@@ -32,11 +32,11 @@
             {{ partial "paige/body-last.html" $page }}
         {{ end }}
 
-     {{ if .Store.Get "hasMermaid" }}
-      <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-      </script>
+     {{ if .Params.hasMermaid }}
+       <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+       <script>
+         mermaid.initialize({ startOnLoad: true });
+       </script>
      {{ end }}
     </body>
 </html>
