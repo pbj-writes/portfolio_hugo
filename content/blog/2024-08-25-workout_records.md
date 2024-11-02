@@ -121,7 +121,7 @@ Here is the next set of elements.⬇️
 The 'trackpoint' elements are where the info that you care about during your workout is stored. You can see that one second elapses between these trackpoints. So, within this lap, each second of time worth of data is recorded along with hr, position, and other KPIs.
 
 Here is a simple visualization of the overall organization and logic of this workout file type (.tcx).
-
+ <script async src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>   
 ```mermaid
 ---
 title: Visualize TCX File

@@ -38,6 +38,7 @@ I'm not a developer so finding how to write some basic APIs was intimidating, bu
 [Postman](https://www.postman.com)
 
 ## Design
+ <script async src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>   
 ```mermaid
 ---
 config:
