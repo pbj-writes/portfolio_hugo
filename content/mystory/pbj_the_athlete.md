@@ -62,9 +62,9 @@ By college, I knew my basketball path was over, and I transitioned into triathlo
 
 |    Climbs   | Centuries or Races |
 | ----------- | ----------- |
+|<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="11777479455" data-style="standard"></div><script src="https://strava-embeds.com/embed.js"></script>|<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="12762042654" data-style="standard"></div><script src="https://strava-embeds.com/embed.js"></script> |
 |<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="7372928371"></div><script src="https://strava-embeds.com/embed.js"></script>|<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="11613592641" data-style="standard" data-from-embed="false"></div><script src="https://strava-embeds.com/embed.js"></script> |
-|<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="6409227298"></div><script src="https://strava-embeds.com/embed.js"></script> |<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="10080211089" data-style="standard"></div><script src="https://strava-embeds.com/embed.js"></script>
+|<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="6409227298"></div><script src="https://strava-embeds.com/embed.js"></script> |<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="10080211089" data-style="standard"></div><script src="https://strava-embeds.com/embed.js"></script>|
 |<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="1890504114"></div><script src="https://strava-embeds.com/embed.js"></script> |<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="9545883836"></div><script src="https://strava-embeds.com/embed.js"></script>|
 ||<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="7638295384"></div><script src="https://strava-embeds.com/embed.js"></script>|
-||<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="5582091860"></div><script src="https://strava-embeds.com/embed.js"></script>|</details>
-<br>
+||<div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="5582091860"></div><script src="https://strava-embeds.com/embed.js"></script>|
