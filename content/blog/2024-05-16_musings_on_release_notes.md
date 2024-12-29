@@ -1,29 +1,32 @@
----
-date: "2024-05-16"
-description: "Growth on release notes approach."
-paige:
-  file_link:
-    disable: false
-  style: |
-    #paige-authors,
-    #paige-date,
-    #paige-keywords,
-    #paige-reading-time,
-    #paige-series,
-    #paige-toc,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-reading-time,
-    .paige-series,
-    .paige-summary {
-        display: block;
-    }
-series: ["writing"]
-tags: ["writing", "release notes"]
-title: "Musings on Release Notes"
----
++++
+date = 2024-05-16
+description = "Growth on release notes approach."
+series = ["writing"]
+tags = ["writing", "release notes"]
+title = "Musings on Release Notes"
+[paige]
+edit = "https://github.com/pbj-writes/portfolio_hugo/edit/main/content/%s"
+[paige.list_page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_reading_time = false
+disable_series = false
+disable_summary = false
+[paige.page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_next = true
+disable_prev = true
+disable_reading_time = false
+disable_series = true
+disable_toc = false
+[paige.site]
+disable_breadcrumbs = false
+disable_credit = false
+disable_license = false
++++
 
 ## There isn't a release notes class
 

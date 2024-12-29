@@ -1,28 +1,32 @@
----
-title: "Tri finally makes sense"
-date: "2024-02-07"
-paige:
-  file_link:
-    disable: false
-  style: |
-    #paige-authors,
-    #paige-date,
-    #paige-keywords,
-    #paige-reading-time,
-    #paige-series,
-    #paige-toc,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-reading-time,
-    .paige-series,
-    .paige-summary {
-        display: block;
-    }
-tags: ["cycling", "running", "triathlon"]
-description: "Ironman 70.3 after 17 year hiatus"
----
++++
+title = "Tri finally makes sense"
+date = 2024-02-07
+tags = ["cycling", "running", "triathlon"]
+description = "Ironman 70.3 after 17 year hiatus."
+[paige]
+edit = "https://github.com/pbj-writes/portfolio_hugo/edit/main/content/%s"
+[paige.list_page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_reading_time = false
+disable_series = false
+disable_summary = false
+[paige.page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_next = true
+disable_prev = true
+disable_reading_time = false
+disable_series = true
+disable_toc = false
+[paige.site]
+disable_breadcrumbs = false
+disable_credit = false
+disable_license = false
++++
+
 ## Path to triathlon
 
 <p>My tri story takes us back to my freshman year in college when I was starting to realize the gapping hole in my life. I had just wrapped a varsity career where I lettered five years in track and field, four years in soccer, and three years in basketball while setting school records in each sport.</p>

@@ -204,12 +204,7 @@ term = ["html"]
   path = "github.com/willfaught/paige"
 
 [params.paige.git]
-commit_url = "https://github.com/pbj-writes/hugo_portfolio/commit/%s"
-
-[params.paige.file_link]
-content = "Edit this page"
-disable = true
-url = "https://github.com/pbj-writes/hugo_portfolio/edit/main/content/%s"
+commit_url = "https://github.com/pbj-writes/portfolio_hugo/commit/%s"
 
 [params.paige.site]
 disable_breadcrumbs = true

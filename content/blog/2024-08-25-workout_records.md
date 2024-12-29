@@ -1,29 +1,33 @@
----
-date: "2024-08-25"
-title: "Workout Records"
-description: "Life update, workout files, and ideas for Strava."
-paige:
-  file_link:
-    disable: false
-  style: |
-    #paige-authors,
-    #paige-date,
-    #paige-keywords,
-    #paige-reading-time,
-    #paige-series,
-    #paige-toc,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-reading-time,
-    .paige-series,
-    .paige-summary {
-        display: block;
-    }
-series: ["writing"]
-tags: ["x-ray", "data", "xml", "strava", "coros"]
----
++++
+date = 2024-08-25
+title = "Workout Records"
+description = "Life update, workout files, and ideas for Strava."
+series = ["writing"]
+tags = ["x-ray", "data", "xml", "strava", "coros"]
+[paige]
+edit = "https://github.com/pbj-writes/portfolio_hugo/edit/main/content/%s"
+[paige.list_page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_reading_time = false
+disable_series = false
+disable_summary = false
+[paige.page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_next = true
+disable_prev = true
+disable_reading_time = false
+disable_series = true
+disable_toc = false
+[paige.site]
+disable_breadcrumbs = false
+disable_credit = false
+disable_license = false
++++
+
 ## Life Update
 I earned my cycling stripes. At the end of July, I crashed my bike and broke my collarbone. I know what you are all thinking ... is the bike okay? My bike was fine after a minor tune-up. I had to have surgery where the surgeon used a plate and screws to ensure the bone heals in its original shape and position. Anyway, I have had a lot of time to sit around and think about post ideas and I started to think about how fitness devices record our workouts.
 

@@ -1,27 +1,31 @@
----
-date: "2024-04-08"
-description: "Deep in training."
-paige:
-  file_link:
-    disable: false
-  style: |
-    #paige-authors,
-    #paige-date,
-    #paige-keywords,
-    #paige-reading-time,
-    #paige-series,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-reading-time,
-    .paige-series,
-    .paige-summary {
-        display: block;
-    }
-tags: ["cycling", "running", "triathlon"]
-title: "Training Update"
----
++++
+date = 2024-04-08
+description = "Deep in training."
+tags = ["cycling", "running", "triathlon"]
+title = "Training Update"
+[paige]
+edit = "https://github.com/pbj-writes/portfolio_hugo/edit/main/content/%s"
+[paige.list_page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_reading_time = false
+disable_series = false
+disable_summary = false
+[paige.page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_next = true
+disable_prev = true
+disable_reading_time = false
+disable_series = true
+disable_toc = false
+[paige.site]
+disable_breadcrumbs = false
+disable_credit = false
+disable_license = false
++++
 
 ## Update
 

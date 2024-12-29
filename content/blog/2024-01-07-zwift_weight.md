@@ -1,29 +1,33 @@
----
-date: "2024-01-07"
-description: "Avoiding weight anxiety and obsession."
-paige:
-  file_link:
-    disable: false
-  style: |
-    #paige-authors,
-    #paige-date,
-    #paige-keywords,
-    #paige-reading-time,
-    #paige-series,
-    #paige-toc,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-reading-time,
-    .paige-series,
-    .paige-summary {
-        display: all;
-    }
-series: ["cycling"]
-tags: ["zwift", "cycling", "strava"]
-title: "Struggling with Zwift Weight"
----
++++
+date = 2024-01-07
+description = "Avoiding weight anxiety and obsession."
+series = ["cycling"]
+tags = ["zwift", "cycling", "strava"]
+title = "Struggling with Zwift Weight"
+[paige]
+edit = "https://github.com/pbj-writes/portfolio_hugo/edit/main/content/%s"
+[paige.list_page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_reading_time = false
+disable_series = false
+disable_summary = false
+[paige.page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_next = true
+disable_prev = true
+disable_reading_time = false
+disable_series = true
+disable_toc = false
+[paige.site]
+disable_breadcrumbs = false
+disable_credit = false
+disable_license = false
++++
+
 ## The struggle
 
 <p>Just like in work, when you can automate something in life, you can eliminate some of the weirder ritualized neuroses.</p>
@@ -90,3 +94,5 @@ title: "Struggling with Zwift Weight"
   - Parse the data from Fitbit to include just the weight number.
   - Automate with some cron job to retreive Fitbit weight data each day or some time increment.
   - I'm sure there's more, but this is where I'm at currently.
+
+

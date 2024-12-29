@@ -1,28 +1,33 @@
----
-title: "A lesson in asking for money"
-date: "2024-01-11"
-paige:
-  file_link:
-    disable: false
-  style: |
-    #paige-authors,
-    #paige-date,
-    #paige-keywords,
-    #paige-reading-time,
-    #paige-series,
-    #paige-toc,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-reading-time,
-    .paige-series,
-    .paige-summary {
-        display: block;
-    }
-tags: ["money", "running"]
-description: "A success and a failure"
----
++++
+date = 2024-01-11
+description = "A success and a failure."
+series = ["cycling"]
+tags = ["money", "running"]
+title = "A lesson in asking for money"
+[paige]
+edit = "https://github.com/pbj-writes/portfolio_hugo/edit/main/content/%s"
+[paige.list_page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_reading_time = false
+disable_series = false
+disable_summary = false
+[paige.page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_next = true
+disable_prev = true
+disable_reading_time = false
+disable_series = true
+disable_toc = false
+[paige.site]
+disable_breadcrumbs = false
+disable_credit = false
+disable_license = false
++++
+
 ## Background
 
 <p>In a summer between years of college, I packed my car and moved two cities down the interstate to work for the New York Public Interest Research Group (NYPIRG).</p>

@@ -1,30 +1,33 @@
----
-date: "2024-10-15"
-description: "A manifesto"
-paige:
-  file_link:
-    disable: false
-  style: |
-    #paige-authors,
-    #paige-date,
-    #paige-keywords,
-    #paige-reading-time,
-    #paige-series,
-    #paige-toc,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-reading-time,
-    .paige-series,
-    .paige-summary {
-        display: all;
-    }
-    
-series: ["cycling"]
-tags: ["cycling"]
-title: "Bicycles"
----
++++
+date = 2024-10-15
+description = "A manifesto."
+series = ["cycling"]
+tags = ["cycling"]
+title = "Bicycles"
+[paige]
+edit = "https://github.com/pbj-writes/portfolio_hugo/edit/main/content/%s"
+[paige.list_page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_reading_time = false
+disable_series = false
+disable_summary = false
+[paige.page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_next = true
+disable_prev = true
+disable_reading_time = false
+disable_series = true
+disable_toc = false
+[paige.site]
+disable_breadcrumbs = false
+disable_credit = false
+disable_license = false
++++
+
 Bicycles are miracle machines. They are simple. They are efficient. They are small.  
 
 As a kid, I started on a bicycle with training wheels, then had a tricycle, then skinned my knees falling off a regular bicycle. I explored neighborhoods. I saw friends. I made it home before dinner. 
