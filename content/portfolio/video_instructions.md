@@ -30,6 +30,10 @@ paige:
 > **NOTE**  
 > These videos were produced with Camtasia screen capture software.
 
+## New documentation experience (2025)
+My doc team refreshed the web help output, so we decided to show users some of the features. 
+{{< paige/youtube "1NHsyMBkJrI" >}}
+
 ## Cloud platform feature video (2024)
 With direction from a product manager, I created a feature video to embed in our release documentation to market a big, new feature.  
 {{< paige/youtube "Ehmht0s8qVY" >}}
