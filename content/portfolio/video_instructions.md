@@ -30,6 +30,10 @@ paige:
 > **NOTE**  
 > These videos were produced with Camtasia screen capture software.
 
+## Security settings UX enhancement (2025)
+Worked with the product and UX teams to communicate a refresh of the security settings user experience.
+{{< paige/youtube "XDsE0qrOh9w" >}}
+
 ## New documentation experience (2025)
 My doc team refreshed the web help output, so we decided to show users some of the features. 
 {{< paige/youtube "1NHsyMBkJrI" >}}
