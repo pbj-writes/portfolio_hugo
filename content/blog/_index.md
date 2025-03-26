@@ -22,7 +22,7 @@ paige:
     #paige-series,
     .paige-series,
     .paige-keywords {
-        display: none;
+        display: all;
     }
 ---
   
