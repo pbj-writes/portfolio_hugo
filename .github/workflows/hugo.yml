@@ -46,6 +46,13 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
+      - name: Restore Hugo Cache
+        uses: actions/cache@v3
+        with:
+          path: ./public
+          key: ${{ runner.os }}-hugo-${{ hashFiles('**/*.md', '**/config.*') }}
+          restore-keys: |
+            ${{ runner.os }}-hugo-
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Build with Hugo
