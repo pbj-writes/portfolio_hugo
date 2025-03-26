@@ -2,7 +2,7 @@
 date = 2025-03-24
 description = "Learnings, tools, and experiences."
 series = ["writing"]
-tags = ["docs"]
+tags = ["writing"]
 title = "Everything as docs"
 [paige]
 edit = "https://github.com/pbj-writes/portfolio_hugo/edit/main/content/%s"
@@ -47,7 +47,7 @@ The reason my company wants to adopt a GitOps model is to speed up development, 
 
 Although understanding what will be missing or different is important, I focus on the reason for changing. In my company's case, the reason is to be better at software development. So, I'm willing to experiment and approach change with curiousity. 
 
-One of our UX colleagues recently presented to my doc team. He talked about disrupting yourself in order to continuing learning and growing. This was an uncomfortable experience because implicitly he and others are anticipating that we'll resist the transition. They are right. Folks on my doc team resist some of the tenants and edicts of the GitOps model. Since I like new things, I find myself in a middle where I'm trying new stuff and giving myself over to change but my teammates are directing their resistance through me to the architects of the transition. I'm just the guy who likes new stuff, ya know?
+One of our UX colleagues recently presented to my doc team. He talked about disrupting yourself in order to continuing learning and growing. This was an uncomfortable experience because implicitly he and others are anticipating that we'll resist the transition. They are right. Folks on my doc team resist some of the tenants and edicts of the GitOps model. Since I like new things, I find myself in a middle where I'm trying new stuff and giving myself over to change but my teammates are directing their resistance through me to the architects of the transition. I'm just the guy who likes new stuff, ya know? But I've also learned more about my work archetypes. I'm an early adopter. 
 
 ## tools, Tools, TOOLS
 A tool is just a thing that helps with something. Here are some things that helped me recently: 
