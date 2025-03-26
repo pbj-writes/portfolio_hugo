@@ -11,18 +11,17 @@ paige:
     #paige-sections,
     #paige-collections,
     #paige-reading-time,
+    #paige-series,
+    .paige-series,
     .paige-authors,
     .paige-date,
     .paige-date-header,
-
     .paige-reading-time {
         display: all;
     }
     #paige-keywords,
-    #paige-series,
-    .paige-series,
     .paige-keywords {
-        display: all;
+        display: none;
     }
 ---
   
