@@ -210,3 +210,9 @@ commit_url = "https://github.com/pbj-writes/portfolio_hugo/commit/%s"
 disable_breadcrumbs = true
 disable_next = true
 disable_prev = true
+
+[params.paige.pages]
+disable_series = false
+
+[params.paige.subpages]
+disable_series = false
