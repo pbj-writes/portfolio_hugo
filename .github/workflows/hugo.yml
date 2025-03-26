@@ -45,9 +45,9 @@ jobs:
           submodules: recursive
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
       - name: Restore Hugo Cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ./public
           key: ${{ runner.os }}-hugo-${{ hashFiles('**/*.md', '**/config.*') }}
