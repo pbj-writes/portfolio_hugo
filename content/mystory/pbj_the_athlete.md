@@ -1,29 +1,8 @@
----
-paige: 
-  style: |
-    #paige-authors,
-    #paige-breadcrumbs,
-    #paige-credit,
-    #paige-date,
-    #paige-keywords,
-    #paige-reading-time,
-    #paige-series,
-    #paige-toc,
-    #paige-sections,
-    #paige-collections,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-reading-time,
-    .paige-series,
-    .paige-summary {
-        display: none;
-    }
-       #paige-page-footer {
-        display: none;
-    }
----
++++
+title = "PBJ the Athlete"
+
++++
+
 <html>
 <head>
 <style>
@@ -42,8 +21,6 @@ th, td {
 </style>
 </head>
 
-# PBJ the Athlete
----
 ## Basketball🏀
 My first love was basketball. Basketball taught me that when I put in the time and effort success will follow. I have carried this lesson into all aspects of my life.<br> 
 {{< paige/image maxwidth="15rem" src="../assets/basketball.jpeg" >}} 

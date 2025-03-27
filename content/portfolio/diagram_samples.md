@@ -1,31 +1,15 @@
----
-paige: 
-  style: |
-    #paige-authors,
-    #paige-breadcrumbs,
-    #paige-credit,
-    #paige-date,
-    #paige-keywords,
-    #paige-reading-time,
-    #paige-series,
-    #paige-toc,
-    #paige-sections,
-    #paige-collections,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-reading-time,
-    .paige-series,
-    .paige-summary {
-        display: none;
-    }
-       #paige-page-footer {
-        display: none;
-    }
----
-
-# Diagram Samples
++++
+title = "Diagram Samples"
+[paige.pages]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_next = true
+disable_prev = true
+disable_reading_time = true
+disable_series = true
+disable_toc = true
++++
 I have experience creating and producing diagrams, screenshots, logos, and other images with Microsoft<sup>®</sup> Visio<sup>®</sup>, Lucidchart, Adobe<sup>®</sup> Illustrator<sup>®</sup>, Adobe<sup>®</sup> Photoshop<sup>®</sup>, and Snagit<sup>®</sup>. The following examples show some of the variety of my work.
 
 ## Relationship Diagram

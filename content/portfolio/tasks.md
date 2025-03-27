@@ -1,22 +1,16 @@
----
-title: "Tasks"
-description: "Install content for a New DT SWISS R 470 700 C Wheelset."
-paige: 
-  style: |
-    #paige-toc,
-    #paige-page-footer,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-series,
-    .paige-summary {
-        display: block;
-    }
-       #paige-page-footer {
-        display: none;
-    }
----
++++
+title = "Tasks"
+description = "Install content for a New DT SWISS R 470 700 C Wheelset."
+[paige.pages]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_next = true
+disable_prev = true
+disable_reading_time = true
+disable_series = true
+disable_toc = false
++++
 <html>
 <head>
 <style>

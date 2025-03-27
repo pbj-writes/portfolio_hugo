@@ -17,7 +17,7 @@ paige:
     .paige-date,
     .paige-date-header,
     .paige-reading-time {
-        display: all;
+        display: none;
     }
     #paige-keywords,
     .paige-keywords {

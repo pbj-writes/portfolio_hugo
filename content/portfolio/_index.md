@@ -19,7 +19,7 @@ paige:
     .paige-reading-time,
     .paige-series,
     .paige-summary {
-        display: none;
+        display: all;
     }
 ---
 

@@ -1,31 +1,26 @@
----
-keywords:
-- blog
-paige:
-  feed:
-    hide_page: false
-  search:
-    hide_page: true
-  style: |
-    #paige-authors,
-    #paige-breadcrumbs,
-    #paige-credit,
-    #paige-date,
-    #paige-keywords,
-    #paige-reading-time,
-    #paige-toc,
-    #paige-sections,
-    #paige-collections,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-reading-time,
-    .paige-summary {
-        display: none;
-    }
-title: "PBJ Writes ✍🏻"
----
++++
+title = "PBJ Writes ✍🏻"
+[paige.list_page]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_reading_time = false
+disable_series = false
+disable_summary = false
+[paige.pages]
+disable_authors = true
+disable_date = true
+disable_keywords = true
+disable_next = true
+disable_prev = true
+disable_reading_time = true
+disable_series = true
+disable_toc = true
+[paige.site]
+disable_breadcrumbs = true
+disable_credit = true
+disable_license = true
++++
 <br>
 
 {{< paige/image

@@ -1,22 +1,16 @@
----
-title: Bicycle Inventory API App
-hasMermaid: true
-paige:
-  style: |
-    #paige-toc,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-series,
-    .paige-summary {
-        display: block;
-    }
-    #paige-page-footer {
-        display: none;
-    }
-
----
++++
+title = "Bicycle Inventory API App"
+hasMermaid = true
+[paige.pages]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_next = true
+disable_prev = true
+disable_reading_time = true
+disable_series = true
+disable_toc = false
++++
 ## Introduction
 
 I wanted to gain a deeper understanding of APIs and demonstrate my [API doc](#view-api-dochttpsdocspbjwritesinfo) skills, so I set out to create a data-driven API application. I started with an idea to track all of my current and former bicycles. I knew that I could easily (but sloppily) design a bicycle data table. And from this point, I did a lot of searching.

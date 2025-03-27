@@ -1,30 +1,15 @@
----
-paige: 
-  style: |
-    #paige-authors,
-    #paige-breadcrumbs,
-    #paige-credit,
-    #paige-date,
-    #paige-keywords,
-    #paige-reading-time,
-    #paige-series,
-    #paige-toc,
-    #paige-sections,
-    #paige-collections,
-    .paige-authors,
-    .paige-date,
-    .paige-date-header,
-    .paige-keywords,
-    .paige-reading-time,
-    .paige-series,
-    .paige-summary {
-        display: none;
-    }
-       #paige-page-footer {
-        display: none;
-    }
----
-# how-to
++++
+title = "how-to"
+[paige.pages]
+disable_authors = false
+disable_date = false
+disable_keywords = false
+disable_next = true
+disable_prev = true
+disable_reading_time = true
+disable_series = true
+disable_toc = true
++++
 
 ## use this template
 This procedure shows template users how to use the Microsoft Word template, shown in [Word Templates](../../portfolio/word_templates) with <mark>Word for Mac</mark>.

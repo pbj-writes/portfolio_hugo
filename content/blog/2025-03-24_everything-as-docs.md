@@ -13,22 +13,22 @@ disable_keywords = false
 disable_reading_time = false
 disable_series = false
 disable_summary = false
-[paige.page]
+[paige.pages]
 disable_authors = false
 disable_date = false
-disable_keywords = false
+disable_keywords = true
 disable_next = true
 disable_prev = true
 disable_reading_time = false
 disable_series = false
-disable_toc = false
+disable_toc = true
 [paige.site]
-disable_breadcrumbs = false
-disable_credit = false
-disable_license = false
+disable_breadcrumbs = true
+disable_credit = true
+disable_license = true
 +++
 
-## Update
+## **Update**
 Busy is one word to describe the last few months, so there's a lot to say. 
 
 ## Libraries

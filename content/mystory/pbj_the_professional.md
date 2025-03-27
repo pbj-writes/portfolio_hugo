@@ -1,4 +1,5 @@
 ---
+title: PBJ the Professional 👨🏻‍💻
 paige: 
   style: |
     #paige-authors,
@@ -41,10 +42,6 @@ th, td {
 }
 </style>
 </head>
-
-# PBJ the Professional 👨🏻‍💻
-
----
 
 ## Writer ✍🏻 and Librarian 📚
 These are my credentials - a B.A. in Professional Writing and an M.S. in Library and Information Science. Yes, I have skills associated with these credentials and these are my core competencies, but I consider myself a generalist.
