@@ -203,5 +203,5 @@ disable_word_count = true
 noclasses = false
 style = "github"
 
-[[module.imports]]
+[module.imports]
 path = "github.com/willfaught/paige"
