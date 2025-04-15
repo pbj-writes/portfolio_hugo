@@ -5,6 +5,9 @@ theme = 'paige'
 titlecasestyle = "Go"
 enablerobotstxt = true
 
+[params.paige.style]
+style = "static/css/paige.css"
+
 [languages.en]
 languageCode = "en-us"
 languagedirection = "ltr"
@@ -75,16 +78,6 @@ weight = 16
 divider_below = true
 
 [[languages.en.menu.main]]
-identifier = "templates"
-name = "Templates"
-parent = "portfolio"
-url = "/portfolio/word_templates/"
-weight = 22
-
-[languages.en.menu.main.params.paige]
-divider_below = true
-
-[[languages.en.menu.main]]
 identifier = "how-to"
 name = "How-to"
 parent = "portfolio"
@@ -115,31 +108,11 @@ weight = 19
 divider_below = true
 
 [[languages.en.menu.main]]
-identifier = "editing_samples"
-name = "Editing Samples"
-parent = "portfolio"
-url = "/portfolio/editing_samples/"
-weight = 21
-
-[languages.en.menu.main.params.paige]
-divider_below = true
-
-[[languages.en.menu.main]]
 identifier = "diagram_samples"
 name = "Diagram Samples"
 parent = "portfolio"
 url = "/portfolio/diagram_samples/"
 weight = 20
-
-[languages.en.menu.main.params.paige]
-divider_below = true
-
-[[languages.en.menu.main]]
-identifier = "style_guide_sample"
-name = "Style Guide Sample"
-parent = "portfolio"
-url = "/portfolio/style_guide_sample/"
-weight = 23
 
 [languages.en.menu.main.params.paige]
 divider_below = true
