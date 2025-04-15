@@ -1,12 +1,9 @@
 baseURL = 'https://pbjwrites.info'
 copyright = '© PBJ'
 timezone = 'America/Los_Angeles'
-theme = 'paige'
+theme = ['paige']
 titlecasestyle = "Go"
 enablerobotstxt = true
-
-[params.paige.style]
-style = "static/css/paige.css"
 
 [languages.en]
 languageCode = "en-us"
@@ -19,9 +16,6 @@ style = "tabs" # Must be "links", "pills", "tabs", or "underline"
 
 [markup.goldmark.renderer]
 unsafe = true
-
-[markup.highlight]
-noClasses = false
 
 [[languages.en.menu.main]]
 identifier = "home"
@@ -168,10 +162,6 @@ section = ["html"]
 taxonomy = ["html"]
 term = ["html"]
 
-[module]
- [[module.imports]]
-  path = "github.com/willfaught/paige"
-
 [params.paige.git]
 commit_url = "https://github.com/pbj-writes/portfolio_hugo/commit/%s"
 
@@ -208,3 +198,10 @@ disable_reading_time = false
 disable_series = false
 disable_summary = true
 disable_word_count = true
+
+[markup.highlight]
+noclasses = false
+style = "github"
+
+[[module.imports]]
+path = "github.com/willfaught/paige"
