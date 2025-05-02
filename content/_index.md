@@ -23,11 +23,7 @@ disable_license = true
 +++
 <br>
 
-{{< paige/image
-    breakpoints=false
-    fetchpriority=""
-    width="32rem"
-    src="../assets/writing.JPG" >}} 
+{{< paige/image breakpoints=false fetchpriority="" width="32rem" src="../assets/writing.JPG" >}} 
 ---
 <p><font size="5"><center>Cycles 🚲 and Works  🖥️</center></font> </p>
 <br>
