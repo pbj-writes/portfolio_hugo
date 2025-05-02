@@ -202,7 +202,3 @@ disable_word_count = true
 [markup.highlight]
 noclasses = false
 style = "github"
-
-[module]
-  [[module.imports]]
-    path = "github.com/willfaught/paige"
