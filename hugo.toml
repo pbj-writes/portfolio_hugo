@@ -103,7 +103,7 @@ divider_below = true
 
 [[languages.en.menu.main]]
 identifier = "diagram_samples"
-name = "Diagram Samples"
+name = "Diagrams"
 parent = "portfolio"
 url = "/portfolio/diagram_samples/"
 weight = 20
