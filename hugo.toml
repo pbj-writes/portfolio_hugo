@@ -63,7 +63,7 @@ weight = 14
 
 [[languages.en.menu.main]]
 identifier = "bicycle_api_app"
-name = "Bicycle Inventory API & Doc"
+name = "Project: Bicycle API & Doc"
 parent = "portfolio"
 url = "/portfolio/bicycle_inventory_api_app/"
 weight = 16
