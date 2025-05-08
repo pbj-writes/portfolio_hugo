@@ -3,7 +3,7 @@ date = 2025-03-24
 description = "Learnings, tools, and experiences."
 series = ["writing"]
 tags = ["writing"]
-title = "Everything as docs"
+title = "Everything as Docs"
 [paige]
 edit = "https://github.com/pbj-writes/portfolio_hugo/edit/main/content/%s"
 [paige.list_page]
