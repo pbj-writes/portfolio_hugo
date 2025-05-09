@@ -28,7 +28,7 @@ jobs:
                     echo "EOF" >> $GITHUB_ENV
             - name: Install Vale
               run: |
-                  curl -sfL https://github.com/errata-ai/vale/releases/latest/download/vale_Linux_64-bit.tar.gz -o vale.tar.gz
+                  curl -sfL https://github.com/errata-ai/vale/releases/download/v3.11.2/vale_3.11.2_Linux_64-bit.tar.gz -o vale.tar.gz
                   tar -xzf vale.tar.gz
                   sudo mv vale /usr/local/bin/
             - name: Vale check files
