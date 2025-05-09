@@ -1,54 +1,49 @@
-on:
-    push:
-        branches-ignore:
-            - main
+name: Vale Lint
 
-env: 
-    VALE_CONFIG_FILE: ".github/linters/.vale.ini"
+on:
+  pull_request:
+    paths:
+      - '**/*.md'  # Only trigger if Markdown files are touched
+  push:
+    branches-ignore:
+      - main
+    paths:
+      - '**/*.md'
 
 jobs:
-    build:
-        name: Vale linter
-        runs-on: ubuntu-latest
-        concurrency: 
-            group: "vale"
-            cancel-in-progress: true
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-              with:
-                fetch-depth: 0
+  vale:
+    name: Vale Lint Check
+    runs-on: ubuntu-latest
 
-            - name: Get list of changed files
-              id: get_changed_files
-              run: |
-                    git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changed_files.txt
-                    echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
-                    cat changed_files.txt >> $GITHUB_ENV
-                    echo "EOF" >> $GITHUB_ENV
-            - name: Install Vale
-              run: |
-                  curl -sfL https://github.com/errata-ai/vale/releases/download/v3.11.2/vale_3.11.2_Linux_64-bit.tar.gz -o vale.tar.gz
-                  tar -xzf vale.tar.gz
-                  sudo mv vale /usr/local/bin/
-            - name: Vale check files
-              run: |
-                if [ -z "$CHANGED_FILES" ]; then
-                    echo "No files changed, skipping Vale check."
-                    exit 0
-                fi
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-                run_vale=false
+      - name: Install Vale
+        run: |
+          VALE_VERSION="3.11.2"
+          curl -sL "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -o vale.tar.gz
+          tar -xzf vale.tar.gz
+          sudo mv vale /usr/local/bin/
+          vale --version
 
-                IFS=$'\n' read -d '' -r -a files <<< "$CHANGED_FILES"
-                for file in "${files[@]}"; do
-                    if [[ $file == *.md ]]; then
-                        vale --config="$VALE_CONFIG_FILE" "${file}"
-                        run_vale=true
-                    fi
-                done
+      - name: Get list of changed files
+        id: changed
+        uses: tj-actions/changed-files@v44
 
-                if [ "$run_vale" = false ]; then
-                    echo "No Markdown files to lint. Skipping Vale check."
-                    exit 0
-                fi
+      - name: Run Vale on changed Markdown files
+        run: |
+          echo "Checking changed Markdown files..."
+          run_vale=false
+          for file in ${{ steps.changed.outputs.all_changed_files }}; do
+            if [[ "$file" == *.md ]]; then
+              echo "Linting $file"
+              vale --config=".github/linters/.vale.ini" "$file"
+              run_vale=true
+            fi
+          done
+
+          if [ "$run_vale" = false ]; then
+            echo "No Markdown files to lint. Skipping."
+            exit 0
+          fi
