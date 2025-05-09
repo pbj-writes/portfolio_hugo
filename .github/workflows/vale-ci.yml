@@ -1,0 +1,45 @@
+on:
+    push:
+        branches-ignore:
+            - main
+
+env: 
+    VALE_CONFIG_FILE: ".github/linters/vale.ini"
+
+jobs:
+    build:
+        name: Vale linter
+        runs-on: ubuntu-latest
+        concurrency: 
+            group: "vale"
+            cancel-in-progress: true
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
+
+            - name: Get list of changed files
+              id: get_changed_files
+              run: |
+                    git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changed_files.txt
+                    echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
+                    cat changed_files.txt >> $GITHUB_ENV
+                    echo "EOF" >> $GITHUB_ENV
+
+            - name: Install Vale
+              run: |
+                  curl -L
+            - name: Vale check files
+              run: |
+                  if [ -z "$CHANGED_FILES" ]; then
+                      echo "No files changed, skipping Vale check."
+                      exit 0
+                  fi
+                  
+                  IFS=$'\n' read -d '' -r -a files <<< "$CHANGED_FILES"
+                  for file in "${files[@]}"; do
+                      if [[ $file == *.md ]]; then
+                          vale --config="$VALE_CONFIG_FILE" "${file}"
+                      fi
+                  done
