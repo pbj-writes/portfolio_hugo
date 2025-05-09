@@ -26,10 +26,11 @@ jobs:
                     echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
                     cat changed_files.txt >> $GITHUB_ENV
                     echo "EOF" >> $GITHUB_ENV
-
             - name: Install Vale
               run: |
-                  curl -L
+                  curl -sfL https://github.com/errata-ai/vale/releases/latest/download/vale_Linux_64-bit.tar.gz -o vale.tar.gz
+                  tar -xzf vale.tar.gz
+                  sudo mv vale /usr/local/bin/
             - name: Vale check files
               run: |
                   if [ -z "$CHANGED_FILES" ]; then
