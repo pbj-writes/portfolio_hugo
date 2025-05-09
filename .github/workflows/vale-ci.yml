@@ -4,7 +4,7 @@ on:
             - main
 
 env: 
-    VALE_CONFIG_FILE: ".github/linters/vale.ini"
+    VALE_CONFIG_FILE: ".github/linters/.vale.ini"
 
 jobs:
     build:
