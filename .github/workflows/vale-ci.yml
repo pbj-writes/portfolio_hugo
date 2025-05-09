@@ -33,14 +33,22 @@ jobs:
                   sudo mv vale /usr/local/bin/
             - name: Vale check files
               run: |
-                  if [ -z "$CHANGED_FILES" ]; then
-                      echo "No files changed, skipping Vale check."
-                      exit 0
-                  fi
-                  
-                  IFS=$'\n' read -d '' -r -a files <<< "$CHANGED_FILES"
-                  for file in "${files[@]}"; do
-                      if [[ $file == *.md ]]; then
-                          vale --config="$VALE_CONFIG_FILE" "${file}"
-                      fi
-                  done
+                if [ -z "$CHANGED_FILES" ]; then
+                    echo "No files changed, skipping Vale check."
+                    exit 0
+                fi
+
+                run_vale=false
+
+                IFS=$'\n' read -d '' -r -a files <<< "$CHANGED_FILES"
+                for file in "${files[@]}"; do
+                    if [[ $file == *.md ]]; then
+                        vale --config="$VALE_CONFIG_FILE" "${file}"
+                        run_vale=true
+                    fi
+                done
+
+                if [ "$run_vale" = false ]; then
+                    echo "No Markdown files to lint. Skipping Vale check."
+                    exit 0
+                fi
