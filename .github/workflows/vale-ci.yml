@@ -10,6 +10,9 @@ on:
     paths:
       - '**/*.md'
 
+env: 
+    VALE_CONFIG_FILE: ".github/linters/.vale.ini"
+
 jobs:
   vale:
     name: Vale Lint Check
