@@ -31,7 +31,8 @@ jobs:
           vale --version
       - name: Install Vale styles
         run: |
-            vale install --config=".github/linters/.vale.ini" Google
+         cp .github/linters/.vale.ini .vale.ini
+         vale install Google
       - name: Get list of changed files
         id: changed
         uses: tj-actions/changed-files@v44
