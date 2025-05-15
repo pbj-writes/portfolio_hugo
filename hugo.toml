@@ -192,7 +192,7 @@ external_link_new_tab = true
 
 [params.paige.subpages]
 disable_authors = true
-disable_date = true
+disable_date = false
 disable_keywords = true
 disable_reading_time = false
 disable_series = false
