@@ -13,25 +13,33 @@ disable_toc = false
 +++
 ## Introduction
 
-I wanted to gain a deeper understanding of APIs and demonstrate my [API doc](#view-api-dochttpsdocspbjwritesinfo) skills, so I set out to create a data-driven API application. I started with an idea to track all of my current and former bicycles. I knew that I could easily (but sloppily) design a bicycle data table. And from this point, I did a lot of searching.
+I wanted to gain a deeper understanding of APIs and demonstrate my [API doc](#api-doc) skills, so I set out to create a data-driven API application. I started with an idea to track all of my current and former bicycles. I knew that I could easily (but sloppily) design a bicycle data table. And from this point, I did a lot of searching.
 
 ## Tools
+
+Tools used for project.
+
 ### Database
+
 I can write SQL but I needed a solution to host my db online in the cloud. I came across [https://elephantsql.com](https://elephantsql.com). They offer to host a limited, but free, Postgres database instance.
 
 > **IMPORTANT**  
 > Elephant SQL announced its [EOL](https://www.elephantsql.com/blog/end-of-life-announcement.html).
 
 ### API server and code platform for APIs
-I'm not a developer so finding how to write some basic APIs was intimidating, but after some next-level internet searching, I found a [step-by-step guide](https://dev.to/fredabod/a-step-by-step-guide-to-using-elephantsql-with-nodejs-and-express-2e9f) for using ElephantSQL with Node.js and Express. 
+
+I'm not a developer so finding how to write some basic APIs was intimidating, but after some next-level internet searching, I found a [step-by-step guide](https://dev.to/fredabod/a-step-by-step-guide-to-using-elephantsql-with-nodejs-and-express-2e9f) for using ElephantSQL with Node.js and Express.
 
 ### IDE
-[Visual Studio Code](https://code.visualstudio.com).
+
+[Visual Studio Code](https://code.visualstudio.com.)
 
 ### API Platform
+
 [Postman](https://www.postman.com)
 
-## Design 
+## Design
+
 ```mermaid
 ---
 config:
@@ -52,7 +60,11 @@ erDiagram
 ```
 
 ## Data Model
+
+Simple data structure.
+
 ### SQL
+
 {{< paige/code
     lang="sql" >}}
 -- create the bicycles table with a few bicycle attributes.
@@ -78,6 +90,9 @@ VALUES
 {{< /paige/code >}}
 
 ## Demo
+
 {{< paige/youtube "s1RzBdgCRc0" >}}
 
-## [View API Doc](https://docs.pbjwrites.info)
+## API Doc
+
+[View API Doc](https://docs.pbjwrites.info)
