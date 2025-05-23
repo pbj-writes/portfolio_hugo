@@ -75,8 +75,11 @@ divider_below = true
 identifier = "docs-as-code"
 name = "Project: Docs-as-code"
 parent = "portfolio"
-url = "https://dita.pbjwrites.info"
+url = "https://dac.pbjwrites.info"
 weight = 16
+
+[languages.en.menu.main.params.paige]
+divider_below = true
 
 [[languages.en.menu.main]]
 identifier = "how-to"
