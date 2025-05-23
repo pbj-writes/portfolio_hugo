@@ -73,7 +73,7 @@ divider_below = true
 
 [[languages.en.menu.main]]
 identifier = "docs-as-code"
-name = "Project: Docs-as-code"
+name = "Project: Docs-as-Code"
 parent = "portfolio"
 url = "https://dac.pbjwrites.info"
 weight = 16
