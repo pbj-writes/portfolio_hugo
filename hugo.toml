@@ -66,10 +66,17 @@ identifier = "bicycle_api_app"
 name = "Project: Bicycle API & Doc"
 parent = "portfolio"
 url = "/portfolio/bicycle_inventory_api_app/"
-weight = 16
+weight = 15
 
 [languages.en.menu.main.params.paige]
 divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "docs-as-code"
+name = "Project: Docs-as-code"
+parent = "portfolio"
+url = "https://dita.pbjwrites.info"
+weight = 16
 
 [[languages.en.menu.main]]
 identifier = "how-to"
