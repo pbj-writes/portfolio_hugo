@@ -122,13 +122,6 @@ weight = 20
 divider_below = true
 
 [[languages.en.menu.main]]
-identifier = "dita_portfolio"
-name = "Old DITA Example"
-parent = "portfolio"
-url = "https://dita.pbjwrites.info"
-weight = 24
-
-[[languages.en.menu.main]]
 identifier = "blog#"
 name = "Blog"
 url = "/blog/#"
