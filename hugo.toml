@@ -118,9 +118,6 @@ parent = "portfolio"
 url = "/portfolio/diagram_samples/"
 weight = 20
 
-[languages.en.menu.main.params.paige]
-divider_below = true
-
 [[languages.en.menu.main]]
 identifier = "blog#"
 name = "Blog"
