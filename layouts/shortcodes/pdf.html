@@ -1,0 +1,10 @@
+{{- $src := .Get 0 -}}
+{{- $height := or (.Get 1) "800px" -}}
+{{- $width := or (.Get 2) "100%" -}}
+
+<iframe 
+  src="/pdfjs/web/viewer.html?file=/pdfs/{{ $src }}" 
+  width="{{ $width }}" 
+  height="{{ $height }}" 
+  style="border:none; margin: auto; display: block;">
+</iframe>
