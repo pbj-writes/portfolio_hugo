@@ -1,5 +1,5 @@
 +++
-title = "Diagrams"
+title = "Visuals"
 [paige.pages]
 disable_authors = false
 disable_date = false
@@ -8,10 +8,17 @@ disable_next = true
 disable_prev = true
 disable_reading_time = true
 disable_series = true
-disable_toc = true
+disable_toc = false
 +++
 
+## Style Demo
+
+As a style committee member, we overhauled our style guide. In an effort to demonstrate some of the capitalization rules, I provided the rules in context of our UX with [Figma](https://www.figma.com).
+
+{{< paige/image alt="Style Demo" maxwidth="55rem" src="../assets/style_capitalization_demo.jpeg" >}}
+
 ## Relationship Diagram
+
 A software application that I was documenting had an adjuster package that would adjust calculated values. The adjuster package has sets, rules, and qualifiers. I needed a way to depict the relationship between these three components of the adjuster package in order for users to grasp how to configure the adjusters. For instance, a set may have more than one rule but a rule can only have one qualifier. Another insight communicated in the diagram is that qualifiers do not need to be associated with a rule because a qualifier may have expired or is planned for the future.
 <br>
 <p>

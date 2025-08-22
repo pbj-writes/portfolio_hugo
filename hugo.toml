@@ -112,10 +112,10 @@ weight = 19
 divider_below = true
 
 [[languages.en.menu.main]]
-identifier = "diagram_samples"
-name = "Diagrams"
+identifier = "visuals"
+name = "Visuals"
 parent = "portfolio"
-url = "/portfolio/diagram_samples/"
+url = "/portfolio/visuals/"
 weight = 20
 
 [languages.en.menu.main.params.paige]
