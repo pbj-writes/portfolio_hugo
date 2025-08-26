@@ -128,6 +128,16 @@ parent = "portfolio"
 url = "/portfolio/creative/"
 weight = 21
 
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "demo_repos"
+name = "Demo: Digital Repositories"
+parent = "portfolio"
+url = "/portfolio/demo_repos/"
+weight = 22
+
 [[languages.en.menu.main]]
 identifier = "blog#"
 name = "Blog"
