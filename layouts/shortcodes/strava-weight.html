@@ -1,0 +1,11 @@
+{{ with .Site.Data.weight }}
+  {{ if .updated_at }}
+  <div class="text-center py-4">
+    <div class="display-4 fw-bold mb-1">{{ .weight_lbs }} <small class="fs-5 fw-normal text-muted">lbs</small></div>
+    <div class="text-muted mb-3 fs-5">{{ .weight_kg }} kg</div>
+    <div class="text-muted small">Last synced: {{ dateFormat "January 2, 2006 · 3:04 PM UTC" .updated_at }}</div>
+  </div>
+  {{ else }}
+  <p class="text-muted text-center py-4">Awaiting first sync.</p>
+  {{ end }}
+{{ end }}

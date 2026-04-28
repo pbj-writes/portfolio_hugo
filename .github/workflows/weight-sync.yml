@@ -1,0 +1,43 @@
+name: Sync Fitbit Weight to Strava
+
+on:
+  schedule:
+    - cron: "0 8,14,20 * * *"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests PyNaCl
+
+      - name: Run sync script
+        run: python scripts/sync_weight.py
+        env:
+          FITBIT_CLIENT_ID: ${{ secrets.FITBIT_CLIENT_ID }}
+          FITBIT_CLIENT_SECRET: ${{ secrets.FITBIT_CLIENT_SECRET }}
+          FITBIT_REFRESH_TOKEN: ${{ secrets.FITBIT_REFRESH_TOKEN }}
+          FITBIT_UNIT: lbs
+          STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
+          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
+          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+          GH_PAT: ${{ secrets.WEIGHT_SYNC_PAT }}
+          GH_REPO: ${{ github.repository }}
+
+      - name: Commit weight data
+        run: |
+          git config user.name "weight-sync-bot"
+          git config user.email "bot@pbjwrites.info"
+          git add data/weight.json
+          git diff --staged --quiet || git commit -m "chore: update Strava weight data"
+          git push

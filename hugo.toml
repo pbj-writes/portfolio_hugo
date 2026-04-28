@@ -138,6 +138,16 @@ parent = "portfolio"
 url = "/portfolio/demo_repos/"
 weight = 22
 
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "strava-weight"
+name = "Project: Fitbit → Strava Sync"
+parent = "portfolio"
+url = "/portfolio/strava-weight/"
+weight = 23
+
 [[languages.en.menu.main]]
 identifier = "blog#"
 name = "Blog"
