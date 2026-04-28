@@ -33,13 +33,13 @@ def refresh_fitbit_token():
 def get_fitbit_weight(access_token):
     today = datetime.now(ZoneInfo("America/Los_Angeles")).strftime("%Y-%m-%d")
     resp = requests.get(
-        f"https://api.fitbit.com/1/user/-/body/log/weight/date/{today}/7d.json",
+        f"https://api.fitbit.com/1/user/-/body/log/weight/date/{today}/30d.json",
         headers={"Authorization": f"Bearer {access_token}"},
     )
     resp.raise_for_status()
     logs = resp.json().get("weight", [])
     if not logs:
-        raise ValueError("No weight logged in the past 7 days")
+        return None
     entry = logs[-1]
     return entry["weight"], entry["date"], entry["time"]
 
@@ -113,7 +113,11 @@ def main():
     update_github_secret("FITBIT_REFRESH_TOKEN", fitbit_refresh_new, gh_token, repo, key_data)
 
     print("Fetching Fitbit weight...")
-    weight_raw, log_date, log_time = get_fitbit_weight(fitbit_access)
+    result = get_fitbit_weight(fitbit_access)
+    if result is None:
+        print("No weight logged in the past 30 days — skipping.")
+        return
+    weight_raw, log_date, log_time = result
     weight_lbs = round(weight_raw, 1) if FITBIT_UNIT == "lbs" else round(weight_raw * 2.20462, 1)
     weight_kg = lbs_to_kg(weight_lbs)
     print(f"Weight: {weight_lbs} lbs / {weight_kg} kg")

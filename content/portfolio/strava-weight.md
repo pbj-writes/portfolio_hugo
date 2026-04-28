@@ -22,3 +22,8 @@ A GitHub Actions workflow runs three times daily. A Python script refreshes OAut
 Read how I progressed this project in blog posts:
 1. [Struggling with Zwift Weight](/blog/2024-01-07/struggling-with-zwift-weight/)  
 2. [Finish Weight Sync](/blog/2026-04-27/finishing-the-fitbit-to-strava-weight-sync/)
+
+## Accounts and Hardware
+- Fitbit account 
+- Fitbit Aria 2 scale
+- Strava account
