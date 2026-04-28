@@ -43,3 +43,8 @@ jobs:
           git add data/weight.json
           git diff --staged --quiet || git commit -m "chore: update Strava weight data"
           git push
+
+      - name: Trigger Hugo deploy
+        env:
+          GH_TOKEN: ${{ secrets.WEIGHT_SYNC_PAT }}
+        run: gh workflow run "Deploy Hugo site to Pages" --ref main
