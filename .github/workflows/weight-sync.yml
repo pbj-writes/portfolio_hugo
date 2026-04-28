@@ -29,7 +29,7 @@ jobs:
           FITBIT_CLIENT_ID: ${{ secrets.FITBIT_CLIENT_ID }}
           FITBIT_CLIENT_SECRET: ${{ secrets.FITBIT_CLIENT_SECRET }}
           FITBIT_REFRESH_TOKEN: ${{ secrets.FITBIT_REFRESH_TOKEN }}
-          FITBIT_UNIT: lbs
+          FITBIT_UNIT: kg
           STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
           STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
           STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
