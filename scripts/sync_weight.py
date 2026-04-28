@@ -99,8 +99,16 @@ def lbs_to_kg(lbs):
 
 
 def main():
+    gh_token = os.environ["GH_PAT"]
+    repo = os.environ["GH_REPO"]
+
     print("Refreshing Fitbit token...")
     fitbit_access, fitbit_refresh_new = refresh_fitbit_token()
+
+    # Save immediately so a failure later doesn't burn this token
+    print("Saving new Fitbit refresh token...")
+    key_data = _get_repo_public_key(gh_token, repo)
+    update_github_secret("FITBIT_REFRESH_TOKEN", fitbit_refresh_new, gh_token, repo, key_data)
 
     print("Fetching Fitbit weight...")
     weight_raw = get_fitbit_weight(fitbit_access)
@@ -111,15 +119,12 @@ def main():
     print("Refreshing Strava token...")
     strava_access, strava_refresh_new = refresh_strava_token()
 
+    # Save immediately for the same reason
+    print("Saving new Strava refresh token...")
+    update_github_secret("STRAVA_REFRESH_TOKEN", strava_refresh_new, gh_token, repo, key_data)
+
     print("Updating Strava athlete weight...")
     update_strava_weight(strava_access, weight_kg)
-
-    print("Rotating refresh tokens in GitHub Secrets...")
-    gh_token = os.environ["GH_PAT"]
-    repo = os.environ["GH_REPO"]
-    key_data = _get_repo_public_key(gh_token, repo)
-    update_github_secret("FITBIT_REFRESH_TOKEN", fitbit_refresh_new, gh_token, repo, key_data)
-    update_github_secret("STRAVA_REFRESH_TOKEN", strava_refresh_new, gh_token, repo, key_data)
 
     print("Writing data/weight.json...")
     os.makedirs("data", exist_ok=True)
