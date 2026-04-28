@@ -4,6 +4,7 @@ description = "Closing the loop on automated weight syncing with GitHub Actions 
 series = ["cycling"]
 tags = ["fitbit", "strava"]
 title = "Update: Fitbit to Strava Weight Sync"
+hasMermaid = true
 [paige]
 edit = "https://github.com/pbj-writes/portfolio_hugo/edit/main/content/%s"
 [paige.list_page]
@@ -30,13 +31,21 @@ disable_license = true
 
 ## Where I Left Off
 
-In my [previous post on this](/blog/2024-01-07/struggling-with-zwift-weight/), I had manually wired up the Fitbit and Strava APIs using Postman. I could pull my latest weight from Fitbit and push it to Strava. What I hadn't figured out yet was how to do it automatically, how to keep the OAuth tokens alive without babysitting them, and how to make it run on a schedule. That's all sorted now.
+In my [previous post on this](/blog/2024-01-07/struggling-with-zwift-weight/), I had manually wired up the Fitbit and Strava APIs using Postman. I could pull my latest weight from a Fitbit scale and push it to Strava. What I hadn't figured out yet was how to do it automatically, how to keep the OAuth tokens alive without babysitting them, and how to make it run on a schedule. Those days are over 😏
 
 ## Token Management
 
-The blockers from before came down to one core problem: OAuth tokens expire. Strava access tokens die every six hours. Fitbit's also rotate. If I just stored a token somewhere and ran a script daily, it would stop working quickly.
+The blockers from before came down to one core problem: OAuth tokens expire. Strava access tokens die every six hours. Fitbit tokens also rotate. If I just stored a token somewhere and ran a script daily, the automation would break down.
 
-The solution is [GitHub Secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions) combined with refresh token rotation. I store six secrets in the repository: Fitbit client ID, Fitbit client secret, Fitbit refresh token, and the same three for Strava. Every time the automation runs, it uses the current refresh token to get a new access token, does its work, then writes the brand new refresh token back to GitHub Secrets. So the tokens are always current and the integration never goes stale.
+The solution is [GitHub Secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions) combined with refresh token rotation. I store six secrets in the repository: 
+- Fitbit client ID
+- Fitbit client secret
+- Fitbit refresh token
+- Strava client ID
+- Strava client secret
+- Strava refresh token
+
+Every time the automation runs, the automation uses the current refresh token to get a new access token, does its work, then writes the brand new refresh token back to GitHub Secrets. So the tokens are always current and the integration never goes stale.
 
 Writing secrets back to GitHub requires a Personal Access Token (PAT) with `secrets:write` scope. That PAT lives as a seventh secret, `WEIGHT_SYNC_PAT`. One secret to keep all the others alive.
 
@@ -46,17 +55,23 @@ The entire sync is handled by a single Python script using `requests` for API ca
 
 At a high level it does five things in order:
 
-1. Refreshes the Fitbit token and fetches the most recent weight log from the past seven days
-2. Converts weight from lbs to kg (Strava stores weight in kg)
-3. Refreshes the Strava token and updates the athlete profile weight
-4. Rotates both new refresh tokens back to GitHub Secrets
-5. Writes the weight and timestamp to `data/weight.json` for the website
-
-The conversion is straightforward: lbs × 0.453592 = kg. If your Fitbit account is set to metric, you can flip a single env var in the workflow to skip the conversion.
+```mermaid
+---
+config:
+  theme: dark
+---
+flowchart LR
+    A[Refresh Fitbit token] --> B[Fetch latest weight log]
+    B --> C[Convert lbs to kg]
+    C --> D[Refresh Strava token]
+    D --> E[Update Strava athlete weight]
+    E --> F[Rotate refresh tokens in GitHub Secrets]
+    F --> G[Write data/weight.json]
+```
 
 ## GitHub Actions
 
-The workflow runs three times a day via a cron schedule and can also be triggered manually from the Actions tab.
+The workflow runs three times a day via a cron schedule and can also be triggered manually from the **Actions** tab.
 
 {{< paige/code lang="yaml" >}}
 on:

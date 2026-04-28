@@ -95,4 +95,6 @@ disable_license = true
   - Automate with some cron job to retreive Fitbit weight data each day or some time increment.
   - I'm sure there's more, but this is where I'm at currently.
 
+### UPDATE 2026
 
+See my follow up post on how I addressed tokens and automation: [Fitbit to Strava Weight Sync](https://pbj-writes.com/blog/2026-04-27/fitbit_strava_weight_sync/).

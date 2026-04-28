@@ -86,57 +86,7 @@ identifier = "how-to"
 name = "How-to"
 parent = "portfolio"
 url = "/portfolio/how-to/"
-weight = 18
-
-[languages.en.menu.main.params.paige]
-divider_below = true
-
-[[languages.en.menu.main]]
-identifier = "install_bicycle_tires"
-name = "Tasks"
-parent = "portfolio"
-url = "/portfolio/tasks/"
-weight = 17
-
-[languages.en.menu.main.params.paige]
-divider_below = true
-
-[[languages.en.menu.main]]
-identifier = "video_instructions"
-name = "Videos"
-parent = "portfolio"
-url = "/portfolio/video_instructions/"
 weight = 19
-
-[languages.en.menu.main.params.paige]
-divider_below = true
-
-[[languages.en.menu.main]]
-identifier = "visuals"
-name = "Visuals"
-parent = "portfolio"
-url = "/portfolio/visuals/"
-weight = 20
-
-[languages.en.menu.main.params.paige]
-divider_below = true
-
-[[languages.en.menu.main]]
-identifier = "creative"
-name = "Creative"
-parent = "portfolio"
-url = "/portfolio/creative/"
-weight = 21
-
-[languages.en.menu.main.params.paige]
-divider_below = true
-
-[[languages.en.menu.main]]
-identifier = "demo_repos"
-name = "Demo: Digital Repositories"
-parent = "portfolio"
-url = "/portfolio/demo_repos/"
-weight = 22
 
 [languages.en.menu.main.params.paige]
 divider_below = true
@@ -146,6 +96,56 @@ identifier = "strava-weight"
 name = "Project: Fitbit → Strava Sync"
 parent = "portfolio"
 url = "/portfolio/strava-weight/"
+weight = 17
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "install_bicycle_tires"
+name = "Tasks"
+parent = "portfolio"
+url = "/portfolio/tasks/"
+weight = 18
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "video_instructions"
+name = "Videos"
+parent = "portfolio"
+url = "/portfolio/video_instructions/"
+weight = 20
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "visuals"
+name = "Visuals"
+parent = "portfolio"
+url = "/portfolio/visuals/"
+weight = 21
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "creative"
+name = "Creative"
+parent = "portfolio"
+url = "/portfolio/creative/"
+weight = 22
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "demo_repos"
+name = "Demo: Digital Repositories"
+parent = "portfolio"
+url = "/portfolio/demo_repos/"
 weight = 23
 
 [[languages.en.menu.main]]

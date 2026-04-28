@@ -2,7 +2,8 @@ import base64
 import json
 import os
 import requests
-from datetime import datetime, timezone
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from nacl import encoding, public
 
 
@@ -30,7 +31,7 @@ def refresh_fitbit_token():
 
 
 def get_fitbit_weight(access_token):
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(ZoneInfo("America/Los_Angeles")).strftime("%Y-%m-%d")
     resp = requests.get(
         f"https://api.fitbit.com/1/user/-/body/log/weight/date/{today}/7d.json",
         headers={"Authorization": f"Bearer {access_token}"},
@@ -39,7 +40,8 @@ def get_fitbit_weight(access_token):
     logs = resp.json().get("weight", [])
     if not logs:
         raise ValueError("No weight logged in the past 7 days")
-    return logs[-1]["weight"]
+    entry = logs[-1]
+    return entry["weight"], entry["date"], entry["time"]
 
 
 def refresh_strava_token():
@@ -111,10 +113,13 @@ def main():
     update_github_secret("FITBIT_REFRESH_TOKEN", fitbit_refresh_new, gh_token, repo, key_data)
 
     print("Fetching Fitbit weight...")
-    weight_raw = get_fitbit_weight(fitbit_access)
+    weight_raw, log_date, log_time = get_fitbit_weight(fitbit_access)
     weight_lbs = round(weight_raw, 1) if FITBIT_UNIT == "lbs" else round(weight_raw * 2.20462, 1)
     weight_kg = lbs_to_kg(weight_lbs)
     print(f"Weight: {weight_lbs} lbs / {weight_kg} kg")
+    logged_at = datetime.fromisoformat(f"{log_date}T{log_time}").replace(
+        tzinfo=ZoneInfo("America/Los_Angeles")
+    )
 
     print("Refreshing Strava token...")
     strava_access, strava_refresh_new = refresh_strava_token()
@@ -133,7 +138,7 @@ def main():
             {
                 "weight_lbs": weight_lbs,
                 "weight_kg": weight_kg,
-                "updated_at": datetime.now(timezone.utc).isoformat(),
+                "updated_at": logged_at.isoformat(),
             },
             f,
             indent=2,
