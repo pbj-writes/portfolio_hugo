@@ -23,7 +23,8 @@ def refresh_fitbit_token():
         },
         data={"grant_type": "refresh_token", "refresh_token": refresh_token},
     )
-    resp.raise_for_status()
+    if not resp.ok:
+        raise RuntimeError(f"Fitbit token refresh failed {resp.status_code}: {resp.text}")
     data = resp.json()
     return data["access_token"], data["refresh_token"]
 
