@@ -13,6 +13,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.WEIGHT_SYNC_PAT }}
 
       - uses: actions/setup-python@v5
         env:
@@ -42,4 +44,4 @@ jobs:
           git config user.email "bot@pbjwrites.info"
           git add data/weight.json
           git diff --staged --quiet || git commit -m "chore: update Strava weight data"
-          git push https://x-access-token:${{ secrets.WEIGHT_SYNC_PAT }}@github.com/${{ github.repository }}.git HEAD:main
+          git push
