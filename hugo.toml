@@ -6,9 +6,9 @@ titlecasestyle = "Go"
 enablerobotstxt = true
 
 [languages.en]
-languageCode = "en-us"
-languagedirection = "ltr"
-languagename = "English"
+direction = "ltr"
+label = "English"
+locale = "en-us"
 weight = 10
 
 [params.paige.menu]
@@ -20,13 +20,13 @@ unsafe = true
 [[languages.en.menu.main]]
 identifier = "home"
 name = "Home"
-url = "/"
+pageRef = "/"
 weight = 9
 
 [[languages.en.menu.main]]
 identifier = "mystory"
 name = "My Story"
-url = "/mystory/"
+pageRef = "/mystory"
 weight = 24
 
 [languages.en.menu.main.params.paige]
@@ -36,14 +36,14 @@ divider_below = true
 identifier = "pbjtheathlete"
 name = "PBJ the Athlete"
 parent ="mystory"
-url = "/mystory/pbj_the_athlete"
+pageRef = "/mystory/pbj_the_athlete"
 weight = 26
 
 [[languages.en.menu.main]]
 identifier = "pbjtheprofessional"
 name = "PBJ the Professional"
 parent ="mystory"
-url = "/mystory/pbj_the_professional"
+pageRef = "/mystory/pbj_the_professional"
 weight = 25
 
 [languages.en.menu.main.params.paige]
@@ -58,14 +58,14 @@ divider_below = true
 [[languages.en.menu.main]]
 identifier = "portfolio"
 name = "Portfolio"
-url = "/portfolio/"
+pageRef = "/portfolio"
 weight = 14
 
 [[languages.en.menu.main]]
 identifier = "bicycle_api_app"
 name = "Project: Bicycle API & Doc"
 parent = "portfolio"
-url = "/portfolio/bicycle_inventory_api_app/"
+pageRef = "/portfolio/bicycle_inventory_api_app"
 weight = 15
 
 [languages.en.menu.main.params.paige]
@@ -85,7 +85,7 @@ divider_below = true
 identifier = "how-to"
 name = "How-to"
 parent = "portfolio"
-url = "/portfolio/how-to/"
+pageRef = "/portfolio/how-to"
 weight = 19
 
 [languages.en.menu.main.params.paige]
@@ -95,7 +95,7 @@ divider_below = true
 identifier = "strava-weight"
 name = "Project: Fitbit → Strava Sync"
 parent = "portfolio"
-url = "/portfolio/strava-weight/"
+pageRef = "/portfolio/strava-weight"
 weight = 17
 
 [languages.en.menu.main.params.paige]
@@ -105,7 +105,7 @@ divider_below = true
 identifier = "install_bicycle_tires"
 name = "Tasks"
 parent = "portfolio"
-url = "/portfolio/tasks/"
+pageRef = "/portfolio/tasks"
 weight = 18
 
 [languages.en.menu.main.params.paige]
@@ -115,7 +115,7 @@ divider_below = true
 identifier = "video_instructions"
 name = "Videos"
 parent = "portfolio"
-url = "/portfolio/video_instructions/"
+pageRef = "/portfolio/video_instructions"
 weight = 20
 
 [languages.en.menu.main.params.paige]
@@ -125,7 +125,7 @@ divider_below = true
 identifier = "visuals"
 name = "Visuals"
 parent = "portfolio"
-url = "/portfolio/visuals/"
+pageRef = "/portfolio/visuals"
 weight = 21
 
 [languages.en.menu.main.params.paige]
@@ -135,7 +135,7 @@ divider_below = true
 identifier = "creative"
 name = "Creative"
 parent = "portfolio"
-url = "/portfolio/creative/"
+pageRef = "/portfolio/creative"
 weight = 22
 
 [languages.en.menu.main.params.paige]
@@ -145,20 +145,20 @@ divider_below = true
 identifier = "demo_repos"
 name = "Demo: Digital Repositories"
 parent = "portfolio"
-url = "/portfolio/demo_repos/"
+pageRef = "/portfolio/demo_repos"
 weight = 23
 
 [[languages.en.menu.main]]
 identifier = "blog#"
 name = "Blog"
-url = "/blog/#"
+pageRef = "/blog"
 weight = 27
 
 [[languages.en.menu.main]]
 identifier = "blog"
 name = "Browse All"
 parent = "blog#"
-url = "/blog/"
+pageRef = "/blog"
 weight = 27
 
 [languages.en.menu.main.params.paige]
@@ -168,14 +168,14 @@ divider_below = true
 identifier = "tags"
 name = "Tags"
 parent = "blog#"
-url = "/tags/"
+pageRef = "/tags"
 weight = 27
 
 [[languages.en.menu.main]]
 identifier = "series"
 name = "Series"
 parent = "blog#"
-url = "/series/"
+pageRef = "/series"
 weight = 27
 
 [taxonomies]
