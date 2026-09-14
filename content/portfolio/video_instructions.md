@@ -13,6 +13,10 @@ disable_toc = true
 > **NOTE**  
 > These videos were produced with Camtasia screen capture software.
 
+## New Platform Roles and Import Team Feature (2026)
+Worked with the product and UX teams to communicate new platform roles and an import team feature.
+{{< paige/youtube "GjPVk1pkPCY" >}}
+
 ## Security settings UX enhancement (2025)
 Worked with the product and UX teams to communicate a refresh of the security settings user experience.
 {{< paige/youtube "XDsE0qrOh9w" >}}
