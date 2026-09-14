@@ -12,7 +12,7 @@ disable_toc = true
 +++
 
 ## use this template
-This procedure shows template users how to use the Microsoft Word template, shown in [Word Templates](../../portfolio/word_templates) with <mark>Word for Mac</mark>.
+This procedure shows template users how to use the Microsoft Word template.
 
 The keys to using this template are:
 1. Always use the template Styles to format content; and
