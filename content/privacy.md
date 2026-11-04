@@ -1,6 +1,9 @@
 +++
 title = "Privacy Policy"
 description = "Privacy policy for the personal Google Health to Strava weight sync app."
+[build]
+list = "never"
+render = "always"
 [paige.pages]
 disable_authors = true
 disable_date = true
