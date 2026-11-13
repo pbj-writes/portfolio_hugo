@@ -12,8 +12,8 @@ info:
     from [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457).
 
     This is a public demo, so its API key is published and three limits
-    apply. The inventory returns to its original four bicycles at the top of
-    every hour. It holds at most 25 bicycles. Each client can send 60
+    apply. The inventory returns to its original four bicycles every Monday
+    at 00:00 UTC. It holds at most 25 bicycles. Each client can send 60
     requests a minute.
   contact:
     name: PBJ

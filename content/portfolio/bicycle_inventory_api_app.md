@@ -18,7 +18,7 @@ I wanted to gain a deeper understanding of APIs and demonstrate my API documenta
 Version 1 was an Express server, a hosted Postgres database, and a separate documentation site. Then the database host shut down, and the project went with it. Version 2 starts from the other end: one OpenAPI document describes the API, and this page builds the [API reference](#api-reference) from it. The API runs as a Cloudflare Worker with a Neon Postgres database. Every operation in the reference has a **Try it** form, so you can send real requests without leaving the page.
 
 > **It's a live demo**  
-> The API key is public, so you can add, update, and delete bicycles as well as read them. The inventory returns to its original four bicycles every hour. The database sleeps when nobody is using it, so the first request can take about a second.
+> The API key is public, so you can add, update, and delete bicycles as well as read them. The inventory returns to its original four bicycles once a week. The database sleeps when nobody is using it, so the first request can take about a second.
 
 ## How this page works
 
