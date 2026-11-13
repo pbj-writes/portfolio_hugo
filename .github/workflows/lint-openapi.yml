@@ -1,0 +1,31 @@
+# Lint the OpenAPI documents that the site's API reference is generated from.
+# Runs separately from the deploy workflow, so a lint failure never blocks a deploy.
+name: Lint OpenAPI spec
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "assets/openapi/**"
+      - ".spectral.yaml"
+      - ".github/workflows/lint-openapi.yml"
+  pull_request:
+    paths:
+      - "assets/openapi/**"
+      - ".spectral.yaml"
+      - ".github/workflows/lint-openapi.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  spectral:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # The ruleset is .spectral.yaml. Warnings fail the job, not only errors.
+      - name: Lint with Spectral
+        run: npx --yes @stoplight/spectral-cli@6 lint "assets/openapi/*.yaml" --fail-severity warn

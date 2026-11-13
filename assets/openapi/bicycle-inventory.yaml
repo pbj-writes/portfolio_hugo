@@ -1,0 +1,481 @@
+openapi: 3.1.0
+info:
+  title: Bicycle Inventory API
+  version: 2.0.0
+  summary: A small CRUD API that tracks every road bike I've owned.
+  description: |
+    The Bicycle Inventory API manages one resource: the bicycle. Anyone can
+    read the inventory. Adding, updating, and deleting bicycles requires an
+    API key.
+
+    Requests and responses use JSON. Errors use the problem details format
+    from [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457).
+
+    This is a public demo, so its API key is published and three limits
+    apply. The inventory returns to its original four bicycles at the top of
+    every hour. It holds at most 25 bicycles. Each client can send 60
+    requests a minute.
+  contact:
+    name: PBJ
+    url: https://pbjwrites.info
+servers:
+  - url: https://bicycle-api.bicycle-api.workers.dev/v2
+    description: Production
+tags:
+  - name: Bicycles
+    description: Create, read, update, and delete bicycles in the inventory.
+paths:
+  /bicycles:
+    get:
+      operationId: listBicycles
+      tags:
+        - Bicycles
+      summary: List all bicycles
+      description: |
+        Returns the bicycles in the inventory, past and present. Filter by
+        manufacturer with `make`, choose the order with `sort` and `order`,
+        and page through the results with `limit` and `offset`.
+      parameters:
+        - name: make
+          in: query
+          description: Return only bicycles from this manufacturer. The match ignores case.
+          schema:
+            type: string
+          example: Cannondale
+        - name: sort
+          in: query
+          description: The field to sort the results by.
+          schema:
+            type: string
+            enum:
+              - bicycle_id
+              - make
+              - model_year
+            default: bicycle_id
+        - name: order
+          in: query
+          description: The sort direction.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: asc
+        - name: limit
+          in: query
+          description: The maximum number of bicycles to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: offset
+          in: query
+          description: The number of bicycles to skip before the first result.
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        "200":
+          description: The bicycles that match the request.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BicycleList"
+              example:
+                total_bicycles: 3
+                limit: 20
+                offset: 0
+                bicycles:
+                  - bicycle_id: 2
+                    make: Cannondale
+                    model: CAAD8
+                    groupset: Shimano Tiagra
+                    frame_type: aluminum
+                    frame_size: 58cm
+                    prime_color: white
+                    model_year: 2014
+                    crank_length: 172.5mm
+                  - bicycle_id: 3
+                    make: Cannondale
+                    model: CAAD13 Disc Rival AXS
+                    groupset: Rival eTAP
+                    frame_type: aluminum
+                    frame_size: 58cm
+                    prime_color: purple
+                    model_year: 2021
+                    crank_length: 175mm
+                  - bicycle_id: 4
+                    make: Cannondale
+                    model: Topstone 4
+                    groupset: microSHIFT Advent 10
+                    frame_type: aluminum
+                    frame_size: large
+                    prime_color: alpine
+                    model_year: 2021
+                    crank_length: 175mm
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+    post:
+      operationId: createBicycle
+      tags:
+        - Bicycles
+      summary: Add a bicycle
+      description: |
+        Adds a bicycle to the inventory. The server assigns the `bicycle_id`
+        and returns the new bicycle.
+
+        The inventory holds at most 25 bicycles. When it's full, adding a
+        bicycle removes the oldest one that was added. The original four
+        bicycles are never removed this way.
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BicycleInput"
+            example:
+              make: Cannondale
+              model: SuperSix EVO Hi-MOD 1
+              groupset: SRAM RED AXS
+              frame_type: carbon
+              frame_size: 58cm
+              prime_color: mercury
+              model_year: 2024
+              crank_length: 175mm
+      responses:
+        "201":
+          description: The bicycle was added.
+          headers:
+            Location:
+              description: The URL of the new bicycle.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bicycle"
+              example:
+                bicycle_id: 5
+                make: Cannondale
+                model: SuperSix EVO Hi-MOD 1
+                groupset: SRAM RED AXS
+                frame_type: carbon
+                frame_size: 58cm
+                prime_color: mercury
+                model_year: 2024
+                crank_length: 175mm
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+  /bicycles/{bicycleId}:
+    parameters:
+      - $ref: "#/components/parameters/BicycleId"
+    get:
+      operationId: getBicycle
+      tags:
+        - Bicycles
+      summary: Get a bicycle
+      description: Returns one bicycle.
+      responses:
+        "200":
+          description: The requested bicycle.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bicycle"
+              example:
+                bicycle_id: 2
+                make: Cannondale
+                model: CAAD8
+                groupset: Shimano Tiagra
+                frame_type: aluminum
+                frame_size: 58cm
+                prime_color: white
+                model_year: 2014
+                crank_length: 172.5mm
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+    put:
+      operationId: updateBicycle
+      tags:
+        - Bicycles
+      summary: Update a bicycle
+      description: |
+        Replaces every field of a bicycle. Send the complete bicycle, not
+        only the fields that changed.
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BicycleInput"
+            example:
+              make: Cannondale
+              model: CAAD8
+              groupset: Shimano 105
+              frame_type: aluminum
+              frame_size: 58cm
+              prime_color: white
+              model_year: 2014
+              crank_length: 172.5mm
+      responses:
+        "200":
+          description: The bicycle was updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bicycle"
+              example:
+                bicycle_id: 2
+                make: Cannondale
+                model: CAAD8
+                groupset: Shimano 105
+                frame_type: aluminum
+                frame_size: 58cm
+                prime_color: white
+                model_year: 2014
+                crank_length: 172.5mm
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+    delete:
+      operationId: deleteBicycle
+      tags:
+        - Bicycles
+      summary: Delete a bicycle
+      description: Removes a bicycle from the inventory. You can't undo a delete.
+      security:
+        - ApiKeyAuth: []
+      responses:
+        "204":
+          description: The bicycle was deleted. The response has no body.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: |
+        Requests that add, update, or delete a bicycle must send an API key
+        in the `X-API-Key` header. Requests that only read data don't need a
+        key.
+  parameters:
+    BicycleId:
+      name: bicycleId
+      in: path
+      required: true
+      description: The `bicycle_id` of the bicycle.
+      schema:
+        type: integer
+        minimum: 1
+      example: 2
+  responses:
+    BadRequest:
+      description: |
+        The request isn't valid. The `errors` array names each field that
+        failed validation.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          example:
+            title: Bad Request
+            status: 400
+            detail: The request has 1 validation error.
+            errors:
+              - field: model_year
+                message: Must be an integer.
+    Unauthorized:
+      description: The `X-API-Key` header is missing or the key isn't valid.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          example:
+            title: Unauthorized
+            status: 401
+            detail: This operation requires a valid API key in the X-API-Key header.
+    NotFound:
+      description: No bicycle has the requested `bicycle_id`.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          example:
+            title: Not Found
+            status: 404
+            detail: No bicycle has the ID 99.
+    TooManyRequests:
+      description: |
+        You sent more than 60 requests in a minute. Wait the number of
+        seconds in the `Retry-After` header, then try again.
+      headers:
+        Retry-After:
+          description: The number of seconds to wait before the next request.
+          schema:
+            type: integer
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+          example:
+            title: Too Many Requests
+            status: 429
+            detail: Rate limit exceeded. Try again in 60 seconds.
+  schemas:
+    Bicycle:
+      description: A bicycle in the inventory, as the API returns it.
+      allOf:
+        - type: object
+          required:
+            - bicycle_id
+          properties:
+            bicycle_id:
+              type: integer
+              description: The unique ID of the bicycle. The server assigns it.
+        - $ref: "#/components/schemas/BicycleInput"
+    BicycleInput:
+      description: The fields you send to add or update a bicycle. All of them are required.
+      type: object
+      required:
+        - make
+        - model
+        - groupset
+        - frame_type
+        - frame_size
+        - prime_color
+        - model_year
+        - crank_length
+      properties:
+        make:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: The manufacturer, such as `Cannondale`.
+        model:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: The model name, such as `CAAD8`.
+        groupset:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: The drivetrain component group, such as `Shimano Tiagra`.
+        frame_type:
+          type: string
+          enum:
+            - aluminum
+            - carbon
+            - steel
+            - titanium
+          description: The frame material.
+        frame_size:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: |
+            The frame size as the manufacturer labels it: a measurement such
+            as `58cm` or a name such as `large`.
+        prime_color:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: The main color of the frame.
+        model_year:
+          type: integer
+          minimum: 1900
+          maximum: 2100
+          description: The model year.
+        crank_length:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: The crank arm length with its unit, such as `172.5mm`.
+    BicycleList:
+      description: One page of bicycles.
+      type: object
+      required:
+        - total_bicycles
+        - limit
+        - offset
+        - bicycles
+      properties:
+        total_bicycles:
+          type: integer
+          description: |
+            The number of bicycles that match the request, before `limit` and
+            `offset` apply.
+        limit:
+          type: integer
+          description: The `limit` that applied to this response.
+        offset:
+          type: integer
+          description: The `offset` that applied to this response.
+        bicycles:
+          type: array
+          description: The bicycles on this page.
+          items:
+            $ref: "#/components/schemas/Bicycle"
+    Problem:
+      description: |
+        An error, in the problem details format from RFC 9457. The API omits
+        the optional `type` member, which the RFC treats as `about:blank`.
+      type: object
+      required:
+        - title
+        - status
+        - detail
+      properties:
+        title:
+          type: string
+          description: A short summary of the error. It matches the HTTP status phrase.
+        status:
+          type: integer
+          description: The HTTP status code.
+        detail:
+          type: string
+          description: An explanation of what went wrong with this request.
+        errors:
+          type: array
+          description: The fields that failed validation. Only validation errors include it.
+          items:
+            type: object
+            required:
+              - field
+              - message
+            properties:
+              field:
+                type: string
+                description: The name of the field or parameter that failed.
+              message:
+                type: string
+                description: Why the value isn't valid.

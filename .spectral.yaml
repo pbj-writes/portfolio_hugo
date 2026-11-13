@@ -1,0 +1,4 @@
+# Spectral ruleset for the OpenAPI documents in assets/openapi/.
+# Run locally: npx @stoplight/spectral-cli@6 lint assets/openapi/*.yaml
+extends:
+  - "spectral:oas"
