@@ -32,7 +32,7 @@ I earned my cycling stripes. At the end of July, I crashed my bike and broke my 
 
 |   |   |
 |---|---|
-| {{< paige/image maxwidth="15rem" src="../assets/x-ray1.jpeg" >}}   | {{< paige/image maxwidth="15rem" src="../assets/x-ray2.jpeg" >}}   | 
+| {{< paige-image maxwidth="15rem" src="../assets/x-ray1.jpeg" >}}   | {{< paige-image maxwidth="15rem" src="../assets/x-ray2.jpeg" >}}   | 
 
 ## Workout Files
 When I began recording my workouts, I used a mobile app called MapMyRun. After about two years, a friend recommended that I use Strava. Once I started using Strava, I loved it, so I wanted to get my complete history over into Strava. To get everything in Strava, I downloaded files from MapMyRun and imported them into Strava. At this time, I never thought about what these files were or what was in them.
@@ -54,14 +54,14 @@ The fitness device industry had supported XML formats such as .gpx or .tcx, but 
 
 Below are the first few lines of a .tcx file based on a run in my neighborhood.⬇️ 
 
- {{< paige/code lang="xml" options="linenos=true" >}}
+ {{< paige-code lang="xml" options="linenos=true" >}}
 <?xml version="1.0" encoding="UTF-8"?>
 <TrainingCenterDatabase xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns:ns5="http://www.garmin.com/xmlschemas/ActivityGoals/v1" xmlns:ns3="http://www.garmin.com/xmlschemas/ActivityExtension/v2" xmlns:ns2="http://www.garmin.com/xmlschemas/UserProfile/v2" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns4="http://www.garmin.com/xmlschemas/ProfileExtension/v1">
  <Activities>
   <Activity Sport="Running">
    <Id>2024-07-19T16:13:25Z</Id>
    <Lap StartTime="2024-07-19T16:13:25Z">
-  {{< /paige/code >}}
+  {{< /paige-code >}}
 
 - On line 1⬆️, the workout file is XML.
 - On line 2⬆️, the XML schema is defined.
@@ -70,7 +70,7 @@ Below are the first few lines of a .tcx file based on a run in my neighborhood.�
 - On line 5⬆️, the element 'Id' is used to uniquely identify that activity.
 
 Here are the next few lines.⬇️
-{{< paige/code lang="xml" options="linenos=false" >}}
+{{< paige-code lang="xml" options="linenos=false" >}}
    <Lap StartTime="2024-07-19T16:13:25Z">
     <TotalTimeSeconds>536</TotalTimeSeconds>
     <DistanceMeters>1609</DistanceMeters>
@@ -82,12 +82,12 @@ Here are the next few lines.⬇️
     <AverageHeartRateBpm>
      <Value>144</Value>
     </AverageHeartRateBpm>
-{{< /paige/code >}}
+{{< /paige-code >}}
 
 The 'Lap' element contains many sub-elements that describe the lap. For example, the average hr of the lap is 144 BPM.
 
 Here is the next set of elements.⬇️   
-{{< paige/code lang="xml" options="linenos=true" >}}
+{{< paige-code lang="xml" options="linenos=true" >}}
     <Track>
      ...
      <Trackpoint>
@@ -119,7 +119,7 @@ Here is the next set of elements.⬇️
        <Speed>8.760000</Speed>
       </Extensions>
      </Trackpoint>
-{{< /paige/code >}}
+{{< /paige-code >}}
 
 The 'trackpoint' elements are where the info that you care about during your workout is stored. You can see that one second elapses between these trackpoints. So, within this lap, each second of time worth of data is recorded along with hr, position, and other KPIs.
 

@@ -73,12 +73,12 @@ flowchart LR
 
 The workflow runs three times a day via a cron schedule and can also be triggered manually from the **Actions** tab.
 
-{{< paige/code lang="yaml" >}}
+{{< paige-code lang="yaml" >}}
 on:
   schedule:
     - cron: "0 8,14,20 * * *"
   workflow_dispatch:
-{{< /paige/code >}}
+{{< /paige-code >}}
 
 After the Python script completes, the workflow commits the updated `data/weight.json` and pushes it. That commit triggers the existing Hugo build workflow, which redeploys the site. The whole chain is automatic.
 

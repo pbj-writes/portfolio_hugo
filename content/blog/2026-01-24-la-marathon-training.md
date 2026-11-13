@@ -75,12 +75,12 @@ Checkout some of the Coros features and data below ⬇️
 
 #### Dashboard
 
-{{< paige/image alt="Landscape" height="38rem" src="../assets/coros_dashboard.png" >}}
+{{< paige-image alt="Landscape" height="38rem" src="../assets/coros_dashboard.png" >}}
 
 #### Running Form Test
 
-{{< paige/image alt="Landscape" width="20rem" src="../assets/coros_running-form.png" >}}
+{{< paige-image alt="Landscape" width="20rem" src="../assets/coros_running-form.png" >}}
 
 #### EvoLab
 
-{{< paige/image alt="Landscape" width="45rem" src="../assets/coros_evolab.png" >}}
+{{< paige-image alt="Landscape" width="45rem" src="../assets/coros_evolab.png" >}}
