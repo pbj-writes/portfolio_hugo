@@ -65,7 +65,7 @@ Simple data structure.
 
 ### SQL
 
-{{< paige/code
+{{< paige-code
     lang="sql" >}}
 -- create the bicycles table with a few bicycle attributes.
 CREATE TABLE bicycles (
@@ -87,11 +87,11 @@ VALUES
 ('Cannondale', 'CAAD8', 'Shimano Tiagra', 'aluminum', '58cm', 'white', '2014', '172.5mm'),
 ('Cannondale', 'CAAD13 Disc Rival AXS', 'Rival eTAP', 'aluminum', '58cm', 'purple', '2021', '175mm'),
 ('Cannondale', 'Topstone 4', 'microSHIFT Advent 10', 'aluminum', 'large', 'alpine', '2021', '175mm');
-{{< /paige/code >}}
+{{< /paige-code >}}
 
 ## Demo
 
-{{< paige/youtube "s1RzBdgCRc0" >}}
+{{< paige-youtube "s1RzBdgCRc0" >}}
 
 ## API Doc
 

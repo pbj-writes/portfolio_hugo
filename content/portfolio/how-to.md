@@ -33,4 +33,4 @@ The keys to using this template are:
 1. After generating a figure caption, highlight the caption.
 2. From the Microsoft Word <kbd>Home</kbd> tab, click <kbd>Figure Caption</kbd>.
 <br>
-{{< paige/image maxwidth="40rem" src="../assets/how_to_use_this_template_to_format_figure_captions.gif" >}}
+{{< paige-image maxwidth="40rem" src="../assets/how_to_use_this_template_to_format_figure_captions.gif" >}}

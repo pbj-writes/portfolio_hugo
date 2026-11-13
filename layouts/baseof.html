@@ -10,26 +10,27 @@
 {{ $attrs = delimit (sort $attrs) " " }}
 
 <!doctype html>
-{{ partial "paige/html.html" $page }}
-    {{ partial "paige/head.html" $page }}
-    {{ partial "paige/body.html" $page }}
-
-        {{ partial "paige/func-include.html" (dict "name" "body-first%s.html" "page" $page) | safeHTML }}
+{{ partial "paige/tag-html-begin.html" $page }}
+    {{ partial "paige/tag-head.html" $page }}
+    {{ partial "paige/tag-body-begin.html" $page }}
+        {{ partial "paige/func-include.html" (dict "name" "html-body-first%s.html" "page" $page) | safeHTML }}
 
         <div class="container">
             <div class="row">
                 <div class="col mt-3" id="paige-site" {{ with $attrs }} {{ $attrs | safeHTMLAttr }} {{ end }}>
                     {{ partial "paige/func-include.html" (dict "name" "site-first%s.html" "page" $page) | safeHTML }}
                     {{ partial "paige/site-header.html" $page }}
+                    {{ partial "paige/func-include.html" (dict "name" "site-body-first%s.html" "page" $page) | safeHTML }}
                     {{ block "main" $page }}{{ end }}
+                    {{ partial "paige/func-include.html" (dict "name" "site-body-last%s.html" "page" $page) | safeHTML }}
                     {{ partial "paige/site-footer.html" $page }}
                     {{ partial "paige/func-include.html" (dict "name" "site-last%s.html" "page" $page) | safeHTML }}
                 </div>
             </div>
         </div>
 
-        {{ partial "paige/scripts.html" $page }}
-        {{ partial "paige/func-include.html" (dict "name" "body-last%s.html" "page" $page) | safeHTML }}
+        {{ partial "paige/tags-script.html" $page }}
+        {{ partial "paige/func-include.html" (dict "name" "html-body-last%s.html" "page" $page) | safeHTML }}
 
     {{ if .Store.Get "hasMermaid" }}
         <script type="module">

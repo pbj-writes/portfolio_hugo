@@ -45,14 +45,14 @@ disable_license = true
 - find the API that would retrieve weight ([https://dev.fitbit.com/build/reference/web-api/body/get-weight-log](https://dev.fitbit.com/build/reference/web-api/body/get-weight-log/)).
 - figure out Fitbit API authorization to get an access token; this was easy because Fitbit provides an EXTREMELY helpful authorization tutorial at [https://dev.fitbit.com/build/reference/web-api/troubleshooting-guide/oauth2-tutorial](https://dev.fitbit.com/build/reference/web-api/troubleshooting-guide/oauth2-tutorial/).
 - open Postman and execute the API to retrieve weight.<br> 
-{{< paige/image src="../assets/fitbit_api.png" width="75%" >}}
+{{< paige-image src="../assets/fitbit_api.png" width="75%" >}}
 - register a Strava app at [https://www.strava.com/settings/api](https://www.strava.com/settings/api).
 - find the API that would post weight ([https://developers.strava.com/docs/reference/#api-Athletes-updateLoggedInAthlete](https://developers.strava.com/docs/reference/#api-Athletes-updateLoggedInAthlete)).
 - figure out Strava API authorization to get access token and write privileges; this was harder to figure out relative to Fitbit's guidance [https://developers.strava.com/docs/getting-started/#oauth](https://developers.strava.com/docs/getting-started/#oauth).
   - authorize my Strava app called 'Fitbit Weight Sync'.<br>
-  {{< paige/image src="../assets/authorize_fitbit_weight_sync_app.png" width="20%" >}}
+  {{< paige-image src="../assets/authorize_fitbit_weight_sync_app.png" width="20%" >}}
   - take the authorization code and retreive an access token (line 6) in Postman; notice my before weight (line 23) in the reponse below:
-  {{< paige/code lang="json" options="linenos=true" >}}
+  {{< paige-code lang="json" options="linenos=true" >}}
 {
     "token_type": "Bearer",
     "expires_at": 1704805801,
@@ -82,9 +82,9 @@ disable_license = true
         "follower": null
     }
 }
-  {{< /paige/code >}}
+  {{< /paige-code >}}
 - open Postman and execute the API to write the weight to my Strava profile; by the way, this is a judgement free zone; I mean really it was just the holidays, so like, ya know.<br>
-{{< paige/image src="../assets/strava_api.png" width="60%" >}}
+{{< paige-image src="../assets/strava_api.png" width="60%" >}}
 
 ## Next steps
 <p>I need to overcome a few roadblocks to move forward.</p>

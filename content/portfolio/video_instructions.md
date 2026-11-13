@@ -15,24 +15,24 @@ disable_toc = true
 
 ## New Platform Roles and Import Team Feature (2026)
 Worked with the product and UX teams to communicate new platform roles and an import team feature.
-{{< paige/youtube "GjPVk1pkPCY" >}}
+{{< paige-youtube "GjPVk1pkPCY" >}}
 
 ## Security settings UX enhancement (2025)
 Worked with the product and UX teams to communicate a refresh of the security settings user experience.
-{{< paige/youtube "XDsE0qrOh9w" >}}
+{{< paige-youtube "XDsE0qrOh9w" >}}
 
 ## New documentation experience (2025)
 My doc team refreshed the web help output, so we decided to show users some of the features. 
-{{< paige/youtube "1NHsyMBkJrI" >}}
+{{< paige-youtube "1NHsyMBkJrI" >}}
 
 ## Cloud platform feature video (2024)
 With direction from a product manager, I created a feature video to embed in our release documentation to market a big, new feature.  
-{{< paige/youtube "Ehmht0s8qVY" >}}
+{{< paige-youtube "Ehmht0s8qVY" >}}
 
 ## Student training videos (2012)
 I created instructions for graduate students to aid in their formatting and submission of electronic theses and dissertations (ETDs).
 
 This video assists students who may not be familiar with Microsoft Word with how to generate a table of contents automatically.
-{{< paige/youtube "0uaNYw0F4rU" >}}
+{{< paige-youtube "0uaNYw0F4rU" >}}
 <br>
-{{< paige/youtube "AdVQgbvToKY" >}}
+{{< paige-youtube "AdVQgbvToKY" >}}

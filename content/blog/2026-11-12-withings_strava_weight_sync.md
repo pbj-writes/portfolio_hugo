@@ -71,13 +71,13 @@ The `getmeas` call asks for `meastype=1` (weight, in kilograms) and `category=1`
 
 The workflow is a near-duplicate of the Fitbit one. The Fitbit workflow is gone from the repo and this one replaces it; the old scripts stay in `scripts/` in case I ever want to resurrect them.
 
-{{< paige/code lang="yaml" >}}
+{{< paige-code lang="yaml" >}}
 on:
   schedule:
     - cron: "0 16,21 * * *"
     - cron: "0 17,22 * * *"
   workflow_dispatch:
-{{< /paige/code >}}
+{{< /paige-code >}}
 
 I only need two syncs a day, at 9 AM and 2 PM Pacific. GitHub cron only understands UTC, so the offset changes twice a year with daylight saving. I schedule both the winter and summer UTC times, and the first step of the job checks the Pacific hour and skips the run that is an hour off.
 

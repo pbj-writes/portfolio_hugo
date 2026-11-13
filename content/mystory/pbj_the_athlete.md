@@ -23,7 +23,7 @@ th, td {
 
 ## Basketball🏀
 My first love was basketball. Basketball taught me that when I put in the time and effort success will follow. I have carried this lesson into all aspects of my life.<br> 
-{{< paige/image maxwidth="15rem" src="../assets/basketball.jpeg" >}} 
+{{< paige-image maxwidth="15rem" src="../assets/basketball.jpeg" >}} 
 
 ---
 
@@ -31,7 +31,7 @@ My first love was basketball. Basketball taught me that when I put in the time a
 By college, I knew my basketball path was over, and I transitioned into triathlon. I learned quickly that I didn't like swimming, but I found cycling. Since college, my obsession has grown into a full-blown compulsion. And more and more of my time is spent training, watching races, and learning about the latest tools and gear. My compulsion is at the point where my partner thinks that I should merge my compulsion with my career.
 |    Learning   | Riding | Racing |
 | ----------- | --------- | --------- |
-|{{< paige/image maxwidth="15rem" src="../assets/cycling.jpeg" >}}              |{{< paige/image maxwidth="15rem" src="../assets/cycling2.jpeg" >}}           | {{< paige/image maxwidth="12rem" src="../assets/cycling1.jpeg" >}}          |
+|{{< paige-image maxwidth="15rem" src="../assets/cycling.jpeg" >}}              |{{< paige-image maxwidth="15rem" src="../assets/cycling2.jpeg" >}}           | {{< paige-image maxwidth="12rem" src="../assets/cycling1.jpeg" >}}          |
 
 ---
 
