@@ -86,17 +86,27 @@ identifier = "how-to"
 name = "How-to"
 parent = "portfolio"
 pageRef = "/portfolio/how-to"
-weight = 19
+weight = 20
+
+[languages.en.menu.main.params.paige]
+divider_below = true
+
+[[languages.en.menu.main]]
+identifier = "withings-strava-weight"
+name = "Project: Withings → Strava Sync"
+parent = "portfolio"
+pageRef = "/portfolio/withings-strava-weight"
+weight = 17
 
 [languages.en.menu.main.params.paige]
 divider_below = true
 
 [[languages.en.menu.main]]
 identifier = "strava-weight"
-name = "Project: Fitbit → Strava Sync"
+name = "Project: Fitbit → Strava Sync (retired)"
 parent = "portfolio"
 pageRef = "/portfolio/strava-weight"
-weight = 17
+weight = 18
 
 [languages.en.menu.main.params.paige]
 divider_below = true
@@ -106,7 +116,7 @@ identifier = "install_bicycle_tires"
 name = "Tasks"
 parent = "portfolio"
 pageRef = "/portfolio/tasks"
-weight = 18
+weight = 19
 
 [languages.en.menu.main.params.paige]
 divider_below = true
@@ -116,7 +126,7 @@ identifier = "video_instructions"
 name = "Videos"
 parent = "portfolio"
 pageRef = "/portfolio/video_instructions"
-weight = 20
+weight = 21
 
 [languages.en.menu.main.params.paige]
 divider_below = true
@@ -126,7 +136,7 @@ identifier = "visuals"
 name = "Visuals"
 parent = "portfolio"
 pageRef = "/portfolio/visuals"
-weight = 21
+weight = 22
 
 [languages.en.menu.main.params.paige]
 divider_below = true
@@ -136,7 +146,7 @@ identifier = "creative"
 name = "Creative"
 parent = "portfolio"
 pageRef = "/portfolio/creative"
-weight = 22
+weight = 23
 
 [languages.en.menu.main.params.paige]
 divider_below = true
@@ -146,7 +156,7 @@ identifier = "demo_repos"
 name = "Demo: Digital Repositories"
 parent = "portfolio"
 pageRef = "/portfolio/demo_repos"
-weight = 23
+weight = 24
 
 [[languages.en.menu.main]]
 identifier = "blog#"
