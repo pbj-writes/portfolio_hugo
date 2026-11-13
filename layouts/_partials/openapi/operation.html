@@ -1,0 +1,296 @@
+{{- /* Renders one API operation as a card: parameters, request body, a
+       "Try it" form, generated code samples, and example responses.
+       The shortcode removes line indentation from this output so Markdown
+       treats the card as a single HTML block. Keep text that depends on
+       leading whitespace out of raw text nodes (see the textarea below).
+       Context: dict "spec" <OpenAPI document> "server" <base URL>
+                     "path" <path template> "method" <lowercase method>
+                     "pathItem" <path item object> "op" <operation object>
+                     "mode" <mock|live> "demoKey" <key readers can use>. */ -}}
+{{- $spec := .spec -}}
+{{- $op := .op -}}
+{{- $id := $op.operationId -}}
+{{- $method := upper .method -}}
+{{- $path := .path -}}
+
+{{- /* Parameters shared by the whole path come first, then the operation's own. */ -}}
+{{- $params := slice -}}
+{{- range .pathItem.parameters -}}
+  {{- $params = $params | append (partial "openapi/resolve.html" (dict "spec" $spec "node" .)) -}}
+{{- end -}}
+{{- range $op.parameters -}}
+  {{- $params = $params | append (partial "openapi/resolve.html" (dict "spec" $spec "node" .)) -}}
+{{- end -}}
+
+{{- /* An operation's own "security" overrides the document default, even when empty. */ -}}
+{{- $security := $spec.security | default slice -}}
+{{- if isset $op "security" -}}
+  {{- $security = $op.security -}}
+{{- end -}}
+{{- $authHeader := "" -}}
+{{- range $security -}}
+  {{- range $name, $_ := . -}}
+    {{- $scheme := index $spec.components.securitySchemes $name -}}
+    {{- if and (eq $scheme.type "apiKey") (eq $scheme.in "header") -}}
+      {{- $authHeader = $scheme.name -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Request body: the first media type listed. */ -}}
+{{- $bodyType := "" -}}
+{{- $bodySchema := dict -}}
+{{- $bodyJSON := "" -}}
+{{- with $op.requestBody -}}
+  {{- range $type, $media := .content -}}
+    {{- if not $bodyType -}}
+      {{- $bodyType = $type -}}
+      {{- $bodySchema = $media.schema -}}
+      {{- with $media.example -}}
+        {{- $bodyJSON = partial "openapi/json.html" (dict "spec" $spec "value" . "schema" $media.schema) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Does a successful response carry a body? The code samples read it if so. */ -}}
+{{- $returnsBody := false -}}
+{{- range $code, $response := $op.responses -}}
+  {{- $response = partial "openapi/resolve.html" (dict "spec" $spec "node" $response) -}}
+  {{- if and (strings.HasPrefix $code "2") $response.content -}}
+    {{- $returnsBody = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* The URL for code samples: path and query parameters filled from their examples. */ -}}
+{{- $url := print .server $path -}}
+{{- $query := slice -}}
+{{- range $params -}}
+  {{- if isset . "example" -}}
+    {{- if eq .in "path" -}}
+      {{- $url = replace $url (printf "{%s}" .name) (string .example) -}}
+    {{- else if eq .in "query" -}}
+      {{- $query = $query | append (printf "%s=%s" .name (urlquery (string .example))) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with $query -}}
+  {{- $url = printf "%s?%s" $url (delimit . "&") -}}
+{{- end -}}
+
+{{- /* curl sample. */ -}}
+{{- $curl := slice (printf "curl%s \"%s\"" (cond (eq $method "GET") "" (print " -X " $method)) $url) -}}
+{{- with $authHeader -}}
+  {{- $curl = $curl | append (printf "-H \"%s: $API_KEY\"" .) -}}
+{{- end -}}
+{{- with $bodyJSON -}}
+  {{- $curl = $curl | append (printf "-H \"Content-Type: %s\"" $bodyType) -}}
+  {{- $curl = $curl | append (printf "-d '%s'" .) -}}
+{{- end -}}
+{{- $curl = delimit $curl " \\\n  " -}}
+
+{{- /* JavaScript (fetch) sample. */ -}}
+{{- $jsHeaders := slice -}}
+{{- with $authHeader -}}
+  {{- $jsHeaders = $jsHeaders | append (printf "    %q: process.env.API_KEY," .) -}}
+{{- end -}}
+{{- with $bodyJSON -}}
+  {{- $jsHeaders = $jsHeaders | append (printf "    \"Content-Type\": %q," $bodyType) -}}
+{{- end -}}
+{{- $jsOptions := slice -}}
+{{- if ne $method "GET" -}}
+  {{- $jsOptions = $jsOptions | append (printf "  method: %q," $method) -}}
+{{- end -}}
+{{- with $jsHeaders -}}
+  {{- $jsOptions = $jsOptions | append (printf "  headers: {\n%s\n  }," (delimit . "\n")) -}}
+{{- end -}}
+{{- with $bodyJSON -}}
+  {{- $jsOptions = $jsOptions | append (printf "  body: JSON.stringify(%s)," (replace . "\n" "\n  ")) -}}
+{{- end -}}
+{{- $js := printf "const response = await fetch(%q);" $url -}}
+{{- with $jsOptions -}}
+  {{- $js = printf "const response = await fetch(%q, {\n%s\n});" $url (delimit . "\n") -}}
+{{- end -}}
+{{- if $returnsBody -}}
+  {{- $js = print $js "\nconst data = await response.json();\nconsole.log(data);" -}}
+{{- else -}}
+  {{- $js = print $js "\nconsole.log(response.status);" -}}
+{{- end -}}
+
+{{- /* Python (requests) sample. JSON examples are also valid Python literals
+       as long as they hold only strings, numbers, objects, and arrays. */ -}}
+{{- $pyArgs := slice (printf "    %q," $url) -}}
+{{- with $authHeader -}}
+  {{- $pyArgs = $pyArgs | append (printf "    headers={%q: os.environ[\"API_KEY\"]}," .) -}}
+{{- end -}}
+{{- with $bodyJSON -}}
+  {{- /* Double the JSON's two-space indentation to match Python's four. */ -}}
+  {{- $pyArgs = $pyArgs | append (printf "    json=%s," (replace (replaceRE `(?m)^( +)` "$1$1" .) "\n" "\n    ")) -}}
+{{- end -}}
+{{- $pyArgs = $pyArgs | append "    timeout=10," -}}
+{{- $py := printf "import requests\n\nresponse = requests.%s(\n%s\n)\nresponse.raise_for_status()\nprint(%s)" (lower $method) (delimit $pyArgs "\n") (cond $returnsBody "response.json()" "response.status_code") -}}
+{{- with $authHeader -}}
+  {{- $py = print "import os\n\n" $py -}}
+{{- end -}}
+
+{{- $samples := slice
+  (dict "key" "curl" "label" "curl" "lang" "bash" "code" $curl)
+  (dict "key" "js" "label" "JavaScript" "lang" "javascript" "code" $js)
+  (dict "key" "python" "label" "Python" "lang" "python" "code" $py)
+-}}
+
+<div class="card oa-op" id="op-{{ $id }}">
+  <div class="card-header d-flex flex-wrap align-items-center gap-2">
+    <span class="badge oa-method oa-method-{{ .method }}">{{ $method }}</span>
+    <code class="oa-path">{{ $path }}</code>
+    {{- if $authHeader }}
+      <span class="badge rounded-pill text-bg-secondary ms-auto">API key required</span>
+    {{- else }}
+      <span class="badge rounded-pill border text-body-secondary ms-auto">No API key</span>
+    {{- end }}
+  </div>
+  <div class="card-body">
+    {{- with $params }}
+      <h4 class="oa-heading">Parameters</h4>
+      <div class="table-responsive">
+        <table class="table table-sm align-top oa-table">
+          <thead>
+            <tr><th scope="col">Name</th><th scope="col">In</th><th scope="col">Type</th><th scope="col">Description</th></tr>
+          </thead>
+          <tbody>
+            {{- range . }}
+              {{- $schema := partial "openapi/schema.html" (dict "spec" $spec "node" .schema) }}
+              <tr>
+                <td><code>{{ .name }}</code>{{ if .required }} <span class="oa-required">required</span>{{ end }}</td>
+                <td>{{ .in }}</td>
+                <td class="text-nowrap">{{ partial "openapi/type.html" (dict "node" .schema) | safeHTML }}</td>
+                <td>{{ .description | markdownify }}{{ with partial "openapi/constraints.html" $schema }}<div class="oa-rules">{{ . | safeHTML }}</div>{{ end }}</td>
+              </tr>
+            {{- end }}
+          </tbody>
+        </table>
+      </div>
+    {{- end }}
+
+    {{- with $bodyType }}
+      <h4 class="oa-heading">Request body</h4>
+      <p class="mb-0"><code>{{ . }}</code> · {{ partial "openapi/type.html" (dict "node" $bodySchema) | safeHTML }}{{ if $op.requestBody.required }} <span class="oa-required">required</span>{{ end }}</p>
+    {{- end }}
+
+    <h4 class="oa-heading">Request</h4>
+    <ul class="nav nav-tabs mb-3" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="oa-{{ $id }}-tab-try" data-bs-toggle="tab" data-bs-target="#oa-{{ $id }}-pane-try" type="button" role="tab" aria-controls="oa-{{ $id }}-pane-try" aria-selected="true">Try it</button>
+      </li>
+      {{- range $samples }}
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="oa-{{ $id }}-tab-{{ .key }}" data-bs-toggle="tab" data-bs-target="#oa-{{ $id }}-pane-{{ .key }}" type="button" role="tab" aria-controls="oa-{{ $id }}-pane-{{ .key }}" aria-selected="false">{{ .label }}</button>
+        </li>
+      {{- end }}
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="oa-{{ $id }}-pane-try" role="tabpanel" aria-labelledby="oa-{{ $id }}-tab-try" tabindex="0">
+        <form class="oa-try" data-oa-operation="{{ $id }}" data-oa-method="{{ $method }}" data-oa-path="{{ $path }}">
+          {{- if or $params $authHeader }}
+            <div class="row g-2 mb-3">
+              {{- range $params }}
+                {{- $schema := partial "openapi/schema.html" (dict "spec" $spec "node" .schema) }}
+                {{- $field := printf "oa-%s-field-%s" $id .name }}
+                <div class="col-6 col-md-4">
+                  <label class="form-label oa-label" for="{{ $field }}"><code>{{ .name }}</code></label>
+                  {{- if $schema.enum }}
+                    <select class="form-select form-select-sm" id="{{ $field }}" data-oa-in="{{ .in }}" data-oa-name="{{ .name }}">
+                      <option value="">{{ with $schema.default }}{{ . }} (default){{ else }}Not set{{ end }}</option>
+                      {{- range $schema.enum }}
+                        {{- if ne . $schema.default }}
+                          <option value="{{ . }}">{{ . }}</option>
+                        {{- end }}
+                      {{- end }}
+                    </select>
+                  {{- else }}
+                    <input class="form-control form-control-sm" type="text" id="{{ $field }}" data-oa-in="{{ .in }}" data-oa-name="{{ .name }}" autocomplete="off" spellcheck="false"
+                      {{- if eq $schema.type "integer" }} inputmode="numeric"{{ end }}
+                      {{- if eq .in "path" }} value="{{ .example }}" required
+                      {{- else if isset . "example" }} placeholder="{{ .example }}"
+                      {{- else if isset $schema "default" }} placeholder="{{ $schema.default }}"
+                      {{- end }}>
+                  {{- end }}
+                </div>
+              {{- end }}
+              {{- with $authHeader }}
+                <div class="col-12 col-md-4">
+                  <label class="form-label oa-label" for="oa-{{ $id }}-field-key"><code>{{ . }}</code></label>
+                  <input class="form-control form-control-sm" type="text" id="oa-{{ $id }}-field-key" data-oa-in="header" data-oa-name="{{ . }}" placeholder="API key" autocomplete="off" spellcheck="false">
+                  {{- with $.demoKey }}
+                    <div class="form-text">Demo key: <code>{{ . }}</code></div>
+                  {{- end }}
+                </div>
+              {{- end }}
+            </div>
+          {{- end }}
+          {{- with $bodyJSON }}
+            <div class="mb-3">
+              <label class="form-label oa-label" for="oa-{{ $id }}-field-body">Request body</label>
+              {{- /* Newlines become character references so the JSON indentation survives. */}}
+              <textarea class="form-control font-monospace oa-body" id="oa-{{ $id }}-field-body" data-oa-in="body" data-oa-type="{{ $bodyType }}" rows="{{ len (split . "\n") }}" spellcheck="false">{{ replace (htmlEscape .) "\n" "&#10;" | safeHTML }}</textarea>
+            </div>
+          {{- end }}
+          <button class="btn btn-primary btn-sm" type="submit">Send request</button>
+        </form>
+        <div class="oa-result" aria-live="polite" hidden></div>
+      </div>
+      {{- range $samples }}
+        <div class="tab-pane fade" id="oa-{{ $id }}-pane-{{ .key }}" role="tabpanel" aria-labelledby="oa-{{ $id }}-tab-{{ .key }}" tabindex="0">
+          {{- highlight .code .lang "" }}
+        </div>
+      {{- end }}
+    </div>
+
+    <h4 class="oa-heading">Responses</h4>
+    <ul class="nav nav-pills mb-3" role="tablist">
+      {{- $first := true }}
+      {{- range $code, $_ := $op.responses }}
+        <li class="nav-item" role="presentation">
+          <button class="nav-link oa-status{{ if $first }} active{{ end }}" id="oa-{{ $id }}-tab-{{ $code }}" data-bs-toggle="tab" data-bs-target="#oa-{{ $id }}-pane-{{ $code }}" type="button" role="tab" aria-controls="oa-{{ $id }}-pane-{{ $code }}" aria-selected="{{ $first }}">{{ $code }}</button>
+        </li>
+        {{- $first = false }}
+      {{- end }}
+    </ul>
+    <div class="tab-content">
+      {{- $first = true }}
+      {{- range $code, $response := $op.responses }}
+        {{- $response = partial "openapi/resolve.html" (dict "spec" $spec "node" $response) }}
+        <div class="tab-pane fade{{ if $first }} show active{{ end }}" id="oa-{{ $id }}-pane-{{ $code }}" role="tabpanel" aria-labelledby="oa-{{ $id }}-tab-{{ $code }}" tabindex="0">
+          <p>{{ $response.description | markdownify }}</p>
+          {{- with $response.headers }}
+            <table class="table table-sm align-top oa-table">
+              <thead>
+                <tr><th scope="col">Header</th><th scope="col">Type</th><th scope="col">Description</th></tr>
+              </thead>
+              <tbody>
+                {{- range $name, $header := . }}
+                  <tr>
+                    <td><code>{{ $name }}</code></td>
+                    <td>{{ partial "openapi/type.html" (dict "node" $header.schema) | safeHTML }}</td>
+                    <td>{{ $header.description | markdownify }}</td>
+                  </tr>
+                {{- end }}
+              </tbody>
+            </table>
+          {{- end }}
+          {{- $shown := false }}
+          {{- range $type, $media := $response.content }}
+            {{- if not $shown }}
+              {{- $shown = true }}
+              <p class="mb-2"><code>{{ $type }}</code> · {{ partial "openapi/type.html" (dict "node" $media.schema) | safeHTML }}</p>
+              {{- with $media.example }}
+                {{- highlight (partial "openapi/json.html" (dict "spec" $spec "value" . "schema" $media.schema)) "json" "" }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+        </div>
+        {{- $first = false }}
+      {{- end }}
+    </div>
+  </div>
+</div>

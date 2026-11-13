@@ -1,0 +1,41 @@
+{{- /* Renders a table of every error status the API can return, collected
+       from the responses of all operations. The first description found for
+       a status code wins.
+       Context: dict "spec" <OpenAPI document>. */ -}}
+{{- $spec := .spec -}}
+{{- $errors := dict -}}
+{{- range $path, $item := $spec.paths -}}
+  {{- range $method, $op := $item -}}
+    {{- if and (reflect.IsMap $op) $op.responses -}}
+      {{- range $code, $response := $op.responses -}}
+        {{- if and (ge $code "400") (not (isset $errors $code)) -}}
+          {{- $errors = merge $errors (dict $code (partial "openapi/resolve.html" (dict "spec" $spec "node" $response))) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<div class="table-responsive">
+  <table class="table table-sm align-top oa-table">
+    <thead>
+      <tr><th scope="col">Status</th><th scope="col">Meaning</th><th scope="col">Body</th></tr>
+    </thead>
+    <tbody>
+      {{- range $code, $response := $errors }}
+        <tr>
+          <td><code>{{ $code }}</code></td>
+          <td>{{ $response.description | markdownify }}</td>
+          <td class="text-nowrap">
+            {{- $shown := false }}
+            {{- range $type, $media := $response.content }}
+              {{- if not $shown }}
+                {{- $shown = true }}
+                {{- partial "openapi/type.html" (dict "node" $media.schema) | safeHTML }}
+              {{- end }}
+            {{- end }}
+          </td>
+        </tr>
+      {{- end }}
+    </tbody>
+  </table>
+</div>

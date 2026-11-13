@@ -1,0 +1,21 @@
+{{- /* Returns a short HTML label for a schema's type. A $ref becomes a link
+       to that schema's entry under "Data models".
+       Context: dict "node" <schema or $ref, unresolved>. */ -}}
+{{- $node := .node -}}
+{{- $label := "" -}}
+{{- if reflect.IsMap $node -}}
+  {{- with index $node "$ref" -}}
+    {{- $name := path.Base . -}}
+    {{- $label = printf `<a href="#schema-%s">%s</a>` (lower $name) $name -}}
+  {{- else -}}
+    {{- $label = $node.type | default "object" -}}
+    {{- if eq $label "array" -}}
+      {{- $items := partial "openapi/type.html" (dict "node" $node.items) -}}
+      {{- if not (strings.HasPrefix $items "<a") -}}
+        {{- $items = print $items "s" -}}
+      {{- end -}}
+      {{- $label = printf "array of %s" $items -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $label -}}

@@ -1,0 +1,24 @@
+{{- /* Renders one table row per schema property, recursing into inline
+       objects and arrays of inline objects (shown as "errors[].field").
+       Properties that point at another schema with $ref link to it instead.
+       Context: dict "spec" <OpenAPI document> "node" <schema or $ref>
+                     "prefix" <name prefix for nested rows>. */ -}}
+{{- $spec := .spec -}}
+{{- $prefix := .prefix | default "" -}}
+{{- $schema := partial "openapi/schema.html" (dict "spec" $spec "node" .node) -}}
+{{- range partial "openapi/prop-order.html" $schema -}}
+  {{- $raw := index $schema.properties . -}}
+  {{- $prop := partial "openapi/schema.html" (dict "spec" $spec "node" $raw) -}}
+  <tr>
+    <td><code>{{ $prefix }}{{ . }}</code>{{ if in $schema.required . }} <span class="oa-required">required</span>{{ end }}</td>
+    <td class="text-nowrap">{{ partial "openapi/type.html" (dict "node" $raw) | safeHTML }}</td>
+    <td>{{ $prop.description | markdownify }}{{ with partial "openapi/constraints.html" $prop }}<div class="oa-rules">{{ . | safeHTML }}</div>{{ end }}</td>
+  </tr>
+  {{- if not (index $raw "$ref") -}}
+    {{- if $raw.properties -}}
+      {{- partial "openapi/schema-rows.html" (dict "spec" $spec "node" $raw "prefix" (print $prefix . ".")) -}}
+    {{- else if and (reflect.IsMap $raw.items) (not (index $raw.items "$ref")) $raw.items.properties -}}
+      {{- partial "openapi/schema-rows.html" (dict "spec" $spec "node" $raw.items "prefix" (print $prefix . "[].")) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

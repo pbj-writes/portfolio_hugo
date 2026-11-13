@@ -1,0 +1,12 @@
+{{- /* Renders a schema's properties as a table.
+       Context: dict "spec" <OpenAPI document> "node" <schema or $ref>. */ -}}
+<div class="table-responsive">
+  <table class="table table-sm align-top oa-table">
+    <thead>
+      <tr><th scope="col">Property</th><th scope="col">Type</th><th scope="col">Description</th></tr>
+    </thead>
+    <tbody>
+      {{- partial "openapi/schema-rows.html" . }}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,18 @@
+{{- /* Returns a schema's property names in display order. Hugo sorts map
+       keys alphabetically, which loses the order written in the spec, so the
+       "required" array supplies it: required properties first, in the order
+       listed, then the optional ones alphabetically.
+       Context: a flattened schema (see openapi/schema.html). */ -}}
+{{- $properties := .properties | default dict -}}
+{{- $order := slice -}}
+{{- range .required -}}
+  {{- if isset $properties . -}}
+    {{- $order = $order | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- range $name, $_ := $properties -}}
+  {{- if not (in $order $name) -}}
+    {{- $order = $order | append $name -}}
+  {{- end -}}
+{{- end -}}
+{{- return $order -}}

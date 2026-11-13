@@ -1,0 +1,46 @@
+[
+  {
+    "bicycle_id": 1,
+    "make": "Specialized",
+    "model": "Sequoia Sport",
+    "groupset": "Shimano Sora",
+    "frame_type": "aluminum",
+    "frame_size": "60cm",
+    "prime_color": "silver",
+    "model_year": 2003,
+    "crank_length": "175mm"
+  },
+  {
+    "bicycle_id": 2,
+    "make": "Cannondale",
+    "model": "CAAD8",
+    "groupset": "Shimano Tiagra",
+    "frame_type": "aluminum",
+    "frame_size": "58cm",
+    "prime_color": "white",
+    "model_year": 2014,
+    "crank_length": "172.5mm"
+  },
+  {
+    "bicycle_id": 3,
+    "make": "Cannondale",
+    "model": "CAAD13 Disc Rival AXS",
+    "groupset": "Rival eTAP",
+    "frame_type": "aluminum",
+    "frame_size": "58cm",
+    "prime_color": "purple",
+    "model_year": 2021,
+    "crank_length": "175mm"
+  },
+  {
+    "bicycle_id": 4,
+    "make": "Cannondale",
+    "model": "Topstone 4",
+    "groupset": "microSHIFT Advent 10",
+    "frame_type": "aluminum",
+    "frame_size": "large",
+    "prime_color": "alpine",
+    "model_year": 2021,
+    "crank_length": "175mm"
+  }
+]

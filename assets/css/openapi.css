@@ -1,0 +1,145 @@
+/* Styles for the API reference that the openapi shortcode renders.
+   Colors come from Bootstrap variables so light and dark mode both work. */
+
+.oa-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  margin-bottom: 1rem;
+}
+
+.oa-facts dt {
+  color: var(--bs-secondary-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.oa-facts dd {
+  margin: 0;
+}
+
+.oa-op {
+  margin-bottom: 2rem;
+}
+
+.oa-method {
+  font-family: var(--bs-font-monospace);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+}
+
+.oa-method-get {
+  background-color: var(--bs-success);
+  color: #fff;
+}
+
+.oa-method-post {
+  background-color: var(--bs-primary);
+  color: #fff;
+}
+
+.oa-method-put,
+.oa-method-patch {
+  background-color: var(--bs-warning);
+  color: #000;
+}
+
+.oa-method-delete {
+  background-color: var(--bs-danger);
+  color: #fff;
+}
+
+.oa-path {
+  color: var(--bs-body-color);
+  font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
+.oa-heading {
+  color: var(--bs-secondary-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin: 1.5rem 0 0.5rem;
+  text-transform: uppercase;
+}
+
+.card-body > .oa-heading:first-child {
+  margin-top: 0;
+}
+
+.oa-table {
+  font-size: 0.9rem;
+}
+
+.oa-required {
+  color: var(--bs-danger-text-emphasis);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.oa-rules {
+  color: var(--bs-secondary-color);
+  font-size: 0.85em;
+}
+
+.oa-label {
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.oa-body {
+  font-size: 0.85rem;
+}
+
+.oa-status {
+  font-family: var(--bs-font-monospace);
+  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+}
+
+.oa-op pre {
+  max-height: 26rem;
+  overflow: auto;
+}
+
+.oa-result {
+  border-top: 1px solid var(--bs-border-color);
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.oa-result-summary {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.oa-result-note {
+  color: var(--bs-secondary-color);
+  font-size: 0.85rem;
+}
+
+.oa-result pre {
+  background-color: var(--bs-tertiary-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem;
+}
+
+.oa-result-request {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.oa-rows {
+  font-size: 0.85rem;
+}

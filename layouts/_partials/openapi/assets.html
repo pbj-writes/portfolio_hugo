@@ -1,0 +1,18 @@
+{{- /* Loads the reference's stylesheet and scripts, and embeds the settings
+       the scripts read: the spec itself, the base URL, and the mock's data.
+       Context: dict "config" <settings for the scripts>
+                     "mock" <asset path of the mock script, optional>. */ -}}
+{{- with resources.Get "css/openapi.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+{{- end }}
+<script type="application/json" id="oa-config">{{ .config | jsonify | safeJS }}</script>
+{{- with .mock }}
+  {{- with resources.Get . | minify | fingerprint }}
+    <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
+  {{- else }}
+    {{- errorf "openapi: cannot find mock script %q in assets/" . }}
+  {{- end }}
+{{- end }}
+{{- with resources.Get "js/openapi-explorer.js" | minify | fingerprint }}
+  <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
+{{- end }}

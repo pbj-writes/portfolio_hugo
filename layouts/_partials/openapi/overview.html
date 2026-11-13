@@ -1,0 +1,20 @@
+{{- /* Renders the facts at the top of the reference: version, base URL, and
+       a link to the published spec file.
+       Context: dict "spec" <OpenAPI document> "server" <base URL>
+                     "specURL" <URL of the published spec> "mode" <mock|live>. */ -}}
+<div class="oa-overview">
+  <dl class="oa-facts">
+    <div><dt>Version</dt><dd>{{ .spec.info.version }}</dd></div>
+    <div><dt>Base URL</dt><dd><code>{{ .server }}</code></dd></div>
+    <div><dt>Specification</dt><dd><a href="{{ .specURL }}">OpenAPI {{ .spec.openapi }} (YAML)</a></dd></div>
+  </dl>
+  {{- if eq .mode "live" }}
+    <div class="alert alert-info" role="note">
+      <strong>Live.</strong> Each <strong>Try it</strong> request goes to the real API. If the API can't be reached, a mock in your browser answers instead, and the result says so.
+    </div>
+  {{- else }}
+    <div class="alert alert-info" role="note">
+      <strong>Mock mode.</strong> Each <strong>Try it</strong> request goes to a mock of this API that runs in your browser. Nothing travels over the network, and your changes last until you reload the page.
+    </div>
+  {{- end }}
+</div>

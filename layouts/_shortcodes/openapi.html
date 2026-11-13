@@ -1,0 +1,100 @@
+{{- /*
+  Renders an interactive API reference from an OpenAPI 3.1 document.
+
+  Call it with the Markdown notation so the headings it writes show up in
+  the page's table of contents:
+
+    {{% openapi src="openapi/bicycle-inventory.yaml" mode="mock"
+        mock="js/bicycle-api-mock.js" seed="bicycles" demo_key="demo-key" %}}
+
+  Parameters:
+    src       Path of the spec under assets/. Required. The file is also
+              published as-is, so tools such as Postman can import it.
+    mode      "mock" (default) answers "Try it" requests in the browser with
+              the mock script. "live" sends them to the first server in the
+              spec, and falls back to the mock if the server is unreachable.
+    mock      Path under assets/ of a script that defines window.openapiMock.
+    seed      Key under data/ holding the mock's starting records.
+    demo_key  API key that readers can use. Shown in the reference, and the
+              only key the mock accepts.
+
+  Supported: local $ref, allOf, path-level parameters, API keys sent in a
+  header, one media type per body, and "example" on media types and
+  parameters. Use the shortcode once per page: element IDs come from each
+  operationId.
+
+  Output is Markdown: "###" headings and spec descriptions as written,
+  interleaved with HTML blocks. Markdown ends an HTML block at the first
+  blank line and reads indented lines as code, so every HTML partial has its
+  line indentation removed before it's written out.
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $mode := .Get "mode" | default "mock" -}}
+{{- $demoKey := .Get "demo_key" -}}
+{{- $resource := resources.Get $src -}}
+{{- if not $resource -}}
+  {{- errorf "openapi shortcode: cannot find %q in assets/ (%s)" $src .Position -}}
+{{- end -}}
+{{- $spec := $resource | transform.Unmarshal -}}
+{{- $server := (index $spec.servers 0).url -}}
+{{- $indentation := `(?m)^\s+` -}}
+{{- $blocks := slice -}}
+
+{{- $config := dict "mode" $mode "server" $server "spec" $spec -}}
+{{- with .Get "seed" -}}
+  {{- $config = merge $config (dict "seed" (index hugo.Data .)) -}}
+{{- end -}}
+{{- with $demoKey -}}
+  {{- $config = merge $config (dict "demoKey" .) -}}
+{{- end -}}
+{{- $blocks = $blocks | append (partial "openapi/assets.html" (dict "config" $config "mock" (.Get "mock")) | replaceRE $indentation "") -}}
+
+{{- $blocks = $blocks | append (partial "openapi/overview.html" (dict "spec" $spec "server" $server "specURL" $resource.RelPermalink "mode" $mode) | replaceRE $indentation "") -}}
+{{- with $spec.info.description -}}
+  {{- $blocks = $blocks | append . -}}
+{{- end -}}
+
+{{- with $spec.components.securitySchemes -}}
+  {{- $blocks = $blocks | append "### Authentication" -}}
+  {{- range . -}}
+    {{- with .description -}}
+      {{- $blocks = $blocks | append . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with $demoKey -}}
+    {{- $blocks = $blocks | append (printf "The API key for this demo is `%s`." .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $path, $pathItem := $spec.paths -}}
+  {{- range $method := slice "get" "post" "put" "patch" "delete" -}}
+    {{- with index $pathItem $method -}}
+      {{- $blocks = $blocks | append (printf "### %s" .summary) -}}
+      {{- with .description -}}
+        {{- $blocks = $blocks | append . -}}
+      {{- end -}}
+      {{- $context := dict "spec" $spec "server" $server "path" $path "method" $method "pathItem" $pathItem "op" . "mode" $mode "demoKey" $demoKey -}}
+      {{- $blocks = $blocks | append (partial "openapi/operation.html" $context | replaceRE $indentation "") -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $blocks = $blocks | append "### Errors" -}}
+{{- $blocks = $blocks | append "When a request fails, the API returns one of these status codes with a JSON body that explains the problem." -}}
+{{- $blocks = $blocks | append (partial "openapi/errors.html" (dict "spec" $spec) | replaceRE $indentation "") -}}
+
+{{- with $spec.components.schemas -}}
+  {{- $blocks = $blocks | append "### Data models" -}}
+  {{- range $name, $schema := . -}}
+    {{- $blocks = $blocks | append (printf "#### %s {#schema-%s}" $name (lower $name)) -}}
+    {{- with $schema.description -}}
+      {{- $blocks = $blocks | append . -}}
+    {{- end -}}
+    {{- $blocks = $blocks | append (partial "openapi/schema-table.html" (dict "spec" $spec "node" $schema) | replaceRE $indentation "") -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $index, $block := $blocks -}}
+  {{- if $index }}{{ "\n\n" }}{{ end -}}
+  {{- trim $block "\n " | safeHTML -}}
+{{- end -}}

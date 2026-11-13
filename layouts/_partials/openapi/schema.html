@@ -1,0 +1,19 @@
+{{- /* Resolves a schema and flattens allOf, so callers always see one object
+       with "properties" and "required". Members merge in the order they are
+       listed, which also sets the display order of the properties.
+       Context: dict "spec" <OpenAPI document> "node" <schema or $ref>. */ -}}
+{{- $spec := .spec -}}
+{{- $schema := partial "openapi/resolve.html" . | default dict -}}
+{{- with $schema.allOf -}}
+  {{- $properties := dict -}}
+  {{- $required := slice -}}
+  {{- range . -}}
+    {{- $part := partial "openapi/schema.html" (dict "spec" $spec "node" .) -}}
+    {{- $properties = merge $properties ($part.properties | default dict) -}}
+    {{- range $part.required -}}
+      {{- $required = $required | append . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $schema = merge $schema (dict "type" "object" "properties" $properties "required" $required) -}}
+{{- end -}}
+{{- return $schema -}}

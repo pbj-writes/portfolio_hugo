@@ -1,0 +1,17 @@
+{{- /* Follows a local $ref ("#/components/schemas/Bicycle") to the object it
+       points at. Returns the node unchanged when it isn't a reference.
+       Context: dict "spec" <OpenAPI document> "node" <any node>. */ -}}
+{{- $node := .node -}}
+{{- if reflect.IsMap $node -}}
+  {{- with index $node "$ref" -}}
+    {{- $target := $.spec -}}
+    {{- range after 1 (split . "/") -}}
+      {{- $target = index $target . -}}
+    {{- end -}}
+    {{- if not $target -}}
+      {{- errorf "openapi: cannot resolve reference %q" . -}}
+    {{- end -}}
+    {{- $node = $target -}}
+  {{- end -}}
+{{- end -}}
+{{- return $node -}}

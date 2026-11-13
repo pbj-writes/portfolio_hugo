@@ -1,0 +1,30 @@
+{{- /* Describes a schema's validation rules (enum, range, length, default)
+       as one line of HTML. Uses isset so that zero values still count.
+       Context: a resolved schema. */ -}}
+{{- $schema := . -}}
+{{- $rules := slice -}}
+{{- with $schema.enum -}}
+  {{- $values := slice -}}
+  {{- range . -}}
+    {{- $values = $values | append (printf "<code>%v</code>" .) -}}
+  {{- end -}}
+  {{- $rules = $rules | append (printf "One of: %s." (delimit $values ", ")) -}}
+{{- end -}}
+{{- $unit := cond (eq $schema.type "string") " characters" "" -}}
+{{- $min := "minimum" -}}
+{{- $max := "maximum" -}}
+{{- if eq $schema.type "string" -}}
+  {{- $min = "minLength" -}}
+  {{- $max = "maxLength" -}}
+{{- end -}}
+{{- if and (isset $schema $min) (isset $schema $max) -}}
+  {{- $rules = $rules | append (printf "%v to %v%s." (index $schema $min) (index $schema $max) $unit) -}}
+{{- else if isset $schema $min -}}
+  {{- $rules = $rules | append (printf "Minimum: %v%s." (index $schema $min) $unit) -}}
+{{- else if isset $schema $max -}}
+  {{- $rules = $rules | append (printf "Maximum: %v%s." (index $schema $max) $unit) -}}
+{{- end -}}
+{{- if isset $schema "default" -}}
+  {{- $rules = $rules | append (printf "Default: <code>%v</code>." $schema.default) -}}
+{{- end -}}
+{{- return (delimit $rules " ") -}}

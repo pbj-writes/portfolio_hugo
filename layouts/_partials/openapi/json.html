@@ -1,0 +1,45 @@
+{{- /* Pretty-prints an example value as JSON, with object keys in schema
+       order instead of the alphabetical order jsonify would produce.
+       Context: dict "spec" <OpenAPI document> "value" <example>
+                     "schema" <schema or $ref> "indent" <current indent>. */ -}}
+{{- $spec := .spec -}}
+{{- $value := .value -}}
+{{- $indent := .indent | default "" -}}
+{{- $inner := print $indent "  " -}}
+{{- $schema := partial "openapi/schema.html" (dict "spec" $spec "node" .schema) -}}
+{{- $out := "" -}}
+{{- if reflect.IsMap $value -}}
+  {{- $keys := slice -}}
+  {{- range partial "openapi/prop-order.html" $schema -}}
+    {{- if isset $value . -}}
+      {{- $keys = $keys | append . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- range $key, $_ := $value -}}
+    {{- if not (in $keys $key) -}}
+      {{- $keys = $keys | append $key -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $members := slice -}}
+  {{- range $keys -}}
+    {{- $child := partial "openapi/json.html" (dict "spec" $spec "value" (index $value .) "schema" (index ($schema.properties | default dict) .) "indent" $inner) -}}
+    {{- $members = $members | append (printf "%s%s: %s" $inner (jsonify .) $child) -}}
+  {{- end -}}
+  {{- $out = "{}" -}}
+  {{- with $members -}}
+    {{- $out = printf "{\n%s\n%s}" (delimit . ",\n") $indent -}}
+  {{- end -}}
+{{- else if reflect.IsSlice $value -}}
+  {{- $items := slice -}}
+  {{- range $value -}}
+    {{- $child := partial "openapi/json.html" (dict "spec" $spec "value" . "schema" $schema.items "indent" $inner) -}}
+    {{- $items = $items | append (print $inner $child) -}}
+  {{- end -}}
+  {{- $out = "[]" -}}
+  {{- with $items -}}
+    {{- $out = printf "[\n%s\n%s]" (delimit . ",\n") $indent -}}
+  {{- end -}}
+{{- else -}}
+  {{- $out = jsonify $value | string -}}
+{{- end -}}
+{{- return $out -}}
