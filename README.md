@@ -12,4 +12,4 @@ Site Layout
 | ------------- | -------------     |
 | portfolio_hugo  | Main website infrastructure for [pbjwrites.info](https://pbjwrites.info) |
 | dita_portofio   | Sub-domain for [dita.pbjwrites.info](https://dita.pbjwrites.info)        |
-| bicycle_api     | The API behind the [Bicycle Inventory API](https://pbjwrites.info/portfolio/bicycle_inventory_api_app/) page, and the version 1 docs at [docs.pbjwrites.info](https://docs.pbjwrites.info) |
+| bicycle_api     | The API behind the [Bicycle Inventory API](https://pbjwrites.info/portfolio/bicycle_inventory_api_app/) page |

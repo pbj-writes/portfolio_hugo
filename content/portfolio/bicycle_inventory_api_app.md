@@ -109,8 +109,6 @@ I'm not a developer, so finding how to write some basic APIs was intimidating. A
 - **IDE:** [Visual Studio Code](https://code.visualstudio.com).
 - **API platform:** [Postman](https://www.postman.com).
 
-The [version 1 reference](https://docs.pbjwrites.info) is still online.
-
 {{< paige-youtube "s1RzBdgCRc0" >}}
 
 ### What went wrong
