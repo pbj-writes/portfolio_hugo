@@ -1,0 +1,64 @@
+name: Sync Withings Weight to Strava
+
+on:
+  schedule:
+    # GitHub cron is UTC only. Targets are 9 AM and 2 PM Pacific. Both the
+    # PST (UTC-8) and PDT (UTC-7) UTC times are scheduled, and the "Gate" step
+    # below skips whichever pair is an hour off for the current season.
+    - cron: "0 16,21 * * *"
+    - cron: "0 17,22 * * *"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Gate on Pacific time
+        id: gate
+        run: |
+          hour=$(TZ=America/Los_Angeles date +%H)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$hour" = "09" ] || [ "$hour" = "14" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Pacific hour is $hour, not 09 or 14; skipping."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - if: steps.gate.outputs.run == 'true'
+        uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.WEIGHT_SYNC_PAT }}
+
+      - if: steps.gate.outputs.run == 'true'
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        if: steps.gate.outputs.run == 'true'
+        run: pip install requests PyNaCl
+
+      - name: Run sync script
+        if: steps.gate.outputs.run == 'true'
+        run: python scripts/sync_withings_weight.py
+        env:
+          WITHINGS_CLIENT_ID: ${{ secrets.WITHINGS_CLIENT_ID }}
+          WITHINGS_CLIENT_SECRET: ${{ secrets.WITHINGS_CLIENT_SECRET }}
+          WITHINGS_REFRESH_TOKEN: ${{ secrets.WITHINGS_REFRESH_TOKEN }}
+          STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
+          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
+          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+          GH_PAT: ${{ secrets.WEIGHT_SYNC_PAT }}
+          GH_REPO: ${{ github.repository }}
+
+      - name: Commit weight data
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          git config user.name "weight-sync-bot"
+          git config user.email "bot@pbjwrites.info"
+          git add data/withings_weight.json
+          git diff --staged --quiet || git commit -m "chore: update Withings weight data"
+          git push
