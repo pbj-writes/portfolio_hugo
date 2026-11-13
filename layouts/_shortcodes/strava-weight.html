@@ -1,4 +1,8 @@
-{{ with hugo.Data.weight }}
+{{/* Renders the latest synced weight from a data file.
+     source: key under data/ to read (default "weight", i.e. data/weight.json;
+     use "withings_weight" for data/withings_weight.json). */}}
+{{ $source := .Get "source" | default "weight" }}
+{{ with index hugo.Data $source }}
   {{ if .updated_at }}
   <div class="text-center py-4">
     <div class="display-4 fw-bold mb-1">{{ .weight_lbs }} <small class="fs-5 fw-normal text-muted">lbs</small></div>
@@ -8,4 +12,6 @@
   {{ else }}
   <p class="text-muted text-center py-4">Awaiting first sync.</p>
   {{ end }}
+{{ else }}
+<p class="text-muted text-center py-4">Awaiting first sync.</p>
 {{ end }}
